@@ -61,7 +61,7 @@ const RevenueReport = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://localhost:5001/api/reports/revenue/from-to`,
+        `http://dangtringhia1407-001-site1.otempurl.com/api/reports/revenue/from-to`,
         {
           params: {
             startDate: startDate.toISOString(),
@@ -85,7 +85,7 @@ const RevenueReport = () => {
   const exportReport = async (format) => {
     try {
       const response = await axios.get(
-        `https://localhost:5001/api/reports/revenue/from-to`,
+        `http://dangtringhia1407-001-site1.otempurl.com/api/reports/revenue/from-to`,
         {
           params: {
             startDate: startDate.toISOString(),
@@ -166,7 +166,7 @@ const RevenueReport = () => {
       },
     ],
   };
-  
+
 
   const barChartOptions = {
     responsive: true,
@@ -233,10 +233,10 @@ const RevenueReport = () => {
       },
     },
   };
-  
+
 
   return (
-    <div style={{ padding: "5px 0 0", marginTop: "-72px" }}>
+    <div style={{ padding: "5px 0 0", marginTop: "50px" }}>
       <Typography variant="h4" align="center" gutterBottom>
         Báo Cáo Doanh Thu
       </Typography>
@@ -256,29 +256,21 @@ const RevenueReport = () => {
           onChange={(e) => setEndDate(new Date(e.target.value))}
           InputLabelProps={{ shrink: true }}
         />
- <Button
-  variant="contained"
-  className="custom-button1 custom-button-contained1"
-  onClick={fetchRevenueData} // Giữ nguyên sự kiện onClick
->
-  Lấy dữ liệu
-</Button>
+        <Button
+          variant="contained"
+          className="custom-button1 custom-button-contained1"
+          onClick={fetchRevenueData} // Giữ nguyên sự kiện onClick
+        >
+          Lấy dữ liệu
+        </Button>
 
-<Button
-  variant="outlined"
-  className="custom-button6 custom-button-outlined6"
-  onClick={() => exportReport("pdf")} // Giữ nguyên sự kiện onClick
->
-  Xuất PDF
-</Button>
-
-<Button
-  variant="outlined"
-  className="custom-button6 custom-button-outlined6"
-  onClick={() => exportReport("excel")} // Giữ nguyên sự kiện onClick
->
-  Xuất Excel
-</Button>
+        <Button
+          variant="outlined"
+          className="custom-button6 custom-button-outlined6"
+          onClick={() => exportReport("excel")} // Giữ nguyên sự kiện onClick
+        >
+          Xuất Excel
+        </Button>
 
 
       </Box>
@@ -290,33 +282,33 @@ const RevenueReport = () => {
       ) : (
         <>
           <TableContainer component={Paper} style={{ maxHeight: "400px", overflowY: "auto" }}>
-  <Table stickyHeader>
-    <TableHead>
-      <TableRow>
-        <TableCell align="center" style={{ fontWeight: "bold", fontSize:"16px" }}>Ngày</TableCell>
-        <TableCell align="center" style={{ fontWeight: "bold", fontSize:"16px" }}>Tổng doanh thu</TableCell>
-        <TableCell align="center" style={{ fontWeight: "bold", fontSize:"16px" }}>Tổng số đơn hàng</TableCell>
-      </TableRow>
-    </TableHead>
-    <TableBody>
-      {revenueData.length > 0 ? (
-        revenueData.map((data, index) => (
-          <TableRow key={index}>
-            <TableCell align="center">{parseDate(data.Date)}</TableCell>
-            <TableCell align="center">{data.TotalRevenue.toLocaleString()} VND</TableCell>
-            <TableCell align="center">{data.TotalOrders}</TableCell>
-          </TableRow>
-        ))
-      ) : (
-        <TableRow>
-          <TableCell colSpan={3} align="center">
-            Không có dữ liệu
-          </TableCell>
-        </TableRow>
-      )}
-    </TableBody>
-  </Table>
-</TableContainer>
+            <Table stickyHeader>
+              <TableHead>
+                <TableRow>
+                  <TableCell align="center" style={{ fontWeight: "bold", fontSize: "16px" }}>Ngày</TableCell>
+                  <TableCell align="center" style={{ fontWeight: "bold", fontSize: "16px" }}>Tổng doanh thu</TableCell>
+                  <TableCell align="center" style={{ fontWeight: "bold", fontSize: "16px" }}>Tổng số đơn hàng</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {revenueData.length > 0 ? (
+                  revenueData.map((data, index) => (
+                    <TableRow key={index}>
+                      <TableCell align="center">{parseDate(data.Date)}</TableCell>
+                      <TableCell align="center">{data.TotalRevenue.toLocaleString()} VND</TableCell>
+                      <TableCell align="center">{data.TotalOrders}</TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={3} align="center">
+                      Không có dữ liệu
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
 
 
           <Box marginTop="20px" display="flex" justifyContent="space-between">
@@ -353,7 +345,7 @@ const RevenueReport = () => {
                         },
                       },
                     },
-                    
+
                   },
                 }}
               />

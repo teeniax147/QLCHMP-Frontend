@@ -2,10 +2,11 @@
 .product-container-all {
   font-family: Arial, sans-serif;
   color: #333;
-  margin: 0 auto;
+
   max-width: 1200px;
   padding: 10px;
-  padding-top: 170px;
+ margin-top: 170px;
+ margin-left: 20px;
 }
 
 .product-header-banner-all img {
@@ -18,9 +19,11 @@
 
 .product-title-all {
   text-align: left;
-  font-size: 24px;
+  font-size: 28px;
   color: #333;
   margin-bottom: 20px;
+  font-weight: bold;
+  margin-left: 22px;
 }
 
 
@@ -166,7 +169,7 @@
   margin-top: 20px;
 }
 
-.page-button-all {
+.page-button-all1 {
   padding: 8px 12px;
   margin: 0 5px;
   border: none;
@@ -175,16 +178,16 @@
   cursor: pointer;
   transition: background-color 0.3s;
 }
-.page-button-all.active-all {
-  background-color: #007bff;
+.page-button-all1.active-all {
+  background-color: #54d179;
   color: white;
 }
-.page-button-all:hover {
+.page-button-all1:hover {
   background-color: #aaa;
 }
-
-
-
+.page-button-all1:focus {
+  outline: none;
+}
 
 /* Thẻ sản phẩm */
 .product-card-all {
@@ -295,24 +298,6 @@
   margin-top: 20px;
 }
 
-.page-button-all {
-  padding: 8px 12px;
-  margin: 0 5px;
-  border: none;
-  background-color: #ddd;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.page-button-all.active-all {
-  background-color: #007bff;
-  color: white;
-}
-
-.page-button-all:hover {
-  background-color: #aaa;
-}
 
 /* Thương hiệu */
 .product-brand-custom {

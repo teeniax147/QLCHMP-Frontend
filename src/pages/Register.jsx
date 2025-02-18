@@ -106,7 +106,7 @@ const Register = () => {
     console.log("Sending request", data);
 
     try {
-      const response = await axios.post('https://localhost:5001/api/Users/register', data);
+      const response = await axios.post('http://dangtringhia1407-001-site1.otempurl.com/api/Users/register', data);
       console.log("Response:", response.data);
       alert(response.data);
       navigate('/otp', { state: { email, otpPurpose: 'register' } });
@@ -209,7 +209,7 @@ const Register = () => {
           </div>
 
           <button type="submit" className="register-button">
-            Đăng Ký Mau Lẹ
+            Đăng Ký
           </button>
         </form>
         <p>Đã có tài khoản? <Link to="/login">Đăng nhập</Link></p>

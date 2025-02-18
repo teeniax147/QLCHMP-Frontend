@@ -31,7 +31,7 @@ const CustomerList = () => {
   useEffect(() => {
     const fetchCustomers = async () => {
       try {
-        const response = await axios.get("https://localhost:5001/api/Customers", {
+        const response = await axios.get("http://dangtringhia1407-001-site1.otempurl.com/api/Customers", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -87,7 +87,7 @@ const CustomerList = () => {
   const handleUpdate = async () => {
     try {
       await axios.put(
-        `https://localhost:5001/api/Customers/${selectedCustomer.customerId}`,
+        `http://dangtringhia1407-001-site1.otempurl.com/api/Customers/${selectedCustomer.customerId}`,
         formData,
         {
           headers: {
@@ -115,7 +115,7 @@ const CustomerList = () => {
   const handleDeleteConfirm = async () => {
     try {
       await axios.delete(
-        `https://localhost:5001/api/Customers/${selectedCustomer.customerId}`,
+        `http://dangtringhia1407-001-site1.otempurl.com/api/Customers/${selectedCustomer.customerId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -156,7 +156,7 @@ const CustomerList = () => {
               <TableCell>Địa chỉ</TableCell>
               <TableCell>Tổng Chi Tiêu</TableCell>
               <TableCell>Cấp Độ</TableCell>
-              <TableCell>Thao Tác</TableCell>
+             
             </TableRow>
           </TableHead>
           <TableBody>
@@ -169,23 +169,7 @@ const CustomerList = () => {
                   <TableCell>{customer.address}</TableCell>
                   <TableCell>{customer.totalSpending}</TableCell>
                   <TableCell>{customer.membershipLevel}</TableCell>
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={() => handleEdit(customer)}
-                      sx={{ mr: 1 }}
-                    >
-                      Sửa
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="error"
-                      onClick={() => handleDelete(customer)}
-                    >
-                      Xóa
-                    </Button>
-                  </TableCell>
+                  
                 </TableRow>
               ))
             ) : (

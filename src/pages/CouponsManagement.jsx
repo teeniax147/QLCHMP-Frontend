@@ -22,7 +22,7 @@ const CouponsManagement = () => {
   const fetchCoupons = async () => {
     try {
       setLoading(true); // Bắt đầu tải
-      const response = await axios.get("https://localhost:5001/api/Coupons");
+      const response = await axios.get("http://dangtringhia1407-001-site1.otempurl.com/api/Coupons");
       console.log("Dữ liệu API trả về:", response.data); // Kiểm tra dữ liệu trả về
       const data = response.data.$values || []; // Lấy dữ liệu từ $values
       setCoupons(data); // Lưu dữ liệu vào state
@@ -47,9 +47,9 @@ const CouponsManagement = () => {
 
   // Hiển thị dữ liệu
   return (
-    <div style={{ margin: "20px" }}>
-      <Typography variant="h4" gutterBottom>
-        Danh sách mã giảm giá
+    <div style={{ margin: "20px", marginTop: "40px", marginBottom: "20px" }}>
+      <Typography variant="h4" align="center" gutterBottom>
+        Danh Sách Mã Giảm Giá
       </Typography>
       <TableContainer component={Paper}>
         <Table>

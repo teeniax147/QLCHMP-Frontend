@@ -33,7 +33,7 @@ const ForgotPassword = () => {
     setLoading(true);
     try {
       // Gửi yêu cầu quên mật khẩu tới API
-      const response = await axios.post('https://localhost:5001/api/Users/forgot-password', { email });
+      const response = await axios.post('http://dangtringhia1407-001-site1.otempurl.com/api/Users/forgot-password', { email });
       console.log("Response:", response.data);
       alert("Mã OTP đã được gửi đến email của bạn. Vui lòng kiểm tra email để xác nhận.");
       

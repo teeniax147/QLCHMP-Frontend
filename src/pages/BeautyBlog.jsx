@@ -10,7 +10,7 @@ const BeautyBlog = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get('https://localhost:5001/api/beauty-blog');
+        const response = await axios.get('http://dangtringhia1407-001-site1.otempurl.com/api/beauty-blog');
         const fullBlogs = response.data.Blogs?.$values || [];
         const cleanedBlogs = fullBlogs.map((blog) => ({
           id: blog.Id,
@@ -18,7 +18,7 @@ const BeautyBlog = () => {
           content: blog.Content || "Nội dung không có sẵn",
           author: blog.Author || "Không rõ",
           featuredImage: blog.FeaturedImage 
-            ? `https://localhost:5001${blog.FeaturedImage}` 
+            ? `http://dangtringhia1407-001-site1.otempurl.com/${blog.FeaturedImage}` 
             : "default-image.jpg",
         }));
         setBlogs(cleanedBlogs);
@@ -38,9 +38,9 @@ const BeautyBlog = () => {
   const otherBlogs = blogs.slice(1);
 
   return (
-    <div className="beauty-blog-wrapper">
+    <div className="beauty-blog-contained">
       <div className="beauty-header">
-        <h1>Chuyên mục làm đẹp</h1>
+        <h1>Chuyên Mục Làm Đẹp</h1>
       </div>
 
       {featuredBlog && (

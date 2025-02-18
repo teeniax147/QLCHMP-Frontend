@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import './BrandManagement.css';
+
 import {
   Table,
   TableBody,
@@ -17,7 +17,7 @@ import {
   CircularProgress,
   Alert,
 } from "@mui/material";
-
+import './BrandManagement.css';
 const BrandManagement = () => {
   const [brands, setBrands] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -32,10 +32,10 @@ const BrandManagement = () => {
 
   const fetchBrands = async () => {
     try {
-      const response = await axios.get("https://localhost:5001/api/thuong-hieu", {
+      const response = await axios.get("http://dangtringhia1407-001-site1.otempurl.com/api/thuong-hieu", {
         headers: { Accept: "application/json" },
       });
-  
+
       // Xử lý phản hồi chứa $values
       if (response.data && response.data.$values) {
         setBrands(response.data.$values);
@@ -80,17 +80,17 @@ const BrandManagement = () => {
     try {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("Token không tồn tại. Vui lòng đăng nhập lại.");
-  
+
       // Tạo FormData để gửi file logo và thông tin thương hiệu
       const formDataToSend = new FormData();
       formDataToSend.append("Name", formData.name); // Đảm bảo đúng key "Name"
-    formDataToSend.append("Description", formData.description);
-    if (formData.logoFile) {
-      formDataToSend.append("LogoFile", formData.logoFile); // Đính kèm logo nếu có
-    }
-  
-    const response = await axios.post(
-        "https://localhost:5001/api/thuong-hieu/them-moi",
+      formDataToSend.append("Description", formData.description);
+      if (formData.logoFile) {
+        formDataToSend.append("LogoFile", formData.logoFile); // Đính kèm logo nếu có
+      }
+
+      const response = await axios.post(
+        "http://dangtringhia1407-001-site1.otempurl.com/api/thuong-hieu/them-moi",
         formDataToSend,
         {
           headers: {
@@ -99,7 +99,7 @@ const BrandManagement = () => {
           },
         }
       );
-  
+
       alert(response.data.message || "Thêm thương hiệu thành công.");
       fetchBrands(); // Reload danh sách thương hiệu
       closeModal(); // Đóng modal
@@ -122,7 +122,7 @@ const BrandManagement = () => {
       if (formData.logoFile) formDataObj.append("LogoFile", formData.logoFile);
 
       const response = await axios.put(
-        `https://localhost:5001/api/thuong-hieu/cap-nhat/${id}`,
+        `http://dangtringhia1407-001-site1.otempurl.com/api/thuong-hieu/cap-nhat/${id}`,
         formDataObj,
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -146,7 +146,7 @@ const BrandManagement = () => {
       if (!token) throw new Error("Token không tồn tại. Vui lòng đăng nhập lại.");
 
       const response = await axios.delete(
-        `https://localhost:5001/api/thuong-hieu/xoa/${selectedBrand.Id}`,
+        `http://dangtringhia1407-001-site1.otempurl.com/api/thuong-hieu/xoa/${selectedBrand.Id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -167,7 +167,7 @@ const BrandManagement = () => {
   if (brands.length === 0) return <Alert severity="info">Không có thương hiệu nào</Alert>;
 
   return (
-    <Box sx={{ padding: "5px 0 0", marginTop: "-70px" }}>
+    <Box sx={{ padding: "5px 0 0", marginTop: "40px" }}>
       <Typography variant="h4" align="center" gutterBottom>
         Quản Lý Thương Hiệu
       </Typography>
@@ -198,16 +198,16 @@ const BrandManagement = () => {
                   {brand.Description || "Không có mô tả"}
                 </TableCell>
                 <TableCell align="center">
-  {brand.LogoUrl ? (
-    <img
-    src={brand.LogoUrl}
-      alt={brand.Name}
-      style={{ maxHeight: "50px", borderRadius: "4px" }}
-    />
-  ) : (
-    "Không có logo"
-  )}
-</TableCell>
+                  {brand.LogoUrl ? (
+                    <img
+                      src={brand.LogoUrl}
+                      alt={brand.Name}
+                      style={{ maxHeight: "50px", borderRadius: "4px" }}
+                    />
+                  ) : (
+                    "Không có logo"
+                  )}
+                </TableCell>
                 <TableCell align="center" className="brand-action-buttons">
                   <Button
                     className="brand-edit-button"
@@ -279,34 +279,34 @@ const BrandManagement = () => {
                 {modalType === "add" ? "Thêm Thương Hiệu" : "Cập Nhật Thương Hiệu"}
               </Typography>
               <TextField
-  label="Tên Thương Hiệu"
-  name="name"
-  value={formData.name || ""}
-  onChange={handleInputChange}
-  fullWidth
-  margin="normal"
-/>
-<TextField
-  label="Mô Tả"
-  name="description"
-  value={formData.description || ""}
-  onChange={handleInputChange}
-  fullWidth
-  margin="normal"
-  multiline
-  rows={3}
-/>
-<input
-  type="file"
-  accept="image/*"
-  onChange={(e) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      logoFile: e.target.files[0],
-    }));
-  }}
-  style={{ marginTop: "15px" }}
-/>
+                label="Tên Thương Hiệu"
+                name="name"
+                value={formData.name || ""}
+                onChange={handleInputChange}
+                fullWidth
+                margin="normal"
+              />
+              <TextField
+                label="Mô Tả"
+                name="description"
+                value={formData.description || ""}
+                onChange={handleInputChange}
+                fullWidth
+                margin="normal"
+                multiline
+                rows={3}
+              />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  setFormData((prevData) => ({
+                    ...prevData,
+                    logoFile: e.target.files[0],
+                  }));
+                }}
+                style={{ marginTop: "15px" }}
+              />
 
               <Box sx={{ display: "flex", justifyContent: "flex-end", marginTop: 2 }}>
                 <Button

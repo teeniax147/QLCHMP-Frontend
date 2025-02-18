@@ -35,7 +35,7 @@ const InventoryManagement = () => {
     setLoading(true);
     try {
       const response = await axios.get("https://localhost:5001/api/Inventories", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }, // Thêm Authorization header
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       setInventories(response.data.$values || []);
     } catch (error) {
@@ -51,80 +51,74 @@ const InventoryManagement = () => {
 
   const openModal = (type, inventory = null) => {
     setModalType(type);
-    setSelectedInventory(inventory); // Lưu dữ liệu kho hàng đã chọn
+    setSelectedInventory(inventory);
     setFormData(
       inventory
         ? {
-            ProductId: inventory.ProductId,
-            WarehouseLocation: inventory.WarehouseLocation,
-            QuantityInStock: inventory.QuantityInStock,
-          }
+          ProductId: inventory.ProductId,
+          WarehouseLocation: inventory.WarehouseLocation,
+          QuantityInStock: inventory.QuantityInStock,
+        }
         : {
-            ProductId: "",
-            WarehouseLocation: "",
-            QuantityInStock: "",
-          }
+          ProductId: "",
+          WarehouseLocation: "",
+          QuantityInStock: "",
+        }
     );
     setIsModalOpen(true);
   };
-  
-  
-  // Đóng modal
+
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedInventory(null);
   };
 
-  // Xử lý thay đổi input
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  // Thêm kho hàng
   const handleAddInventory = async () => {
     try {
       const response = await axios.post(
         "https://localhost:5001/api/Inventories",
         formData,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }, // Thêm Authorization header
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       );
-  
-      const newInventory = response.data; // Lấy kho hàng vừa thêm
-      setInventories((prevInventories) => [...prevInventories, newInventory]); // Cập nhật danh sách kho hàng
+
+      const newInventory = response.data;
+      setInventories((prevInventories) => [...prevInventories, newInventory]);
       alert("Thêm kho hàng thành công!");
       closeModal();
     } catch (error) {
       alert(error.response?.data || "Có lỗi xảy ra khi thêm kho hàng.");
     }
   };
-  
-  // Sửa kho hàng
+
   const handleEditInventory = async () => {
     try {
       const updatedInventory = {
         ...formData,
-        InventoryId: selectedInventory.InventoryId, // Đảm bảo gửi InventoryId
+        InventoryId: selectedInventory.InventoryId,
       };
-  
+
       await axios.put(
         `https://localhost:5001/api/Inventories/${selectedInventory.InventoryId}`,
         updatedInventory,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }, // Thêm Authorization header
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       );
       alert("Cập nhật kho hàng thành công!");
-      fetchInventories(); // Làm mới danh sách kho hàng
-      closeModal(); // Đóng modal
+      fetchInventories();
+      closeModal();
     } catch (error) {
       alert(error.response?.data || "Có lỗi xảy ra khi cập nhật kho hàng.");
     }
   };
-  
-  // Xóa kho hàng
+
   const handleDeleteInventory = async () => {
     if (!selectedInventory?.InventoryId) {
       alert("Không tìm thấy ID kho hàng để xóa.");
@@ -144,60 +138,92 @@ const InventoryManagement = () => {
       alert(error.response?.data || "Có lỗi xảy ra khi xóa kho hàng.");
     }
   };
-  
+
   if (loading) return <CircularProgress style={{ display: "block", margin: "20px auto" }} />;
   if (error) return <Alert severity="error">{error}</Alert>;
 
   return (
-    <Box sx={{ padding: "20px" }}>
-      <Typography variant="h4" align="center" gutterBottom>
+    <Box sx={{ padding: "20px", marginTop: "30px", marginBottom: "20px" }}>
+      <Typography
+        variant="h4"
+        align="center"
+        gutterBottom
+
+      >
         Quản Lý Kho Hàng
       </Typography>
-      <Button variant="contained" onClick={() => openModal("add")} sx={{ marginBottom: "20px" }}>
+      <Button
+        variant="contained"
+        onClick={() => openModal("add")}
+        sx={{ marginBottom: "20px", backgroundColor: "#007BFF", color: "#FFFFFF" }}
+      >
         Thêm Kho Hàng
       </Button>
-      <TableContainer component={Paper} sx={{ maxHeight: "400px", overflowY: "auto" }}>
-  <Table stickyHeader>
-    <TableHead>
-      <TableRow>
-        <TableCell>ID</TableCell>
-        <TableCell>ID Sản Phẩm</TableCell>
-        <TableCell>Vị Trí Kho</TableCell>
-        <TableCell>Số Lượng</TableCell>
-        <TableCell>Hành Động</TableCell>
-      </TableRow>
-    </TableHead>
-    <TableBody>
-      {inventories.map((inventory) => (
-        <TableRow key={inventory.InventoryId}>
-          <TableCell>{inventory.InventoryId}</TableCell>
-          <TableCell>{inventory.ProductId}</TableCell>
-          <TableCell>{inventory.WarehouseLocation}</TableCell>
-          <TableCell>{inventory.QuantityInStock}</TableCell>
-          <TableCell>
-            <Button
-              onClick={() => openModal("edit", inventory)}
-              color="primary"
-              variant="text"
-            >
-              Sửa
-            </Button>
-            <Button
-              onClick={() => openModal("delete", inventory)}
-              color="error"
-              variant="text"
-            >
-              Xóa
-            </Button>
-          </TableCell>
-        </TableRow>
-      ))}
-    </TableBody>
-  </Table>
-</TableContainer>
+      <TableContainer component={Paper} sx={{ maxHeight: "450px", overflowY: "auto" }}>
+        <Table stickyHeader>
+          <TableHead>
+            <TableRow>
+              <TableCell align="center" sx={{ fontWeight: "bold", width: "5%", fontSize: "16px" }}>STT</TableCell> {/* Đổi từ ID thành STT */}
+              <TableCell align="center" sx={{ fontWeight: "bold", width: "5%", fontSize: "16px" }}>Vị Trí Kho</TableCell>
+              <TableCell align="center" sx={{ fontWeight: "bold", width: "5%", fontSize: "16px" }}>Số Lượng</TableCell>
+              <TableCell align="center" sx={{ fontWeight: "bold", width: "5%", fontSize: "16px" }}>Hành Động</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {inventories.map((inventory, index) => (
+              <TableRow key={inventory.InventoryId}>
+                <TableCell align="center">{index + 1}</TableCell> {/* Thêm số thứ tự thay vì InventoryId */}
+                <TableCell align="center">{inventory.WarehouseLocation}</TableCell>
+                <TableCell align="center">{inventory.QuantityInStock}</TableCell>
+                <TableCell align="center">
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      gap: "20px",
+                    }}
+                  >
+                    <Button
+                      onClick={() => openModal("edit", inventory)}
+                      sx={{
+                        border: "1px solid #28A745",
+                        color: "#28A745",
+                        backgroundColor: "transparent",
+                        "&:hover": {
+                          borderColor: "#155D27", // Đổi màu viền khi hover
+                        },
+                        "&:focus": {
+                          outline: "none", // Bỏ viền focus
+                        },
+                      }}
+                    >
+                      Sửa
+                    </Button>
+                    <Button
+                      onClick={() => openModal("delete", inventory)}
+                      sx={{
+                        border: "1px solid #DC3545",
+                        color: "#DC3545",
+                        backgroundColor: "transparent",
+                        "&:hover": {
+                          borderColor: "#9A1E1E", // Đổi màu viền khi hover
+                        },
+                        "&:focus": {
+                          outline: "none", // Bỏ viền focus
+                        },
+                      }}
+                    >
+                      Xóa
+                    </Button>
+                  </Box>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
 
+        </Table>
+      </TableContainer>
 
-      {/* Modal */}
       <Modal open={isModalOpen} onClose={closeModal}>
         <Box
           sx={{
@@ -257,17 +283,42 @@ const InventoryManagement = () => {
                 fullWidth
                 margin="normal"
               />
-              <Box sx={{ display: "flex", justifyContent: "flex-end", marginTop: 2 }}>
+              <Box sx={{ display: "flex", justifyContent: "flex-end", marginTop: 2, gap: "10px" }}>
                 <Button
                   onClick={modalType === "add" ? handleAddInventory : handleEditInventory}
-                  variant="contained"
-                  sx={{ marginRight: 2 }}
+                  sx={{
+                    border: "1px solid #007BFF",
+                    color: "#007BFF",
+                    backgroundColor: "transparent",
+                    "&:hover": {
+                      borderColor: "#0056b3", // Đổi màu viền khi hover
+                      backgroundColor: "transparent",
+                    },
+                    "&:focus": {
+                      outline: "none", // Bỏ viền focus
+                    },
+                  }}
                 >
                   {modalType === "add" ? "Thêm" : "Lưu"}
                 </Button>
-                <Button onClick={closeModal} variant="outlined">
+                <Button
+                  onClick={closeModal}
+                  sx={{
+                    border: "1px solid #FFC107",
+                    color: "#FFC107",
+                    backgroundColor: "transparent",
+                    "&:hover": {
+                      borderColor: "#E0A800", // Đổi màu viền khi hover
+                      backgroundColor: "transparent",
+                    },
+                    "&:focus": {
+                      outline: "none", // Bỏ viền focus
+                    },
+                  }}
+                >
                   Hủy
                 </Button>
+
               </Box>
             </>
           )}

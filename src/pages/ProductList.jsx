@@ -17,7 +17,7 @@ const ProductList = () => {
 
       try {
         const response = await axios.get(
-          `https://localhost:5001/api/Products/theo-danh-muc/${categoryId}?pageNumber=1&pageSize=10`,
+          `http://dangtringhia1407-001-site1.otempurl.com/api/Products/theo-danh-muc/${categoryId}?pageNumber=1&pageSize=10`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -43,15 +43,15 @@ const ProductList = () => {
   const handleAddToFavorites = async (productId) => {
     const token = localStorage.getItem("token"); // Lấy token từ localStorage
     console.log("Token từ localStorage:", token);
-  
+
     if (!token) {
       alert("Bạn cần đăng nhập để thêm sản phẩm vào danh sách yêu thích.");
       return;
     }
-  
+
     try {
       const response = await axios.post(
-        "https://localhost:5001/api/Favorites/add",
+        "http://dangtringhia1407-001-site1.otempurl.com/api/Favorites/add",
         { ProductId: productId },
         {
           headers: {
@@ -59,7 +59,7 @@ const ProductList = () => {
           },
         }
       );
-  
+
       alert(response.data); // Hiển thị thông báo thành công từ server
     } catch (error) {
       console.error("Lỗi khi thêm sản phẩm yêu thích:", error.response?.data || error.message);
@@ -100,42 +100,52 @@ const ProductList = () => {
                 }}
               >
                 ♡
-                </div>
+              </div>
               {/* Hiển thị ảnh sản phẩm */}
-            <img
-              src={product.ImageUrl || "https://via.placeholder.com/150"}
-              alt={product.Name}
-              className="product-image-custom"
-            />
+              <img
+                src={product.ImageUrl || "https://via.placeholder.com/150"}
+                alt={product.Name}
+                className="product-image-custom"
+              />
 
-            <div className="product-details-custom">
-              {/* Hiển thị tên thương hiệu */}
-              <p className="product-brand-custom">
-           {product.BrandName || "Không có thương hiệu"}
-              </p>
-              <h3 className="product-name-custom">{product.Name}</h3>
+              <div className="product-details-custom">
+                {/* Hiển thị tên thương hiệu */}
+                <p className="product-brand-custom">
+                  {product.BrandName || "Không có thương hiệu"}
+                </p>
+                <h3 className="product-name-custom">{product.Name}</h3>
 
-              {/* Hiển thị giá */}
-              <p className="product-price-custom">
-                {product.Price ? `${product.Price.toLocaleString()} VND` : "Liên hệ"}
-                {product.OriginalPrice && product.OriginalPrice > product.Price && (
-                  <span className="product-original-price">
-                    {` (Giá gốc: ${product.OriginalPrice.toLocaleString()} VND)`}
-                  </span>
-                )}
-              </p>
+                {/* Hiển thị giá */}
+                <p className="product-price-custom">
+                  {product.Price ? `${product.Price.toLocaleString()}đ` : "Liên hệ"}
+                </p>
+                  {product.OriginalPrice && product.OriginalPrice > product.Price && (
+                    <span className="product-original-price3">
+                      {`  ${product.OriginalPrice.toLocaleString()}đ`}
+                    </span>
+                  )}
+                
 
-              {/* Hiển thị đánh giá trung bình và số lượt đánh giá */}
-              <p className="product-rating-custom">
-           {product.AverageRating ? product.AverageRating.toFixed(1) : "Chưa có"} / 5
-                <span> ({product.ReviewCount || 0} đánh giá)</span>
-              </p>
-                {/* Hiển thị số lượng tồn kho */}
+                <div className="product-rating-stars">
+                  {Array.from({ length: 5 }, (_, index) => (
+                    <span
+                      key={index}
+                      className={`product-star ${product.ReviewCount > 0 && index < Math.round(product.AverageRating || 0) ? "filled" : ""
+                        }`}
+                    >
+                      ★
+                    </span>
+                  ))}
+                  <span>({product.ReviewCount || 0})</span>
+                </div>
+
+                {/* Số lượng tồn kho */}
                 <p className="product-stock-custom">
-                ({product.CurrentStock || "Không xác định"})
-              </p>
+                  {product.CurrentStock ? `${product.CurrentStock} sản phẩm có sẵn` : "Không xác định"}
+                </p>
+
+              </div>
             </div>
-          </div>
           ))
         ) : (
           <p>Không có sản phẩm nào trong danh mục này.</p>

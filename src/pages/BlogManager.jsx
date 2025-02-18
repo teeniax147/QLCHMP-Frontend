@@ -26,7 +26,7 @@ const BlogManager = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("https://localhost:5001/api/beauty-blog", {
+      const response = await axios.get("http://dangtringhia1407-001-site1.otempurl.com/api/beauty-blog", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -40,7 +40,7 @@ const BlogManager = () => {
         author: blog.Author || "Không có tác giả",
         category: blog.Category?.Name || "Không có danh mục",
         featuredImage: blog.FeaturedImage
-          ? `https://localhost:5001${blog.FeaturedImage}`
+          ? `http://dangtringhia1407-001-site1.otempurl.com${blog.FeaturedImage}`
           : null,
         createdAt: blog.CreatedAt || "",
         updatedAt: blog.UpdatedAt || "",
@@ -103,7 +103,7 @@ const BlogManager = () => {
       if (currentBlog.id) {
         // Cập nhật bài viết
         await axios.put(
-          `https://localhost:5001/api/beauty-blog/cap-nhat/${currentBlog.id}`,
+          `http://dangtringhia1407-001-site1.otempurl.com/api/beauty-blog/cap-nhat/${currentBlog.id}`,
           formData,
           {
             headers: {
@@ -115,7 +115,7 @@ const BlogManager = () => {
         alert("Cập nhật bài viết thành công!");
       } else {
         // Thêm mới bài viết
-        await axios.post("https://localhost:5001/api/beauty-blog/them-moi", formData, {
+        await axios.post("http://dangtringhia1407-001-site1.otempurl.com/api/beauty-blog/them-moi", formData, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "multipart/form-data",
@@ -144,7 +144,7 @@ const BlogManager = () => {
     if (window.confirm("Bạn có chắc muốn xóa bài viết này?")) {
       try {
         const token = localStorage.getItem("token");
-        await axios.delete(`https://localhost:5001/api/beauty-blog/xoa/${id}`, {
+        await axios.delete(`http://dangtringhia1407-001-site1.otempurl.com/api/beauty-blog/xoa/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -159,9 +159,9 @@ const BlogManager = () => {
   };
 
   return (
-    <div>
+    <div style={{ margin: "20px", marginTop: "40px", marginBottom: "20px" }}>
       <Typography variant="h4" align="center" gutterBottom>
-        Quản lý bài viết
+        Danh Sách Bài Viết
       </Typography>
       {loading && (
         <Typography variant="body1" align="center" gutterBottom>
@@ -238,7 +238,7 @@ const BlogManager = () => {
         <Box
           sx={{
             width: 400,
-            maxHeight: "80vh", // Giới hạn chiều cao modal
+            maxHeight: "70vh", // Giới hạn chiều cao modal
             overflowY: "auto", // Thanh cuộn
             bgcolor: "background.paper",
             p: 3,
@@ -278,7 +278,7 @@ const BlogManager = () => {
             <img
               src={previewImage}
               alt="Hình ảnh xem trước"
-              style={{ width: "100%", height: "auto", marginBottom: "10px", borderRadius: "5px" }}
+              style={{ width: "30%", height: "auto", marginBottom: "10px", borderRadius: "5px" }}
             />
           )}
           <TextField

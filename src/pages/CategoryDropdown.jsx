@@ -11,7 +11,7 @@ const CategoryDropdown = ({ title, parentId }) => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await axios.get('https://localhost:5001/api/Categories');
+                const response = await axios.get('http://dangtringhia1407-001-site1.otempurl.com/api/Categories');
                 const data = response.data.$values || [];
                 console.log("Danh mục từ API:", data); // Kiểm tra dữ liệu trong console
 

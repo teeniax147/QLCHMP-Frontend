@@ -34,10 +34,10 @@ const CartPreviewPage = () => {
 
     try {
       const [shippingResponse, paymentResponse] = await Promise.all([
-        axios.get('https://localhost:5001/api/ShippingCompany', {
+        axios.get('http://dangtringhia1407-001-site1.otempurl.com/api/ShippingCompany', {
           headers: { Authorization: `Bearer ${token}` }
         }),
-        axios.get('https://localhost:5001/api/PaymentMethod', {
+        axios.get('http://dangtringhia1407-001-site1.otempurl.com/api/PaymentMethod', {
           headers: { Authorization: `Bearer ${token}` }
         })
       ]);
@@ -61,7 +61,7 @@ const CartPreviewPage = () => {
     }
 
     try {
-      const response = await axios.get('https://localhost:5001/api/Users/get-user-info', {
+      const response = await axios.get('http://dangtringhia1407-001-site1.otempurl.com/api/Users/get-user-info', {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -86,7 +86,7 @@ const CartPreviewPage = () => {
   
     try {
       await axios.put(
-        'https://localhost:5001/api/Users/update',
+        'http://dangtringhia1407-001-site1.otempurl.com/api/Users/update',
         {
           FirstName: firstName,
           LastName: lastName,
@@ -131,7 +131,7 @@ const CartPreviewPage = () => {
 
     try {
       const response = await axios.post(
-        'https://localhost:5001/api/Carts/preview',
+        'http://dangtringhia1407-001-site1.otempurl.com/api/Carts/preview',
         {
           CouponCode: couponCode || null,
           ShippingCompanyId: parseInt(selectedShippingCompany) || null,
@@ -169,7 +169,7 @@ const CartPreviewPage = () => {
 
     try {
       await axios.post(
-        'https://localhost:5001/api/Orders/create',
+        'http://dangtringhia1407-001-site1.otempurl.com/api/Orders/create',
         {},
         {
           headers: { Authorization: `Bearer ${token}` }

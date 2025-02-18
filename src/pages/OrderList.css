@@ -1,131 +1,16 @@
-/* Container Styles */
-.order-container {
-    padding: 20px;
-    max-width: 900px;
-    margin: auto;
-    background: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Header and Subheader Styles */
-  .order-header {
-    font-size: 28px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .order-subheader {
-    font-size: 22px;
-    color: #444;
-    margin-top: 30px;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 8px;
-  }
-  
-  /* Order Info Styles */
-  .order-info {
-    font-size: 16px;
-    margin: 8px 0;
-    color: #555;
-  }
-  
-  .order-highlight {
-    font-weight: bold;
-    color: #000;
-  }
-  
-  /* Order Status Styles */
-  .order-status {
-    font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 5px;
-    color: white;
-    display: inline-block;
-  }
-  
-  .order-pending {
-    background-color: #ff9800;
-  }
-  
-  .order-shipped {
-    background-color: #2196f3;
-  }
-  
-  .order-delivered {
-    background-color: #4caf50;
-  }
-  
-  .order-cancelled {
-    background-color: #f44336;
-  }
-  
-  /* Table Styles */
-  .order-table {
-    width: 100%;
-    margin-top: 20px;
-    border-collapse: collapse;
-    background: #fff;
-    border-radius: 5px;
-    overflow: hidden;
-  }
-  
-  .order-table th,
-  .order-table td {
-    padding: 12px;
-    text-align: left;
-    border: 1px solid #ddd;
-  }
-  
-  .order-table th {
-    background-color: #4caf50;
-    color: white;
-    font-size: 14px;
-    text-transform: uppercase;
-  }
-  
-  .order-table td {
-    font-size: 14px;
-    color: #555;
-  }
-  
-  /* Loading and Error Styles */
-  .order-loading {
-    text-align: center;
-    font-size: 18px;
-    color: #007bff;
-  }
-  
-  .order-error {
-    text-align: center;
-    color: red;
-    font-weight: bold;
-    font-size: 16px;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .order-container {
-      padding: 15px;
-    }
-  
-    .order-header {
-      font-size: 24px;
-    }
-  
-    .order-subheader {
-      font-size: 18px;
-    }
-  
-    .order-info {
-      font-size: 14px;
-    }
-  
-    .order-table th,
-    .order-table td {
-      font-size: 12px;
-      padding: 8px;
-    }
-  }
+
+        .order-action-buttons {
+          display: flex;
+          flex-direction: column;
+          /* Đặt nút theo cột */
+          align-items: center;
+          /* Căn giữa theo chiều ngang */
+          gap: 10px;
+          /* Tăng khoảng cách giữa các nút */
+        }
+    
+        /* Đảm bảo nút có cùng kích thước */
+        .order-action-buttons .MuiButton-root {
+          width: 150px;
+          text-align: center;
+        }

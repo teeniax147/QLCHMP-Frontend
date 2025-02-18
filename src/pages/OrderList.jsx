@@ -17,7 +17,7 @@ import {
   TextField,
 } from "@mui/material";
 import { Star, StarBorder } from "@mui/icons-material";
-
+import "./OrderList.css";
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -37,7 +37,7 @@ const OrderList = () => {
     "Tất cả",
     "Chờ xác nhận",
     "Chờ lấy hàng",
-    "Chờ giao hàng",
+    "Đang giao hàng",
     "Đã giao",
     "Đã hủy",
   ];
@@ -52,7 +52,7 @@ const OrderList = () => {
         case 2:
           return status === "Chờ Lấy Hàng";
         case 3:
-          return status === "Chờ Giao Hàng";
+          return status === "Đang Giao Hàng";
         case 4:
           return status === "Đã Giao";
         case 5:
@@ -69,7 +69,7 @@ const OrderList = () => {
     setError("");
     try {
       const response = await axios.get(
-        `https://localhost:5001/api/Orders/customer/${customerId}/orders`,
+        `http://dangtringhia1407-001-site1.otempurl.com/api/Orders/customer/${customerId}/orders`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -94,7 +94,7 @@ const OrderList = () => {
 
     try {
       const response = await axios.put(
-        `https://localhost:5001/api/Orders/${orderId}/cancel`,
+        `http://dangtringhia1407-001-site1.otempurl.com/api/Orders/${orderId}/cancel`,
         {},
         {
           headers: {
@@ -114,7 +114,7 @@ const OrderList = () => {
   const fetchOrderDetails = async (orderId) => {
     try {
       const response = await axios.get(
-        `https://localhost:5001/api/Orders/orders/${orderId}/details`,
+        `http://dangtringhia1407-001-site1.otempurl.com/api/Orders/orders/${orderId}/details`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -146,7 +146,7 @@ const OrderList = () => {
 
     try {
       const response = await axios.post(
-        `https://localhost:5001/api/ProductFeedbacks/add`,
+        `http://dangtringhia1407-001-site1.otempurl.com/api/ProductFeedbacks/add`,
         {
           ProductId: selectedProduct.ProductId,
           Rating: rating,
@@ -180,9 +180,9 @@ const OrderList = () => {
   }, []);
 
   return (
-    <div style={{ padding: "20px", marginTop: "80px" }}>
-      <Typography variant="h4" align="center" gutterBottom>
-        Danh sách đơn hàng
+    <div style={{ padding: "20px", marginTop: "70px" }}>
+      <Typography variant="h4" align="center" fontSize={"30px"} fontWeight={"bold"} gutterBottom>
+      DANH SÁCH ĐƠN HÀNG
       </Typography>
 
       {/* Tabs trạng thái */}
@@ -209,46 +209,47 @@ const OrderList = () => {
           <Table>
             <TableHead>
               <TableRow>
-              <TableCell>STT</TableCell>
-                <TableCell>Ngày đặt</TableCell>
-                <TableCell>Trạng thái</TableCell>
-                <TableCell>Khách hàng</TableCell>
-                <TableCell>Địa chỉ giao hàng</TableCell>
-                <TableCell>Phương thức thanh toán</TableCell>
-                <TableCell>Tổng tiền</TableCell>
-                <TableCell>Hành động</TableCell>
+                    <TableCell align="center" sx={{ fontWeight: "bold", width: "0%", fontSize: "16px" }}>STT</TableCell>
+                    <TableCell align="center" sx={{ fontWeight: "bold", width: "5%", fontSize: "16px" }}>Ngày đặt</TableCell>
+                    <TableCell align="center" sx={{ fontWeight: "bold", width: "7%", fontSize: "16px" }}>Trạng thái</TableCell>
+                    <TableCell align="center" sx={{ fontWeight: "bold", width: "5%", fontSize: "16px" }}>Khách hàng</TableCell>
+                    <TableCell align="center" sx={{ fontWeight: "bold", width: "10%", fontSize: "16px" }}>Địa chỉ giao hàng</TableCell>
+              
+                    <TableCell align="center" sx={{ fontWeight: "bold", width: "5%", fontSize: "16px" }}>Tổng tiền</TableCell>
+                    <TableCell align="center" sx={{ fontWeight: "bold", width: "5%", fontSize: "16px" }}>Hành động</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {filteredOrders().map((order, index) => (
                 <TableRow key={order.Id}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>{order.OrderDate}</TableCell>
-                  <TableCell>{order.Status}</TableCell>
-                  <TableCell>{order.CustomerName}</TableCell>
-                  <TableCell>{order.ShippingAddress}</TableCell>
-                  <TableCell>{order.PaymentMethod}</TableCell>
-                  <TableCell>{order.TotalAmount.toLocaleString()} VND</TableCell>
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={() => fetchOrderDetails(order.Id)}
-                    >
-                      Xem chi tiết
-                    </Button>
-                    {order.Status === "Chờ Xác Nhận" && (
+                  <TableCell align="center">{index + 1}</TableCell>
+                  <TableCell align="center">{order.OrderDate}</TableCell>
+                  <TableCell align="center">{order.Status}</TableCell>
+                  <TableCell align="center">{order.CustomerName}</TableCell>
+                  <TableCell align="center">{order.ShippingAddress}</TableCell>
+                
+                  <TableCell align="center">{order.TotalAmount.toLocaleString()} VND</TableCell>
+                  <TableCell align="center">
+                    <div className="order-action-buttons">
                       <Button
-                        variant="outlined"
-                        color="secondary"
-                        onClick={() => cancelOrder(order.Id, order.Status)}
-                        style={{ marginLeft: "10px" }}
+                        variant="contained"
+                        color="primary"
+                        onClick={() => fetchOrderDetails(order.Id)}
                       >
-                        Hủy đơn hàng
+                        Xem chi tiết
                       </Button>
-                    )}
-                    
+                      {order.Status === "Chờ Xác Nhận" && (
+                        <Button
+                          variant="outlined"
+                          color="secondary"
+                          onClick={() => cancelOrder(order.Id, order.Status)}
+                        >
+                          Hủy đơn hàng
+                        </Button>
+                      )}
+                    </div>
                   </TableCell>
+
                 </TableRow>
               ))}
             </TableBody>

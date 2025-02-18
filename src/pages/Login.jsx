@@ -12,7 +12,7 @@ const Login = () => {
 
   const loginAPI = async (user, pass) => {
     try {
-      const res = await axios.post('https://localhost:5001/api/Users/login', {
+      const res = await axios.post('http://dangtringhia1407-001-site1.otempurl.com/api/Users/login', {
         EmailOrUsername: user,
         Password: pass,
       });

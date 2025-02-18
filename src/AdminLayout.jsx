@@ -60,8 +60,8 @@ const AdminLayout = () => {
       {
         isAdminLogin ? <div className="admin-layout-container">
           <aside className="admin-sidebar">
-            <div className="logoheader2">
-              <img src="src/assets/Logo.png" alt="Glamour Cosmic Logo" />
+            <div className="logoheader3">
+              <img src="src/assets/Icons/logo6.png" alt="Glamour Cosmic Logo" />
             </div>
             <nav>
               <ul>
@@ -70,8 +70,7 @@ const AdminLayout = () => {
                 </li>
                 {isAccountOpen && (
                   <ul className="sub-menu">
-                    <li><Link to="/admin/users"><span>👤</span> Người dùng</Link></li>
-                    <li><Link to="/admin/admins"><span>🛠️</span> Quản trị viên</Link></li>
+          
                     <li><Link to="/admin/create-user"><span>👥</span>Phân quyền</Link></li>
                   </ul>
                 )}
@@ -80,20 +79,26 @@ const AdminLayout = () => {
                 </li>
                 {isManagementOpen && (
                   <ul className="sub-menu">
-                    {/* <li><Link to="/admin/customers"><span>👔</span> Tài khoản khách hàng</Link></li> */}
+                    <li><Link to="/admin/blogs"><span>✏️</span> Bài viết blog</Link></li>
+                    <li><Link to="/admin/brands"><span>🏷️</span> Thương hiệu</Link></li>
+                   
+                    <li><Link to="/admin/revenue-report"><span>📑</span> Thống kê - Báo cáo</Link></li>
+                   
+                   <li><Link to="/admin/orders"><span>🛒</span> Đơn hàng</Link></li>
                     <li><Link to="/admin/customers"><span><FontAwesomeIcon icon={faUser} /></span> Tài khoản khách hàng</Link></li>
                     <li><Link to="/admin/categories"><span>📂</span> Danh mục</Link></li>
                     <li><Link to="/admin/products"><span>📦</span> Sản phẩm</Link></li>
-                    <li><Link to="/admin/brands"><span>🏷️</span> Thương hiệu</Link></li>
-                    <li><Link to="/admin/inventory"><span>📦</span> Kho hàng</Link></li>
-                    <li><Link to="/admin/orders"><span>🛒</span> Đơn hàng</Link></li>
                     <li><Link to="/admin/coupons"><span>🏷️</span> Mã giảm giá</Link></li>
-                    <li><Link to="/admin/payment-methods"><span>💳</span> Phương thức thanh toán</Link></li>
-                    <li><Link to="/admin/blogs"><span>✏️</span> Bài viết blog</Link></li>
-                    <li><Link to="/admin/promotions"><span>🎉</span> Khuyến mãi</Link></li>
-                    <li><Link to="/admin/membership"><span>🏅</span> Thứ hạng thành viên</Link></li>
-                    <li><Link to="/admin/revenue-report"><span>📑</span> Thống kê - Báo cáo</Link></li>
-                    <li><Link to="/admin/shipping"><span>🚚</span> Đơn vị vận chuyển</Link></li>
+                    <li><Link to="/admin/inventory"><span>📦</span> Kho hàng</Link></li>
+                  
+                    
+                
+                    
+                   
+                   
+           
+                  
+                    
                   </ul>
                 )}
               </ul>
@@ -112,8 +117,8 @@ const AdminLayout = () => {
             <span className="icon2">
               {userName && (
                 <div onClick={handleDropdownToggle} className="user-menu-trigger1">
-                  <img src="src/assets/Icons/dangnhap.png" alt="User Icon" />
-                  <span>Xin chào {userName} !</span>
+                  <FontAwesomeIcon icon={faUser} />
+                  <span>{userName} </span>
                 </div>
               )}
               {userName && showDropdown && (

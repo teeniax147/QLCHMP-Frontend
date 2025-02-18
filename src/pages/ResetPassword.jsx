@@ -23,7 +23,7 @@ const ResetPassword = () => {
   useEffect(() => {
     const checkOtpVerified = async () => {
       try {
-        await axios.get(`https://localhost:5001/api/Users/check-otp-verified?email=${email}`);
+        await axios.get(`http://dangtringhia1407-001-site1.otempurl.com/api/Users/check-otp-verified?email=${email}`);
       } catch (error) {
         console.error("OTP chưa được xác nhận:", error.response ? error.response.data : error.message);
         setError("Bạn chưa xác nhận OTP hoặc OTP không hợp lệ.");
@@ -59,7 +59,7 @@ const ResetPassword = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post('https://localhost:5001/api/Users/reset-password', {
+      const response = await axios.post('http://dangtringhia1407-001-site1.otempurl.com/api/Users/reset-password', {
         email,
         newPassword,
         confirmPassword,

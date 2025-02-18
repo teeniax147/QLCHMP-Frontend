@@ -16,7 +16,7 @@ const FavoritesPage = () => {
 
     try {
       const response = await axios.get(
-        "https://localhost:5001/api/Favorites/user-favorites",
+        "http://dangtringhia1407-001-site1.otempurl.com/api/Favorites/user-favorites",
         {
           headers: {
             Authorization: `Bearer ${token}`, // Gửi token thực từ localStorage
@@ -46,7 +46,7 @@ const FavoritesPage = () => {
     try {
       // Gửi yêu cầu xóa sản phẩm yêu thích
       const response = await axios.delete(
-        "https://localhost:5001/api/Favorites/remove",
+        "http://dangtringhia1407-001-site1.otempurl.com/api/Favorites/remove",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -84,10 +84,43 @@ const FavoritesPage = () => {
               className="favorites-image"
             />
             <div className="favorites-details">
-              <h3 className="favorites-name">{favorite.Name}</h3>
-              <p className="favorites-price">
-               {favorite.Price.toLocaleString()} VND
+              <p className="favorites-brand">
+                {favorite.BrandName || "Không rõ"}
               </p>
+              <h3 className="favorites-name">{favorite.Name}</h3>
+            
+           
+                {favorite.Price ? (
+                  <>
+                    <p className="favorites-price">
+                      {`${favorite.Price.toLocaleString()}đ`}
+                    </p>
+                    {favorite.OriginalPrice && favorite.OriginalPrice > favorite.Price && (
+                      <span className="favorites-original-price">
+                        {`${favorite.OriginalPrice.toLocaleString()}đ`}
+                      </span>
+                    )}
+                  </>
+                ) : (
+                  <p className="favorites-price">Liên hệ</p>
+                )}
+            
+
+              
+              
+              <div className="favorites-rating-stars">
+                {Array.from({ length: 5 }, (_, index) => (
+                  <span
+                    key={index}
+                    className={`favorite-star ${favorites.ReviewCount > 0 && index < Math.round(favorites.AverageRating || 0) ? "filled" : ""
+                      }`}
+                  >
+                    ★
+                  </span>
+                ))}
+                <span className="favorite-review-count">({favorites.ReviewCount || 0})</span>
+              </div>
+
               {/* Nút xóa sản phẩm yêu thích */}
               <div
                 className="favorite-remove-icon"

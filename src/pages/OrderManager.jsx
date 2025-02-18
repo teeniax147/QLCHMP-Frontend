@@ -49,7 +49,7 @@ const OrderManager = () => {
       }
 
       const response = await axios.get(
-        `https://localhost:5001/api/Orders/all-orders?pageNumber=${page}&pageSize=${pageSize}`,
+        `http://dangtringhia1407-001-site1.otempurl.com/api/Orders/all-orders?pageNumber=${page}&pageSize=${pageSize}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -100,7 +100,7 @@ const OrderManager = () => {
       }
 
       await axios.put(
-        `https://localhost:5001/api/Orders/${selectedOrder.Id}/update-status`,
+        `http://dangtringhia1407-001-site1.otempurl.com/api/Orders/${selectedOrder.Id}/update-status`,
         {
           Status: newStatus,
           PaymentStatus: newPaymentStatus,
@@ -146,7 +146,7 @@ const OrderManager = () => {
       }
 
       await axios.put(
-        `https://localhost:5001/api/Orders/${selectedOrder.Id}/cancel-by-staff`,
+        `http://dangtringhia1407-001-site1.otempurl.com/api/Orders/${selectedOrder.Id}/cancel-by-staff`,
         {},
         {
           headers: {
@@ -175,8 +175,8 @@ const OrderManager = () => {
   }, []);
 
   return (
-    <div style={{ padding: "5px 0 0", marginTop: "-70px" }}>
-       
+    <div style={{ padding: "5px 0 0", marginTop: "40px", marginBottom: "20px" }}>
+
       <Typography variant="h4" align="center" gutterBottom>
         Quản Lý Đơn Hàng
       </Typography>
@@ -196,52 +196,52 @@ const OrderManager = () => {
             style={{ maxHeight: "500px", overflow: "auto" }}
           >
             <Table stickyHeader>
-            <TableHead>
-  <TableRow>
-    <TableCell
-      align="center"
-      sx={{ fontWeight: "bold", fontSize: "16px" }}
-    >
-      STT
-    </TableCell>
-    <TableCell
-      align="center"
-      sx={{ fontWeight: "bold", fontSize: "16px" }}
-    >
-      Ngày đặt
-    </TableCell>
-    <TableCell
-      align="center"
-      sx={{ fontWeight: "bold", fontSize: "16px" }}
-    >
-      Trạng thái
-    </TableCell>
-    <TableCell
-      align="center"
-      sx={{ fontWeight: "bold", fontSize: "16px" }}
-    >
-      Tổng tiền
-    </TableCell>
-    <TableCell
-      align="center"
-      sx={{ fontWeight: "bold", fontSize: "16px" }}
-    >
-      Địa chỉ giao hàng
-    </TableCell>
-    <TableCell
-      align="center"
-      sx={{ fontWeight: "bold", fontSize: "16px" }}
-    >
-      Khách hàng
-    </TableCell>
-    <TableCell
-      align="center"
-      sx={{ fontWeight: "bold", fontSize: "16px" }}
-    >
-      Hành động
-    </TableCell>
-  </TableRow>
-</TableHead>
+              <TableHead>
+                <TableRow>
+                  <TableCell
+                    align="center"
+                    sx={{ fontWeight: "bold", fontSize: "16px" }}
+                  >
+                    STT
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{ fontWeight: "bold", fontSize: "16px" }}
+                  >
+                    Ngày đặt
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{ fontWeight: "bold", fontSize: "16px" }}
+                  >
+                    Trạng thái
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{ fontWeight: "bold", fontSize: "16px" }}
+                  >
+                    Tổng tiền
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{ fontWeight: "bold", fontSize: "16px" }}
+                  >
+                    Địa chỉ giao hàng
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{ fontWeight: "bold", fontSize: "16px" }}
+                  >
+                    Khách hàng
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{ fontWeight: "bold", fontSize: "16px" }}
+                  >
+                    Hành động
+                  </TableCell>
+                </TableRow>
+              </TableHead>
 
               <TableBody>
                 {orders.map((order, index) => (
@@ -257,33 +257,33 @@ const OrderManager = () => {
                     <TableCell>{order.ShippingAddress}</TableCell>
                     <TableCell>{order.CustomerName}</TableCell>
                     <TableCell>
-  {order.Status !== "Đã Hủy" && (
-    <>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => {
-          setSelectedOrder(order);
-          setNewStatus(order.Status || "");
-          setNewPaymentStatus(order.PaymentStatus || "");
-          setModalOpen(true);
-        }}
-      >
-        Cập nhật
-      </Button>
-      {order.Status !== "Đang Giao Hàng" &&
-        order.Status !== "Đã Giao" && (
-          <Button
-            variant="outlined"
-            color="error"
-            onClick={() => handleOpenCancelModal(order)}
-          >
-            Hủy
-          </Button>
-        )}
-    </>
-  )}
-</TableCell>
+                      {order.Status !== "Đã Hủy" && (
+                        <>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() => {
+                              setSelectedOrder(order);
+                              setNewStatus(order.Status || "");
+                              setNewPaymentStatus(order.PaymentStatus || "");
+                              setModalOpen(true);
+                            }}
+                          >
+                            Cập nhật
+                          </Button>
+                          {order.Status !== "Đang Giao Hàng" &&
+                            order.Status !== "Đã Giao" && (
+                              <Button
+                                variant="outlined"
+                                color="error"
+                                onClick={() => handleOpenCancelModal(order)}
+                              >
+                                Hủy
+                              </Button>
+                            )}
+                        </>
+                      )}
+                    </TableCell>
 
                   </TableRow>
                 ))}

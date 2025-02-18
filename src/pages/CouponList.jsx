@@ -9,7 +9,7 @@ const CouponList = () => {
   useEffect(() => {
     const fetchCoupons = async () => {
       try {
-        const response = await axios.get('https://localhost:5001/api/Coupons');
+        const response = await axios.get('http://dangtringhia1407-001-site1.otempurl.com/api/Coupons');
         const couponsData = response.data.$values || [];
         setCoupons(couponsData);
       } catch (err) {

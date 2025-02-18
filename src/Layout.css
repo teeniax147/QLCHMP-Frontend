@@ -408,16 +408,6 @@ margin: 0 10px;
 }
 
 
-a {
-  color: inherit; /* Giữ nguyên màu của liên kết theo thẻ cha */
-  text-decoration: none; /* Loại bỏ gạch chân mặc định của liên kết */
-}
-
-a, a:visited, a:hover, a:focus, a:active {
-  color: #333; /* Thay #333 bằng màu bạn muốn dùng cho văn bản liên kết */
-  text-decoration: none;
-  outline: none; /* Loại bỏ viền hiển thị khi liên kết được focus hoặc active */
-}
 .user-menu-trigger {
   cursor: pointer;
   display: flex;
@@ -494,7 +484,11 @@ a, a:visited, a:hover, a:focus, a:active {
   align-items: center;
 }
 
-/* -------- */
+.link-blog {
+  color: #333;
+    color: inherit;
+      /* Giữ nguyên màu của thẻ cha (li) */
+}
 .link-blog:hover{
-color: #333;
+  color: #333;
 }

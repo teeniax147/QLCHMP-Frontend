@@ -10,6 +10,7 @@ const Layout = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [greeting, setGreeting] = useState('');
   const [cartItemCount, setCartItemCount] = useState(0); // State mới cho số lượng giỏ hàng
+  const [searchKeyword, setSearchKeyword] = useState(""); // Từ khóa tìm kiếm
  
   useEffect(() => {
     const storedName = localStorage.getItem('userName');
@@ -26,17 +27,17 @@ const Layout = () => {
       setGreeting('Good evening 🌙');
     }
 
-     // Hàm lấy số lượng sản phẩm trong giỏ hàng
-     const fetchCartItemCount = async () => {
+    // Hàm lấy số lượng sản phẩm trong giỏ hàng
+    const fetchCartItemCount = async () => {
       try {
-        const response = await axios.get('https://localhost:5001/api/Carts/item-count', {
+        const response = await axios.get('http://dangtringhia1407-001-site1.otempurl.com/api/Carts/item-count', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
         setCartItemCount(response.data.ItemCount);
-      } catch (hehe) {}
-        
+      } catch (hehe) { }
+
     };
 
     // Gọi hàm lấy số lượng lần đầu
@@ -48,7 +49,7 @@ const Layout = () => {
     // Xóa interval khi component unmount
     return () => clearInterval(intervalId);
   }, []);
-   
+
   const handleDropdownToggle = () => {
     setShowDropdown((prev) => !prev);
   };
@@ -58,10 +59,39 @@ const Layout = () => {
     localStorage.removeItem('roles');
     localStorage.removeItem('token');
     setUserName('');
-    
-    
+
+
     setShowDropdown(false);
-    
+
+  };
+  const handleSearch = async (e) => {
+    e.preventDefault();
+
+    if (!searchKeyword.trim()) {
+      alert("Vui lòng nhập từ khóa tìm kiếm!");
+      return;
+    }
+
+    try {
+      console.log("Từ khóa tìm kiếm:", searchKeyword); // Log từ khóa
+
+      const response = await axios.get("http://dangtringhia1407-001-site1.otempurl.com/api/Products/tim-kiem", {
+        params: { Keyword: searchKeyword },
+      });
+
+      console.log("Phản hồi từ API:", response.data); // Log phản hồi API
+
+      if (response.data.length === 0) {
+        alert("Không tìm thấy sản phẩm nào phù hợp.");
+        return;
+      }
+
+      // Điều hướng đến AllProductsList kèm dữ liệu
+      navigate("/all-products", { state: { products: response.data } });
+    } catch (error) {
+      console.error("Lỗi khi gọi API:", error.message || error.response?.data);
+      alert("Không thể tìm kiếm sản phẩm. Vui lòng thử lại!");
+    }
   };
 
   return (
@@ -77,22 +107,30 @@ const Layout = () => {
             <img src="src/assets/Logo.png" alt="Glamour Cosmic Logo" />
           </Link>
 
-          <div className="search-bar">
-            <input type="text" placeholder="FREESHIP MỌI ĐƠN" />
+          {/* Thanh tìm kiếm */}
+          <form className="search-bar" onSubmit={handleSearch}>
+            <input
+              type="text"
+              placeholder="Nhập từ khóa tìm kiếm..."
+              value={searchKeyword}
+              onChange={(e) => setSearchKeyword(e.target.value)}
+            />
             <button type="submit" className="search-button">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 30 30">
                 <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"></path>
               </svg>
             </button>
-          </div>
+          </form>
 
           <div className="header-icons">
-          <span className="icon">
-  <Link to="/beauty-blog" className='link-blog'>
-    <img src="src/assets/Icons/blog.png" alt="Blog Icon" />
-    Blog làm đẹp
-  </Link>
-</span>
+            <span className="icon">
+
+              <Link to="/beauty-blog" className='link-blog'>
+                <img src="src/assets/Icons/blog.png" alt="Blog Icon" />
+                Blog làm đẹp
+              </Link>
+
+            </span>
             <span className="icon">
               <img src="src/assets/Icons/trungtamhotro.png" alt="Support Icon" />
               Trung tâm hỗ trợ
@@ -106,7 +144,7 @@ const Layout = () => {
                   <span>Xin chào {userName} !</span>
                 </div>
               ) : (
-                <Link to="/login">
+                  <Link to="/login" className='link-blog'>
                   <img src="src/assets/Icons/dangnhap.png" alt="Login Icon" />
                   <span>Đăng nhập</span>
                 </Link>
@@ -115,23 +153,23 @@ const Layout = () => {
                 <div className="user-dropdown-menu">
                   <p>{greeting} {userName} !</p>
                   <ul>
-                  <li>
-  <Link to="/user-profile">
-    <img src="https://img.icons8.com/?size=100&id=98957&format=png&color=000000" alt="Thông tin tài khoản Icon" style={{ width: '20px', marginRight: '8px', verticalAlign: 'middle' }} />
-    Thông tin tài khoản
-  </Link>
-</li>
+                    <li>
+                      <Link to="/user-profile">
+                        <img src="https://img.icons8.com/?size=100&id=98957&format=png&color=000000" alt="Thông tin tài khoản Icon" style={{ width: '20px', marginRight: '8px', verticalAlign: 'middle' }} />
+                        Thông tin tài khoản
+                      </Link>
+                    </li>
 
-<li>
-  <Link to="/orders/customer/:customerId">
-    <img src="https://img.icons8.com/?size=100&id=89394&format=png&color=000000" alt="Lịch sử đặt hàng Icon" style={{ width: '20px', marginRight: '8px', verticalAlign: 'middle' }} />
-   Đơn hàng 
-  </Link>
-</li>
+                    <li>
+                      <Link to="/orders/customer/:customerId">
+                        <img src="https://img.icons8.com/?size=100&id=89394&format=png&color=000000" alt="Lịch sử đặt hàng Icon" style={{ width: '20px', marginRight: '8px', verticalAlign: 'middle' }} />
+                        Đơn hàng
+                      </Link>
+                    </li>
 
-<li>
-  <button onClick={handleLogout} className="logout-button">Đăng xuất</button>
-</li>
+                    <li>
+                      <button onClick={handleLogout} className="logout-button">Đăng xuất</button>
+                    </li>
                   </ul>
                 </div>
               )}
@@ -140,28 +178,28 @@ const Layout = () => {
               <Link to="/favorites">❤️</Link>
             </span>
             <span className="iconcart">
-  <Link to="/CartPage">
-    <img src="src/assets/cart1.png" alt="Cart Icon" />
-    {cartItemCount > 0 && <span className="cart-count">{cartItemCount}</span>}
-  </Link>
-</span>
+              <Link to="/CartPage">
+                <img src="src/assets/cart1.png" alt="Cart Icon" />
+                {cartItemCount > 0 && <span className="cart-count">{cartItemCount}</span>}
+              </Link>
+            </span>
 
           </div>
         </div>
 
         <nav className="nav">
-    <ul>
-        <li><Link to="/">TRANG CHỦ</Link></li>
-        <li><Link to="/all-products">SẢN PHẨM</Link></li>
-        <li>
-  <CategoryDropdown title="DƯỠNG DA" parentId={2} />
-</li>
-        <li><CategoryDropdown title="TRANG ĐIỂM" parentId={1} /></li> {/* Truyền parentId tương ứng */}
-        <li><BrandDropdown title="THƯƠNG HIỆU" /></li>
-       
-        <li><Link to="/coupons">MÃ ƯU ĐÃI</Link></li>
-    </ul>
-</nav>
+          <ul>
+            <li><Link to="/">TRANG CHỦ</Link></li>
+            <li><Link to="/all-products">SẢN PHẨM</Link></li>
+            <li>
+              <CategoryDropdown title="DƯỠNG DA" parentId={2} />
+            </li>
+            <li><CategoryDropdown title="TRANG ĐIỂM" parentId={1} /></li> {/* Truyền parentId tương ứng */}
+            <li><BrandDropdown title="THƯƠNG HIỆU" /></li>
+
+            <li><Link to="/coupons">MÃ ƯU ĐÃI</Link></li>
+          </ul>
+        </nav>
 
 
       </header>
@@ -233,21 +271,21 @@ const Layout = () => {
         </div>
         <hr className="footer-divider" />  {/* Đường gạch ngang */}
         <div className="footer-bottom">
-      
-  <p>® GlamourCosmic.com.vn thuộc quyền sở hữu của Công ty Cổ Phần Hoa Sen
-    Việt GPKD số 0303565753 cấp ngày 24/09/2004 tại Sở Kế hoạch & Đầu tư TP
-    HCM | VP Miền Nam Lầu 1, G Tower 3 - 196A, Nguyễn Văn Hưởng, Phường
-    Thảo Điền, Thành Phố Thủ Đức, TP.HCM--- Chi nhánh Công ty CP Hoa Sen
-    Việt tại Hà Nội GPKD chi nhánh số 0303565753-008 cấp ngày 12/10/2011 |
-    Tòa nhà Lidaco, 19 Đại Từ, Phường Đại Kim, Quận Hoàng Mai, TP. Hà Nội.
-  </p>
-  <div className="certification-icons">
-    <img src="src/assets/Icons/verified.png.png" alt="Bảo Hành" />
-    <img src="src/assets/Icons/verified-dmca.png.png" alt="DMCA" />
-  </div>
-</div>
 
-       
+          <p>® GlamourCosmic.com.vn thuộc quyền sở hữu của Công ty Cổ Phần Hoa Sen
+            Việt GPKD số 0303565753 cấp ngày 24/09/2004 tại Sở Kế hoạch & Đầu tư TP
+            HCM | VP Miền Nam Lầu 1, G Tower 3 - 196A, Nguyễn Văn Hưởng, Phường
+            Thảo Điền, Thành Phố Thủ Đức, TP.HCM--- Chi nhánh Công ty CP Hoa Sen
+            Việt tại Hà Nội GPKD chi nhánh số 0303565753-008 cấp ngày 12/10/2011 |
+            Tòa nhà Lidaco, 19 Đại Từ, Phường Đại Kim, Quận Hoàng Mai, TP. Hà Nội.
+          </p>
+          <div className="certification-icons">
+            <img src="src/assets/Icons/verified.png.png" alt="Bảo Hành" />
+            <img src="src/assets/Icons/verified-dmca.png.png" alt="DMCA" />
+          </div>
+        </div>
+
+
       </footer>
     </>
   );

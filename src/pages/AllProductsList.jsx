@@ -8,6 +8,7 @@ const AllProductsList = () => {
   const [loading, setLoading] = useState(true); // Trạng thái loading
   const [error, setError] = useState(null); // Trạng thái lỗi
   const [filters, setFilters] = useState({
+
     minPrice: '',
     maxPrice: '',
     brandId: '',
@@ -27,7 +28,7 @@ const AllProductsList = () => {
       setError(null);
 
       try {
-        const response = await axios.get(`https://localhost:5001/api/Products/danh-sach`, {
+        const response = await axios.get(`http://dangtringhia1407-001-site1.otempurl.com/api/Products/danh-sach`, {
           params: {
             pageNumber: page,
             pageSize: pageSize,
@@ -69,7 +70,7 @@ const AllProductsList = () => {
 
   const applyFilters = () => {
     setLoading(true);
-  
+
     // Chỉ gửi các tham số hợp lệ, bỏ qua giá trị null hoặc undefined
     const validParams = {
       pageNumber: page,
@@ -80,18 +81,18 @@ const AllProductsList = () => {
       ...(filters.isOnSale !== null && { isOnSale: filters.isOnSale }),
       ...(sortOrder && { sortByPrice: sortOrder }),
     };
-  
-    axios
-    .get(`https://localhost:5001/api/Products/loc`, { params: validParams })
-    .then((response) => {
-      const data = response.data.DanhSachSanPham?.$values || [];
-      
-      // Loại bỏ sản phẩm trùng lặp
-      const uniqueProducts = Array.from(new Map(data.map(item => [item.Id, item])).values());
 
-      setProducts(uniqueProducts); // Cập nhật danh sách sản phẩm
-      setTotalPages(Math.ceil(response.data.TongSoSanPham / pageSize)); // Cập nhật số trang
-    })
+    axios
+      .get(`http://dangtringhia1407-001-site1.otempurl.com/api/Products/loc`, { params: validParams })
+      .then((response) => {
+        const data = response.data.DanhSachSanPham?.$values || [];
+
+        // Loại bỏ sản phẩm trùng lặp
+        const uniqueProducts = Array.from(new Map(data.map(item => [item.Id, item])).values());
+
+        setProducts(uniqueProducts); // Cập nhật danh sách sản phẩm
+        setTotalPages(Math.ceil(response.data.TongSoSanPham / pageSize)); // Cập nhật số trang
+      })
       .catch((error) => {
         console.error("Lỗi khi gọi API:", error);
         setError("Lỗi từ server: " + error.message);
@@ -100,19 +101,19 @@ const AllProductsList = () => {
         setLoading(false);
       });
   };
-  
+
   const handleAddToFavorites = async (productId) => {
     const token = localStorage.getItem("token"); // Lấy token từ localStorage
     console.log("Token từ localStorage:", token);
-  
+
     if (!token) {
       alert("Bạn cần đăng nhập để thêm sản phẩm vào danh sách yêu thích.");
       return;
     }
-  
+
     try {
       const response = await axios.post(
-        "https://localhost:5001/api/Favorites/add",
+        "http://dangtringhia1407-001-site1.otempurl.com/api/Favorites/add",
         { ProductId: productId },
         {
           headers: {
@@ -120,15 +121,15 @@ const AllProductsList = () => {
           },
         }
       );
-  
+
       alert(response.data); // Hiển thị thông báo thành công từ server
     } catch (error) {
       console.error("Lỗi khi thêm sản phẩm yêu thích:", error.response?.data || error.message);
       alert(error.response?.data || "Không thể thêm sản phẩm vào yêu thích.");
     }
   };
-  
-  
+
+
   if (loading) {
     return <p>Đang tải danh sách sản phẩm...</p>;
   }
@@ -137,7 +138,7 @@ const AllProductsList = () => {
     return <p>{error}</p>;
   }
 
- 
+
   return (
     <div className="product-container-all">
       <div className="product-header-banner-all">
@@ -148,151 +149,149 @@ const AllProductsList = () => {
       </div>
       <h1 className="product-title-all">Tất cả sản phẩm</h1>
       <div className="product-page-container">
-      <div className="filters-all">
-        <div className="filter-section-all">
-        
-          <h4 className="product-text-all">Khoảng giá:</h4>
+        <div className="filters-all">
+          <div className="filter-section-all">
 
-  <div className="price-filters2">
-    <label>
-     
-      <input
-        type="number"
-        name="minPrice"
-        value={filters.minPrice}
-        onChange={handleFilterChange}
-      />
-    </label>
-    <h4 className="product-text">-</h4>
-    <label>
-     
-      <input
-        type="number"
-        name="maxPrice"
-        value={filters.maxPrice}
-        onChange={handleFilterChange}
-      />
-    </label>
-  
-  
-  </div>
+            <h4 className="product-text-all">Khoảng giá:</h4>
 
-          <div style={{display: "flex", flexDirection: "row", alignItems: "center", gap: "10px"}}>
-          <label>
-            Đang khuyến mãi:
-          </label>
-          <input
-          style={{width: "auto"}}
-              type="checkbox"
-              name="isOnSale"
-              checked={filters.isOnSale}
-              onChange={handleFilterChange}
-            />
+            <div className="price-filters2">
+              <label>
+
+                <input
+                  type="number"
+                  name="minPrice"
+                  value={filters.minPrice}
+                  onChange={handleFilterChange}
+                />
+              </label>
+              <h4 className="product-text">-</h4>
+              <label>
+
+                <input
+                  type="number"
+                  name="maxPrice"
+                  value={filters.maxPrice}
+                  onChange={handleFilterChange}
+                />
+              </label>
+
+
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "10px" }}>
+              <label>
+                Đang khuyến mãi:
+              </label>
+              <input
+                style={{ width: "auto" }}
+                type="checkbox"
+                name="isOnSale"
+                checked={filters.isOnSale}
+                onChange={handleFilterChange}
+              />
+            </div>
+          </div>
+
+          <div className="sort-section-all">
+            <label htmlFor="sortFilter" className="filter-label-all">
+              Sắp xếp theo:
+            </label>
+            <select
+              name="sortByPrice"
+              onChange={(e) => setSortOrder(e.target.value)}
+              value={sortOrder}
+            >
+              <option value="">Tất cả</option>
+              <option value="asc">Giá thấp nhất</option>
+              <option value="desc">Giá cao nhất</option>
+            </select>
+            <button onClick={applyFilters}>Áp dụng</button>
           </div>
         </div>
 
-        <div className="sort-section-all">
-          <label htmlFor="sortFilter" className="filter-label-all">
-            Sắp xếp theo:
-          </label>
-          <select
-            name="sortByPrice"
-            onChange={(e) => setSortOrder(e.target.value)}
-            value={sortOrder}
-          >
-            <option value="">Tất cả</option>
-            <option value="asc">Giá thấp nhất</option>
-            <option value="desc">Giá cao nhất</option>
-          </select>
-          <button onClick={applyFilters}>Áp dụng</button>
+        <div className="product-grid-all">
+          {products.length > 0 ? (
+            products.map((product, index) => (
+              <div
+                className="product-card-all"
+                key={`${product.Id}-${index}`}
+                onClick={() => navigate(`/product-detail/${product.Id}`)}
+              >
+                {/* Thêm nút trái tim */}
+                <div
+                  className="product-favorite-icon"
+                  onClick={(e) => {
+                    e.stopPropagation(); // Ngăn sự kiện click vào thẻ cha
+                    handleAddToFavorites(product.Id); // Gọi API thêm vào danh sách yêu thích
+                  }}
+                >
+                  ♡
+                </div>
+
+                <img
+                  src={product.ImageUrl || "https://via.placeholder.com/150"}
+                  alt={product.Name}
+                  className="product-image-all"
+                />
+                <div className="product-details-all">
+
+                  <p className="product-brand-custom">{product.BrandName || "Không có thương hiệu"}</p>
+
+
+                  <h3 className="product-name-all">{product.Name}</h3>
+
+
+
+                  <p className="product-price-custom">
+                    {product.Price ? `${product.Price.toLocaleString()}đ` : "Liên hệ"}
+                  </p>
+                  {product.OriginalPrice && product.OriginalPrice > product.Price && (
+                    <span className="product-original-price2">{product.OriginalPrice.toLocaleString()}đ</span>
+                  )}
+
+
+
+                  <div className="product-rating-stars">
+                    {Array.from({ length: 5 }, (_, index) => (
+                      <span
+                        key={index}
+                        className={`product-star ${product.ReviewCount > 0 && index < Math.round(product.AverageRating || 0) ? "filled" : ""
+                          }`}
+                      >
+                        ★
+                      </span>
+                    ))}
+                    <span>({product.ReviewCount || 0})</span>
+                  </div>
+
+                  {/* Số lượng tồn kho */}
+                  <p className="product-stock-custom">
+                    {product.CurrentStock ? `${product.CurrentStock} sản phẩm có sẵn` : "Không xác định"}
+                  </p>
+                </div>
+
+              </div>
+
+            ))
+          ) : (
+            <p>Không có sản phẩm nào trong danh mục này.</p>
+          )}
         </div>
       </div>
 
-      <div className="product-grid-all">
-        {products.length > 0 ? (
-          products.map((product, index) => (
-            <div
-              className="product-card-all"
-              key={`${product.Id}-${index}`}
-              onClick={() => navigate(`/product-detail/${product.Id}`)}
-            >
-              {/* Thêm nút trái tim */}
-              <div
-                className="product-favorite-icon"
-                onClick={(e) => {
-                  e.stopPropagation(); // Ngăn sự kiện click vào thẻ cha
-                  handleAddToFavorites(product.Id); // Gọi API thêm vào danh sách yêu thích
-                }}
-              >
-                ♡
-              </div>
-              
-              <img
-                src={product.ImageUrl || "https://via.placeholder.com/150"}
-                alt={product.Name}
-                className="product-image-all"
-              />
-          <div className="product-details-all">
-
-  <p className="product-brand-custom">{product.BrandName || "Không có thương hiệu"}</p>
-
-
-  <h3 className="product-name-all">{product.Name}</h3>
-
-  
- 
-    <p className="product-price-custom">
-      {product.Price ? `${product.Price.toLocaleString()}đ` : "Liên hệ"}
-    </p>
-    {product.OriginalPrice && product.OriginalPrice > product.Price && (
-      <span className="product-original-price2">{product.OriginalPrice.toLocaleString()}đ</span>
-    )}
- 
-
- 
-  <div className="product-rating-stars">
-    {Array.from({ length: 5 }, (_, index) => (
-      <span
-        key={index}
-        className={`product-star ${
-          product.ReviewCount > 0 && index < Math.round(product.AverageRating || 0) ? "filled" : ""
-        }`}
-      >
-        ★
-      </span>
-    ))}
-    <span>({product.ReviewCount || 0})</span>
-  </div>
-
-  {/* Số lượng tồn kho */}
-  <p className="product-stock-custom">
-    {product.CurrentStock ? `${product.CurrentStock} sản phẩm có sẵn` : "Không xác định"}
-  </p>
-</div>
-
-            </div>
-           
-          ))
-        ) : (
-          <p>Không có sản phẩm nào trong danh mục này.</p>
-        )}
-         </div>
-      </div>
-     
       <div className="pagination-all">
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index}
-            className={`page-button-all ${
-              page === index + 1 ? "active-all" : ""
-            }`}
+            className={`page-button-all1 ${page === index + 1 ? "active-all" : ""
+              }`}
             onClick={() => handlePageChange(index + 1)}
           >
             {index + 1}
           </button>
         ))}
       </div>
-     
+
     </div>
 
   );

@@ -24,7 +24,7 @@ const UserProfile = () => {
     }
 
     try {
-      const response = await axios.get('https://localhost:5001/api/Users/get-user-info', {
+      const response = await axios.get('http://dangtringhia1407-001-site1.otempurl.com/api/Users/get-user-info', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -61,7 +61,7 @@ const UserProfile = () => {
 
     try {
       await axios.put(
-        'https://localhost:5001/api/Users/update',
+        'http://dangtringhia1407-001-site1.otempurl.com/api/Users/update',
         {
           FirstName: formData.firstName,
           LastName: formData.lastName,

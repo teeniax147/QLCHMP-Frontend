@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Home.css'; // Đảm bảo đường dẫn chính xác
 import { Link } from 'react-router-dom';
 const Home = () => {
-  
+
   const banners = [
     'src/assets/Icons/banner.png',
     'src/assets/Icons/banner 2.png',
@@ -26,7 +26,7 @@ const Home = () => {
   const closeModal = () => {
     setSelectedProduct(null); // Đóng modal bằng cách đặt sản phẩm thành null
   };
-  
+
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
@@ -46,111 +46,111 @@ const Home = () => {
   // Danh sách sản phẩm mẫu cho "Sản Phẩm Nổi Bật"
   const featuredProducts = [
     {
-        id: 1,
-        brand: 'GLAMOUR COSMIC', 
-        name: 'Sữa Tắm GLAMOUR SHOP Dạng Gel Hương Nước Hoa Perfume',
-        price: '559,000₫',
-        originalPrice: '908,000₫',
-        discount: '-38%',
-        label: '1+1',
-        rating: 5,
-        reviews: 17,
-        image: 'https://image.hsv-tech.io/0x1200/tfs/common/44a504e0-330d-4505-91c8-de9438367676.webp',
+      id: 1,
+      brand: 'GLAMOUR COSMIC',
+      name: 'Sữa Tắm GLAMOUR SHOP Dạng Gel Hương Nước Hoa Perfume',
+      price: '559,000₫',
+      originalPrice: '908,000₫',
+      discount: '-38%',
+      label: '1+1',
+      rating: 5,
+      reviews: 17,
+      image: 'https://image.hsv-tech.io/0x1200/tfs/common/44a504e0-330d-4505-91c8-de9438367676.webp',
     },
     {
-        id: 2,
-        brand: 'GLAMOUR COSMIC', 
-        name: 'Gel Tắm GLAMOUR SHOP Cung Cấp Ẩm Avocado Body Wash',
-        price: '349,000₫',
-        rating: 5,
-        reviews: 15,
-        image: 'https://image.hsv-tech.io/0x1987/tfs/common/52e55050-072f-4662-a7a5-0c2d64e98695.webp',
+      id: 2,
+      brand: 'GLAMOUR COSMIC',
+      name: 'Gel Tắm GLAMOUR SHOP Cung Cấp Ẩm Avocado Body Wash',
+      price: '349,000₫',
+      rating: 5,
+      reviews: 15,
+      image: 'https://image.hsv-tech.io/0x1987/tfs/common/52e55050-072f-4662-a7a5-0c2d64e98695.webp',
     },
     {
-        id: 3,
-        brand: 'GLAMOUR COSMIC', 
-        name: 'KEM DƯỠNG Da Tay GLAMOUR SHOP Thật',
-        price: '139,000₫',
-        rating: 4,
-        reviews: 116,
-        image: 'https://image.hsv-tech.io/0x1987/tfs/common/404a9c8f-76b9-43fe-ab12-ca6c49b9e806.webp',
+      id: 3,
+      brand: 'GLAMOUR COSMIC',
+      name: 'KEM DƯỠNG Da Tay GLAMOUR SHOP Thật',
+      price: '139,000₫',
+      rating: 4,
+      reviews: 116,
+      image: 'https://image.hsv-tech.io/0x1987/tfs/common/404a9c8f-76b9-43fe-ab12-ca6c49b9e806.webp',
     },
     {
-        id: 4,
-        brand: 'GLAMOUR COSMIC', 
-        name: 'Tẩy Tế Bào...Body Peeling 300ML',
-        price: '649,000₫',
-        originalPrice: '989,000₫',
-        discount: '-34%',
-        rating: 5,
-        reviews: 7,
-        image: 'https://image.hsv-tech.io/0x1987/tfs/common/5e355e2e-de19-46fa-b1ff-d416544826ee.webp',
+      id: 4,
+      brand: 'GLAMOUR COSMIC',
+      name: 'Tẩy Tế Bào...Body Peeling 300ML',
+      price: '649,000₫',
+      originalPrice: '989,000₫',
+      discount: '-34%',
+      rating: 5,
+      reviews: 7,
+      image: 'https://image.hsv-tech.io/0x1987/tfs/common/5e355e2e-de19-46fa-b1ff-d416544826ee.webp',
     },
     {
-        id: 5,
-        brand: 'GLAMOUR COSMIC', 
-        name: 'Dung Dịch Vệ Sinh Phụ Nữ Yehwadam ',
-        price: '699,000₫',
-        originalPrice: '1,048,000₫',
-        discount: '-33%',
-        rating: 5,
-        reviews: 9,
-        image: 'https://image.hsv-tech.io/0x1987/tfs/common/db845ba9-465f-4a63-9314-074be209bb75.webp',
+      id: 5,
+      brand: 'GLAMOUR COSMIC',
+      name: 'Dung Dịch Vệ Sinh Phụ Nữ Yehwadam ',
+      price: '699,000₫',
+      originalPrice: '1,048,000₫',
+      discount: '-33%',
+      rating: 5,
+      reviews: 9,
+      image: 'https://image.hsv-tech.io/0x1987/tfs/common/db845ba9-465f-4a63-9314-074be209bb75.webp',
     },
     {
-        id: 6,
-        brand: 'GLAMOUR COSMIC', 
-        name: 'Sữa Dưỡng Thể GLAMOUR SHOP Cung Cấp Ẩm Avocado Body...',
-        price: '349,000₫',
-        rating: 5,
-        reviews: 8,
-        image: 'https://image.hsv-tech.io/0x1987/tfs/common/df7ebc1c-4a43-4522-a0ab-a1eefa2d93d2.webp',
+      id: 6,
+      brand: 'GLAMOUR COSMIC',
+      name: 'Sữa Dưỡng Thể GLAMOUR SHOP Cung Cấp Ẩm Avocado Body...',
+      price: '349,000₫',
+      rating: 5,
+      reviews: 8,
+      image: 'https://image.hsv-tech.io/0x1987/tfs/common/df7ebc1c-4a43-4522-a0ab-a1eefa2d93d2.webp',
     },
     {
-        id: 7,
-        brand: 'GLAMOUR COSMIC', 
-        name: 'Xịt Dưỡng Thể Hương Nước Hoa GLAMOUR SHOP Nature Garden...',
-        price: '439,000₫',
-        originalPrice: '788,000₫',
-        discount: '-44%',
-        rating: 4,
-        reviews: 0,
-        image: 'https://image.hsv-tech.io/400x0/tfs/common/b8dfd59f-4fd0-49bc-895a-25a4daf4dd27.webp',
+      id: 7,
+      brand: 'GLAMOUR COSMIC',
+      name: 'Xịt Dưỡng Thể Hương Nước Hoa GLAMOUR SHOP Nature Garden...',
+      price: '439,000₫',
+      originalPrice: '788,000₫',
+      discount: '-44%',
+      rating: 4,
+      reviews: 0,
+      image: 'https://image.hsv-tech.io/400x0/tfs/common/b8dfd59f-4fd0-49bc-895a-25a4daf4dd27.webp',
     },
     {
-        id: 8,
-        brand: 'GLAMOUR COSMIC', 
-        name: 'Sữa Dưỡng Thể Dưỡng Ẩm Cho Da Nhạy Cảm Dr. Belmeur Mild...',
-        price: '979,000₫',
-        rating: 5,
-        reviews: 3,
-        image: 'https://image.hsv-tech.io/400x0/tfs/products/65d2fecf-d589-4f46-bc4a-5d4177a11d60.webp',
+      id: 8,
+      brand: 'GLAMOUR COSMIC',
+      name: 'Sữa Dưỡng Thể Dưỡng Ẩm Cho Da Nhạy Cảm Dr. Belmeur Mild...',
+      price: '979,000₫',
+      rating: 5,
+      reviews: 3,
+      image: 'https://image.hsv-tech.io/400x0/tfs/products/65d2fecf-d589-4f46-bc4a-5d4177a11d60.webp',
     },
     {
       id: 9,
-      brand: 'GLAMOUR COSMIC', 
+      brand: 'GLAMOUR COSMIC',
       name: 'Combo 2 Kem chống nắng đa năng GLAMOUR Natural...',
       price: '550,000₫',
       rating: 5,
       reviews: 3,
       image: 'https://image.hsv-tech.io/0x1987/tfs/common/8eb45545-3cf7-41e2-aa1a-ac575c6c7ea5.webp',
-  },
-  {
-    id: 10,
-    brand: 'GLAMOUR COSMIC', 
-    name: 'Sữa Dưỡng GLAMOUR SHOP Trắng Da White Seed ...',
-    price: '425,000₫',
-    originalPrice: '788,000₫',
-    discount: '-44%',
-    rating: 4,
-    reviews: 0,
-    image: 'https://image.hsv-tech.io/0x1987/tfs/common/1fa6c774-3203-4430-893f-396fef0373c4.webp',
-},
-  
-];
-const skinConditions = ["Da hỗn hợp", "Da nhạy cảm", "Da khô", "Da thường", "Da dầu"];
-const priceRanges = ["Dưới 500.000", "500.000 - 1.000.000", "1.500.000 - 2.000.000", "Trên 2.000.000"];
- const [selectedConditions, setSelectedConditions] = useState([]);
+    },
+    {
+      id: 10,
+      brand: 'GLAMOUR COSMIC',
+      name: 'Sữa Dưỡng GLAMOUR SHOP Trắng Da White Seed ...',
+      price: '425,000₫',
+      originalPrice: '788,000₫',
+      discount: '-44%',
+      rating: 4,
+      reviews: 0,
+      image: 'https://image.hsv-tech.io/0x1987/tfs/common/1fa6c774-3203-4430-893f-396fef0373c4.webp',
+    },
+
+  ];
+  const skinConditions = ["Da hỗn hợp", "Da nhạy cảm", "Da khô", "Da thường", "Da dầu"];
+  const priceRanges = ["Dưới 500.000", "500.000 - 1.000.000", "1.500.000 - 2.000.000", "Trên 2.000.000"];
+  const [selectedConditions, setSelectedConditions] = useState([]);
   const [selectedPriceRanges, setSelectedPriceRanges] = useState([]);
 
   const handleConditionChange = (condition) => {
@@ -170,12 +170,12 @@ const priceRanges = ["Dưới 500.000", "500.000 - 1.000.000", "1.500.000 - 2.00
     const matchesPriceRange = !selectedPriceRanges.length || selectedPriceRanges.includes(product.priceRange);
     return matchesCondition && matchesPriceRange;
   });
-  
+
 
   const productsBySkinCondition = [
     {
       id: 4,
-      brand: 'GLAMOUR COSMIC', 
+      brand: 'GLAMOUR COSMIC',
       name: 'Tẩy Tế Bào...Body Peeling 300ML',
       price: '649,000₫',
       originalPrice: '989,000₫',
@@ -183,19 +183,19 @@ const priceRanges = ["Dưới 500.000", "500.000 - 1.000.000", "1.500.000 - 2.00
       rating: 5,
       reviews: 7,
       image: 'https://image.hsv-tech.io/0x1987/tfs/common/5e355e2e-de19-46fa-b1ff-d416544826ee.webp',
-  },
-  {
+    },
+    {
       id: 6,
-      brand: 'GLAMOUR COSMIC', 
+      brand: 'GLAMOUR COSMIC',
       name: 'Sữa Dưỡng Thể GLAMOUR SHOP Cung Cấp Ẩm Avocado Body...',
       price: '349,000₫',
       rating: 5,
       reviews: 8,
       image: 'https://image.hsv-tech.io/0x1987/tfs/common/df7ebc1c-4a43-4522-a0ab-a1eefa2d93d2.webp',
-  },
-  {
+    },
+    {
       id: 7,
-      brand: 'GLAMOUR COSMIC', 
+      brand: 'GLAMOUR COSMIC',
       name: 'Xịt Dưỡng Thể Hương Nước Hoa GLAMOUR SHOP Nature Garden...',
       price: '439,000₫',
       originalPrice: '788,000₫',
@@ -203,59 +203,59 @@ const priceRanges = ["Dưới 500.000", "500.000 - 1.000.000", "1.500.000 - 2.00
       rating: 4,
       reviews: 0,
       image: 'https://image.hsv-tech.io/400x0/tfs/common/b8dfd59f-4fd0-49bc-895a-25a4daf4dd27.webp',
-  },
-  {
+    },
+    {
       id: 8,
-      brand: 'GLAMOUR COSMIC', 
+      brand: 'GLAMOUR COSMIC',
       name: 'Sữa Dưỡng Thể Dưỡng Ẩm Cho Da Nhạy Cảm Dr. Belmeur Mild...',
       price: '979,000₫',
       rating: 5,
       reviews: 3,
       image: 'https://image.hsv-tech.io/400x0/tfs/products/65d2fecf-d589-4f46-bc4a-5d4177a11d60.webp',
-  },
-  {
-    id: 9,
-    brand: 'GLAMOUR COSMIC', 
-    name: 'Combo 2 Kem chống nắng đa năng GLAMOUR Natural...',
-    price: '550,000₫',
-    rating: 5,
-    reviews: 3,
-    image: 'https://image.hsv-tech.io/0x1987/tfs/common/8eb45545-3cf7-41e2-aa1a-ac575c6c7ea5.webp',
-},
-{
-  id: 10,
-  brand: 'GLAMOUR COSMIC', 
-  name: 'Sữa Dưỡng GLAMOUR SHOP Trắng Da White Seed ...',
-  price: '425,000₫',
-  originalPrice: '788,000₫',
-  discount: '-44%',
-  rating: 4,
-  reviews: 0,
-  image: 'https://image.hsv-tech.io/0x1987/tfs/common/1fa6c774-3203-4430-893f-396fef0373c4.webp',
-},
-{
-  id: 11,
-  brand: 'GLAMOUR COSMIC', 
-  name: 'Sữa Tắm GLAMOUR SHOP Dạng Gel Hương Nước Hoa Perfume',
-  price: '559,000₫',
-  originalPrice: '908,000₫',
-  discount: '-38%',
-  label: '1+1',
-  rating: 5,
-  reviews: 17,
-  image: 'https://image.hsv-tech.io/0x1200/tfs/common/44a504e0-330d-4505-91c8-de9438367676.webp',
-},
-{
-  id: 12,
-  brand: 'GLAMOUR COSMIC', 
-  name: 'Gel Tắm GLAMOUR SHOP Cung Cấp Ẩm Avocado Body Wash',
-  price: '349,000₫',
-  rating: 5,
-  reviews: 15,
-  image: 'https://image.hsv-tech.io/0x1987/tfs/common/52e55050-072f-4662-a7a5-0c2d64e98695.webp',
-}
+    },
+    {
+      id: 9,
+      brand: 'GLAMOUR COSMIC',
+      name: 'Combo 2 Kem chống nắng đa năng GLAMOUR Natural...',
+      price: '550,000₫',
+      rating: 5,
+      reviews: 3,
+      image: 'https://image.hsv-tech.io/0x1987/tfs/common/8eb45545-3cf7-41e2-aa1a-ac575c6c7ea5.webp',
+    },
+    {
+      id: 10,
+      brand: 'GLAMOUR COSMIC',
+      name: 'Sữa Dưỡng GLAMOUR SHOP Trắng Da White Seed ...',
+      price: '425,000₫',
+      originalPrice: '788,000₫',
+      discount: '-44%',
+      rating: 4,
+      reviews: 0,
+      image: 'https://image.hsv-tech.io/0x1987/tfs/common/1fa6c774-3203-4430-893f-396fef0373c4.webp',
+    },
+    {
+      id: 11,
+      brand: 'GLAMOUR COSMIC',
+      name: 'Sữa Tắm GLAMOUR SHOP Dạng Gel Hương Nước Hoa Perfume',
+      price: '559,000₫',
+      originalPrice: '908,000₫',
+      discount: '-38%',
+      label: '1+1',
+      rating: 5,
+      reviews: 17,
+      image: 'https://image.hsv-tech.io/0x1200/tfs/common/44a504e0-330d-4505-91c8-de9438367676.webp',
+    },
+    {
+      id: 12,
+      brand: 'GLAMOUR COSMIC',
+      name: 'Gel Tắm GLAMOUR SHOP Cung Cấp Ẩm Avocado Body Wash',
+      price: '349,000₫',
+      rating: 5,
+      reviews: 15,
+      image: 'https://image.hsv-tech.io/0x1987/tfs/common/52e55050-072f-4662-a7a5-0c2d64e98695.webp',
+    }
   ];
-  
+
 
   return (
     <div>
@@ -298,88 +298,33 @@ const priceRanges = ["Dưới 500.000", "500.000 - 1.000.000", "1.500.000 - 2.00
           <span className="category-active">Chăm sóc da</span>
           <span className="category-inactive">Trang điểm</span>
         </div>
-      
+
         <div className="featured-product-list">
-        {featuredProducts.map((product) => (
-      <div className="featured-product-card" key={product.id}>
-          {product.discount && <div className="badge">{product.discount}</div>}
-            <img src={product.image} alt={product.name} className="product-image" />
-          <div className="product-brand">{product.brand}</div> {/* Đặt thương hiệu dưới hình ảnh */}
-            <h3 className="product-title">{product.name}</h3>
-          <div className="price-section">
-          {product.originalPrice && <span className="original-price">{product.originalPrice}</span>}
-             <span className="discounted-price">{product.price}</span>
-          </div>
-          <div className="rating">
-              {'★'.repeat(product.rating)}
-            <span className="reviews">({product.reviews})</span>
+          {featuredProducts.map((product) => (
+            <div className="featured-product-card" key={product.id}>
+              {product.discount && <div className="badge">{product.discount}</div>}
+              <img src={product.image} alt={product.name} className="product-image" />
+              <div className="product-brand">{product.brand}</div> {/* Đặt thương hiệu dưới hình ảnh */}
+              <h3 className="product-title">{product.name}</h3>
+              <div className="price-section">
+                {product.originalPrice && <span className="original-price">{product.originalPrice}</span>}
+                <span className="discounted-price">{product.price}</span>
+              </div>
+              <div className="rating">
+                {'★'.repeat(product.rating)}
+                <span className="reviews">({product.reviews})</span>
+              </div>
+            </div>
+          ))}
         </div>
+
+        <Link to="/Duongda">
+          <button className="view-all-button">Xem tất cả</button>
+        </Link>
+
+
+
       </div>
-        ))}
-    </div>
-
-    <Link to="/Duongda">
-  <button className="view-all-button">Xem tất cả</button>
-</Link>
-
-  
-</div>
-{/* Phần tình trạng da và sản phẩm theo tình trạng da */}
-<div className="filter-and-product-section">
-  {/* Phần bộ lọc tình trạng da */}
-  <div className="skin-condition">
-    <h2 className="section-title">TÌNH TRẠNG DA</h2>
-    <div className="search-box">
-      <input type="text" placeholder="Tìm" className="search-input" />
-    </div>
-    <div className="skin-condition-filters">
-      {skinConditions.map((condition, index) => (
-        <div key={index} className="filter-item">
-          <input type="checkbox" id={`condition-${index}`} />
-          <label htmlFor={`condition-${index}`}>{condition}</label>
-        </div>
-      ))}
-    </div>
-    <h2 className="section-title">GIÁ SẢN PHẨM</h2>
-    <div className="search-box">
-      <input type="text" placeholder="Tìm" className="search-input" />
-    </div>
-    <div className="price-filters">
-      {priceRanges.map((range, index) => (
-        <div key={index} className="filter-item">
-          <input type="checkbox" id={`price-${index}`} />
-          <label htmlFor={`price-${index}`}>{range}</label>
-        </div>
-      ))}
-    </div>
-  </div>
-
-  {/* Phần sản phẩm theo tình trạng da */}
-  <div className="products-section">
-    <h2 className="section-title">SẢN PHẨM THEO TÌNH TRẠNG DA</h2>
-    <div className="skin-condition-product-list">
-      {productsBySkinCondition.slice(0, 8).map((product) => (
-        <div className="skin-condition-product-card" key={product.id}>
-          {product.discount && <div className="badge">{product.discount}</div>}
-          <img src={product.image} alt={product.name} className="product-image" />
-          <div className="product-brand">{product.brand}</div>
-          <h3 className="product-title">{product.name}</h3>
-          <div className="price-section">
-            {product.originalPrice && (
-              <span className="original-price">{product.originalPrice}</span>
-            )}
-            <span className="discounted-price">{product.price}</span>
-          </div>
-          <div className="rating">
-            {'★'.repeat(product.rating)}
-            <span className="reviews">({product.reviews})</span>
-          </div>
-        </div>
-      ))}
-        
-    </div>
-  </div>
-</div>
 
       <div className="banner-container">
         <img src="src/assets/Icons/hinh2.png" alt="Glamour Cosmic with Wonwoo" className="banner-image" />

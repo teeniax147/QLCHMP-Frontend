@@ -33,7 +33,7 @@ const OtpVerification = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post('https://localhost:5001/api/Users/verify-otp', {
+      const response = await axios.post('http://dangtringhia1407-001-site1.otempurl.com/api/Users/verify-otp', {
         email,
         otp,
         otpPurpose,
@@ -61,7 +61,7 @@ const OtpVerification = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post('https://localhost:5001/api/Users/forgot-password', {
+      const response = await axios.post('http://dangtringhia1407-001-site1.otempurl.com/api/Users/forgot-password', {
         email,
       });
       console.log("OTP resend response:", response.data);

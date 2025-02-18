@@ -15,7 +15,7 @@ const ProductDetail = () => {
     const fetchProductDetail = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`https://localhost:5001/api/Products/chi-tiet/${id}`);
+        const response = await axios.get(`http://dangtringhia1407-001-site1.otempurl.com/api/Products/chi-tiet/${id}`);
         setProduct(response.data);
       } catch (err) {
         console.error("Lỗi khi tải chi tiết sản phẩm:", err);
@@ -38,7 +38,7 @@ const ProductDetail = () => {
   
     try {
       const response = await axios.post(
-        "https://localhost:5001/api/Favorites/add",
+        "http://dangtringhia1407-001-site1.otempurl.com/api/Favorites/add",
         { ProductId: productId },
         {
           headers: {
@@ -78,7 +78,7 @@ const ProductDetail = () => {
       console.log("Dữ liệu gửi đi:", requestData);
 
       const response = await axios.post(
-        'https://localhost:5001/api/Carts/add',
+        'http://dangtringhia1407-001-site1.otempurl.com/api/Carts/add',
         requestData,
         config
       );

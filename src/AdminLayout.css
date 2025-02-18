@@ -58,22 +58,22 @@
   position: fixed;
   top: 0;
   left: 250px;
-  height: 40px;
+  height: 30px;
   width: calc(100% - 250px);
   display: flex;
   align-items: center;
   z-index: 999;
 }
 
-.logoheader2 {
+.logoheader3 {
   display: flex;
   align-items: center;
   margin-right: auto;
 }
 
-.logoheader2 img {
-  height: 50px;
-  margin-left: 30px;
+.logoheader3 img {
+  height: 120px;
+  margin-left: 50px;
   margin-top: -10px;
 }
 
@@ -86,10 +86,7 @@
   margin-right: 125px;
 }
 
-.logoheader2 img {
-  height: 60px;
-  display: block;
-}
+
 
 .admin-header input {
   padding: 5px;
@@ -154,6 +151,7 @@
   display: flex;
   align-items: center;
   font-size: 13px;
+
 }
 
 .user-dropdown-menu1 {
@@ -163,7 +161,7 @@
   background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 250px;
+  width: 280px;
   padding: 16px;
   z-index: 1000;
   font-family: 'Arial', sans-serif;
@@ -173,6 +171,7 @@
   font-size: 18px;
   font-weight: bold;
   margin-top: 10px;
+
 }
 
 /* Thêm gạch ngang phân cách */

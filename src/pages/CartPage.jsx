@@ -23,7 +23,7 @@ const CartPage = () => {
     }
 
     try {
-      const response = await axios.get('https://localhost:5001/api/Carts/details', {
+      const response = await axios.get('http://dangtringhia1407-001-site1.otempurl.com/api/Carts/details', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -48,7 +48,7 @@ const CartPage = () => {
   const removeItem = async (productId) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete('https://localhost:5001/api/Carts/remove-item', {
+      await axios.delete('http://dangtringhia1407-001-site1.otempurl.com/api/Carts/remove-item', {
         headers: {
           Authorization: `Bearer ${token}`
         },
@@ -65,7 +65,7 @@ const CartPage = () => {
   const clearCart = async () => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete('https://localhost:5001/api/Carts/clear', {
+      await axios.delete('http://dangtringhia1407-001-site1.otempurl.com/api/Carts/clear', {
         headers: {
           Authorization: `Bearer ${token}`
         }

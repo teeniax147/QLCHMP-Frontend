@@ -37,7 +37,7 @@ const CreateUser = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://localhost:5001/api/Users/create-user",
+        "http://dangtringhia1407-001-site1.otempurl.com/api/Users/create-user",
         formData,
         {
           headers: {

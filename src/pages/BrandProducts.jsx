@@ -15,11 +15,11 @@ const BrandProducts = () => {
     const fetchBrandProducts = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`https://localhost:5001/api/thuong-hieu/${brandId}`);
+        const response = await axios.get(`http://dangtringhia1407-001-site1.otempurl.com/api/thuong-hieu/${brandId}`);
         const data = response.data;
         setBrandInfo({
           Name: data.Name,
-          LogoUrl: data.LogoUrl ? `https://localhost:5001${data.LogoUrl}` : null, // Thêm domain nếu cần
+          LogoUrl: data.LogoUrl ? `http://dangtringhia1407-001-site1.otempurl.com${data.LogoUrl}` : null, // Thêm domain nếu cần
           Description: data.Description,
         });
         setProducts(data.Products.$values || []);
@@ -35,9 +35,7 @@ const BrandProducts = () => {
   }, [brandId]);
 
   const handleAddToFavorites = async (productId) => {
-    const token = localStorage.getItem("token"); // Lấy token từ localStorage
-    console.log("Token từ localStorage:", token);
-
+    const token = localStorage.getItem("token");
     if (!token) {
       alert("Bạn cần đăng nhập để thêm sản phẩm vào danh sách yêu thích.");
       return;
@@ -45,7 +43,7 @@ const BrandProducts = () => {
 
     try {
       const response = await axios.post(
-        "https://localhost:5001/api/Favorites/add",
+        "http://dangtringhia1407-001-site1.otempurl.com/api/Favorites/add",
         { ProductId: productId },
         {
           headers: {
@@ -54,7 +52,7 @@ const BrandProducts = () => {
         }
       );
 
-      alert(response.data); // Hiển thị thông báo thành công từ server
+      alert(response.data);
     } catch (error) {
       console.error("Lỗi khi thêm sản phẩm yêu thích:", error.response?.data || error.message);
       alert(error.response?.data || "Không thể thêm sản phẩm vào yêu thích.");
@@ -78,9 +76,10 @@ const BrandProducts = () => {
           />
         ) : null}
         <div className="brand-title-description">
-          <h1>{brandInfo.Name}</h1>
+          <h1>{brandInfo?.Name}</h1>
+          <p>{brandInfo?.Description}</p>
         </div>
-        <p className="brand-description">{brandInfo.Description}</p> {/* Hiển thị mô tả */}
+
       </div>
 
       <div className="brand-product-grid">
@@ -89,14 +88,13 @@ const BrandProducts = () => {
             <div
               className="brand-product-card"
               key={product.Id}
-              onClick={() => navigate(`/product-detail/${product.Id}`)} // Điều hướng đến chi tiết sản phẩm
+              onClick={() => navigate(`/product-detail/${product.Id}`)}
             >
-              {/* Thêm nút trái tim */}
               <div
                 className="brand-favorite-icon"
                 onClick={(e) => {
-                  e.stopPropagation(); // Ngăn sự kiện click vào thẻ cha
-                  handleAddToFavorites(product.Id); // Gọi API thêm vào danh sách yêu thích
+                  e.stopPropagation();
+                  handleAddToFavorites(product.Id);
                 }}
               >
                 ♡
@@ -106,13 +104,39 @@ const BrandProducts = () => {
                 alt={product.Name}
                 className="brand-product-image"
               />
-              <div className="brand-product-brand">{product.Brand?.Name || brandInfo.Name}</div>
               <div className="brand-product-details">
+                <p className="brand-product-brand">{product.Brand?.Name || brandInfo.Name}</p>
                 <h3 className="brand-product-name">{product.Name}</h3>
+
+                {/* Hiển thị giá */}
                 <p className="brand-product-price">
-                  {product.Price ? product.Price.toLocaleString() : "Liên hệ"} VND
+                  {product.Price ? `${product.Price.toLocaleString()}đ` : "Liên hệ"}
                 </p>
+                {product.OriginalPrice && product.OriginalPrice > product.Price && (
+                  <span className="brand-product-original-price">
+                    {`${product.OriginalPrice.toLocaleString()}đ`}
+                  </span>
+                )}
+
+                {/* Đánh giá sao */}
+                <div className="brand-product-rating-stars">
+                  {Array.from({ length: 5 }, (_, index) => (
+                    <span
+                      key={index}
+                      className={`brand-product-star ${product.ReviewCount > 0 && index < Math.round(product.AverageRating || 0)
+                        ? "filled"
+                        : ""
+                        }`}
+                    >
+                      ★
+                    </span>
+                  ))}
+                  <span className="brand-product-review-count">({product.ReviewCount || 0})</span>
+                </div>
+
+             
               </div>
+
             </div>
           ))
         ) : (

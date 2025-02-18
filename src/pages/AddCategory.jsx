@@ -38,7 +38,7 @@ const AddCategory = () => {
         if (!token) {
           throw new Error("Token không tồn tại.");
         }
-        const response = await axios.get("https://localhost:5001/api/Categories", {
+        const response = await axios.get("http://dangtringhia1407-001-site1.otempurl.com/api/Categories", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const flatCategories = flattenNestedCategories(response.data.$values || []);
@@ -65,7 +65,7 @@ const AddCategory = () => {
       if (!token) {
         throw new Error("Token không tồn tại.");
       }
-      await axios.post("https://localhost:5001/api/Categories", category, {
+      await axios.post("http://dangtringhia1407-001-site1.otempurl.com/api/Categories", category, {
         headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
       });
       alert("Thêm danh mục thành công!");

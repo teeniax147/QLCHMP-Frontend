@@ -1,7 +1,72 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./CategoryManagement.css";
+import { styled } from "@mui/material/styles";
+import {
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
+
+const StyledTableCell = styled(TableCell)({
+  textAlign: "center",
+  fontWeight: "bold",
+  fontSize: "16px",
+});
+
+const StyledButton = styled(Button)(({ variant }) => ({
+  marginRight: "10px",
+  ...(variant === "add" && {
+    backgroundColor: "blue",
+    color: "white",
+    "&:hover": {
+      borderColor: "blue",
+    },
+  }),
+  ...(variant === "edit" && {
+    border: "1px solid green",
+    color: "green",
+    backgroundColor: "transparent",
+    "&:hover": {
+      borderColor: "darkgreen",
+    },
+  }),
+  ...(variant === "delete" && {
+    border: "1px solid red",
+    color: "red",
+    backgroundColor: "transparent",
+    "&:hover": {
+      borderColor: "darkred",
+    },
+  }),
+  ...(variant === "save" && {
+    border: "1px solid blue",
+    color: "blue",
+    backgroundColor: "transparent",
+    "&:hover": {
+      borderColor: "darkblue",
+    },
+  }),
+  ...(variant === "cancel" && {
+    border: "1px solid orange",
+    color: "orange",
+    backgroundColor: "transparent",
+    "&:hover": {
+      borderColor: "darkorange",
+    },
+  }),
+  "&:focus": {
+    outline: "none",
+  },
+}));
 
 const CategoryManagement = () => {
   const [categories, setCategories] = useState([]);
@@ -42,7 +107,7 @@ const CategoryManagement = () => {
         throw new Error("Token không tồn tại. Vui lòng đăng nhập lại.");
       }
 
-      const response = await axios.get("https://localhost:5001/api/Categories", {
+      const response = await axios.get("http://dangtringhia1407-001-site1.otempurl.com/api/Categories", {
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
@@ -60,7 +125,7 @@ const CategoryManagement = () => {
       console.error("Lỗi API:", err);
       setError(
         err.response?.data?.message ||
-          "Không thể lấy danh mục. Vui lòng kiểm tra lại API hoặc kết nối mạng."
+        "Không thể lấy danh mục. Vui lòng kiểm tra lại API hoặc kết nối mạng."
       );
     } finally {
       setLoading(false);
@@ -78,7 +143,7 @@ const CategoryManagement = () => {
       if (!token) throw new Error("Token không tồn tại.");
 
       await axios.put(
-        `https://localhost:5001/api/Categories/${selectedCategory.Id}`,
+        `http://dangtringhia1407-001-site1.otempurl.com/api/Categories/${selectedCategory.Id}`,
         selectedCategory,
         {
           headers: {
@@ -102,7 +167,7 @@ const CategoryManagement = () => {
       if (!token) throw new Error("Token không tồn tại.");
 
       await axios.delete(
-        `https://localhost:5001/api/Categories/${selectedCategory.Id}`,
+        `http://dangtringhia1407-001-site1.otempurl.com/api/Categories/${selectedCategory.Id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -171,87 +236,86 @@ const CategoryManagement = () => {
   if (loading) return <p>Đang tải danh mục...</p>;
   if (error) return <p style={{ color: "red" }}>{error}</p>;
 
+
+
   return (
-    <div>
-      <h1>Quản Lý Danh Mục Sản Phẩm</h1>
-      <button
-        className="btn-add"
+    <div style={{ padding: "5px 0 0", marginTop: "40px", marginBottom: "20px" }}>
+      <h2>Quản Lý Danh Mục Sản Phẩm</h2>
+      <StyledButton
+        variant="add"
         onClick={() => navigate("/admin/add-category")}
-      ></button>
-      <table
-        border="1"
-        style={{ width: "100%", textAlign: "left", marginTop: "20px" }}
       >
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Tên danh mục</th>
-            <th>Mô tả</th>
-            <th>Danh mục cha</th>
-            <th>Danh mục con</th>
-            <th>Hành động</th>
-          </tr>
-        </thead>
-        <tbody>{renderCategories()}</tbody>
-      </table>
+        Thêm
+      </StyledButton>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>STT</StyledTableCell>
+            <StyledTableCell>Tên danh mục</StyledTableCell>
+            <StyledTableCell>Mô tả</StyledTableCell>
+            <StyledTableCell>Danh mục cha</StyledTableCell>
+            <StyledTableCell>Danh mục con</StyledTableCell>
+            <StyledTableCell>Hành động</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>{renderCategories()}</TableBody>
+      </Table>
 
-      {showEditModal && (
-  <>
-    <div className="custom-modal-overlay" onClick={() => setShowEditModal(false)}></div>
-    <div className="custom-modal">
-      <h2 className="custom-modal-title">Chỉnh sửa danh mục</h2>
-      <label>Tên danh mục:</label>
-      <input
-        className="custom-modal-input"
-        type="text"
-        value={selectedCategory.Name}
-        onChange={(e) =>
-          setSelectedCategory({ ...selectedCategory, Name: e.target.value })
-        }
-      />
-      <label>Mô tả:</label>
-      <textarea
-        className="custom-modal-textarea"
-        value={selectedCategory.Description}
-        onChange={(e) =>
-          setSelectedCategory({
-            ...selectedCategory,
-            Description: e.target.value,
-          })
-        }
-      />
-      <button className="custom-modal-button custom-modal-button-save" onClick={handleSave}>
-        Lưu
-      </button>
-      <button className="custom-modal-button custom-modal-button-cancel" onClick={() => setShowEditModal(false)}>
-        Hủy
-      </button>
-    </div>
-  </>
-)}
+      {/* Modal chỉnh sửa */}
+      <Dialog open={showEditModal} onClose={() => setShowEditModal(false)}>
+        <DialogTitle>Chỉnh sửa danh mục</DialogTitle>
+        <DialogContent>
+          <TextField
+            label="Tên danh mục"
+            value={selectedCategory?.Name || ""}
+            onChange={(e) =>
+              setSelectedCategory({ ...selectedCategory, Name: e.target.value })
+            }
+            fullWidth
+            margin="dense"
+          />
+          <TextField
+            label="Mô tả"
+            value={selectedCategory?.Description || ""}
+            onChange={(e) =>
+              setSelectedCategory({
+                ...selectedCategory,
+                Description: e.target.value,
+              })
+            }
+            fullWidth
+            margin="dense"
+            multiline
+          />
+        </DialogContent>
+        <DialogActions>
+          <StyledButton variant="save" onClick={handleSave}>
+            Lưu
+          </StyledButton>
+          <StyledButton variant="cancel" onClick={() => setShowEditModal(false)}>
+            Hủy
+          </StyledButton>
+        </DialogActions>
+      </Dialog>
 
-{showDeleteModal && (
-  <>
-    <div className="custom-modal-overlay" onClick={() => setShowDeleteModal(false)}></div>
-    <div className="custom-modal">
-      <h2 className="custom-modal-title">Xác nhận xóa danh mục</h2>
-      <p>
-        Bạn có chắc muốn xóa danh mục: <b>{selectedCategory.Name}</b>?
-      </p>
-      <button className="custom-modal-button custom-modal-button-save" onClick={handleDelete}>
-        Xóa
-      </button>
-      <button className="custom-modal-button custom-modal-button-cancel" onClick={() => setShowDeleteModal(false)}>
-        Hủy
-      </button>
-    </div>
-  </>
-)}
-
-
-
- 
-
+      {/* Modal xác nhận xóa */}
+      <Dialog open={showDeleteModal} onClose={() => setShowDeleteModal(false)}>
+        <DialogTitle>Xác nhận xóa</DialogTitle>
+        <DialogContent>
+          Bạn có chắc muốn xóa danh mục: <b>{selectedCategory?.Name}</b>?
+        </DialogContent>
+        <DialogActions>
+          <StyledButton variant="delete" onClick={handleDelete}>
+            Xóa
+          </StyledButton>
+          <StyledButton
+            variant="cancel"
+            onClick={() => setShowDeleteModal(false)}
+          >
+            Hủy
+          </StyledButton>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

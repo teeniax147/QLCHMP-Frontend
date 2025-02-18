@@ -10,7 +10,7 @@ const BrandDropdown = ({ title }) => {
   useEffect(() => {
     const fetchBrands = async () => {
       try {
-        const response = await axios.get('https://localhost:5001/api/thuong-hieu');
+        const response = await axios.get('http://dangtringhia1407-001-site1.otempurl.com/api/thuong-hieu');
         if (response.status === 200) {
           const data = response.data?.$values || []; 
           setBrands(data);
