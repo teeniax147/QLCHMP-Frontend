@@ -11,7 +11,7 @@ const Layout = () => {
   const [greeting, setGreeting] = useState('');
   const [cartItemCount, setCartItemCount] = useState(0); // State mới cho số lượng giỏ hàng
   const [searchKeyword, setSearchKeyword] = useState(""); // Từ khóa tìm kiếm
- 
+
   useEffect(() => {
     const storedName = localStorage.getItem('userName');
     if (storedName) {
@@ -104,7 +104,7 @@ const Layout = () => {
 
         <div className="header-main">
           <Link to="/" className="logoheader">
-            <img src="src/assets/Logo.png" alt="Glamour Cosmic Logo" />
+            <img src="/public/Logo.png" alt="Glamour Cosmic Logo" />
           </Link>
 
           {/* Thanh tìm kiếm */}
@@ -144,7 +144,7 @@ const Layout = () => {
                   <span>Xin chào {userName} !</span>
                 </div>
               ) : (
-                  <Link to="/login" className='link-blog'>
+                <Link to="/login" className='link-blog'>
                   <img src="src/assets/Icons/dangnhap.png" alt="Login Icon" />
                   <span>Đăng nhập</span>
                 </Link>
