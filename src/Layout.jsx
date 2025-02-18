@@ -104,7 +104,7 @@ const Layout = () => {
 
         <div className="header-main">
           <Link to="/" className="logoheader">
-            <img src="/public/Logo.png" alt="Glamour Cosmic Logo" />
+            <img src="public/Logo.png" alt="Glamour Cosmic Logo" />
           </Link>
 
           {/* Thanh tìm kiếm */}
