@@ -126,13 +126,13 @@ const Layout = () => {
             <span className="icon">
 
               <Link to="/beauty-blog" className='link-blog'>
-                <img src="src/assets/Icons/blog.png" alt="Blog Icon" />
+                <img src="/imgs/Icons/blog.png" alt="Blog Icon" />
                 Blog làm đẹp
               </Link>
 
             </span>
             <span className="icon">
-              <img src="src/assets/Icons/trungtamhotro.png" alt="Support Icon" />
+              <img src="/imgs/Icons/trungtamhotro.png" alt="Support Icon" />
               Trung tâm hỗ trợ
             </span>
             <span className="icon-more">•••</span>
@@ -140,12 +140,12 @@ const Layout = () => {
             <span className="icon">
               {userName ? (
                 <div onClick={handleDropdownToggle} className="user-menu-trigger">
-                  <img src="src/assets/Icons/dangnhap.png" alt="User Icon" />
+                  <img src="/imgs/Icons/dangnhap.png" alt="User Icon" />
                   <span>Xin chào {userName} !</span>
                 </div>
               ) : (
                 <Link to="/login" className='link-blog'>
-                  <img src="src/assets/Icons/dangnhap.png" alt="Login Icon" />
+                    <img src="/imgs/Icons/dangnhap.png" alt="Login Icon" />
                   <span>Đăng nhập</span>
                 </Link>
               )}
@@ -179,7 +179,7 @@ const Layout = () => {
             </span>
             <span className="iconcart">
               <Link to="/CartPage">
-                <img src="src/assets/cart1.png" alt="Cart Icon" />
+                <img src="/imgs/cart1.png" alt="Cart Icon" />
                 {cartItemCount > 0 && <span className="cart-count">{cartItemCount}</span>}
               </Link>
             </span>
@@ -224,21 +224,21 @@ const Layout = () => {
           {/* Phần nội dung footer */}
           <div className="footer-logo-social">
             <div className="footer-logo">
-              <img src="src/assets/Icons/logo1.png" alt="Glamour Cosmic Logo" />
+              <img src="/imgs/Icons/logo1.png" alt="Glamour Cosmic Logo" />
             </div>
             <div className="footer-social">
               <h4>THEO DÕI CHÚNG TÔI TRÊN</h4>
               <ul className="social-icons">
-                <li><img src="src/assets/Icons/fb(black).png" alt="Facebook" /></li>
-                <li><img src="src/assets/Icons/instagram.png" alt="Instagram" /></li>
-                <li><img src="src/assets/Icons/tiktok.png" alt="Tiktok" /></li>
+                <li><img src="/imgs/Icons/fb(black).png" alt="Facebook" /></li>
+                <li><img src="/imgs/Icons/instagram.png" alt="Instagram" /></li>
+                <li><img src="/imgs/Icons/tiktok.png" alt="Tiktok" /></li>
               </ul>
               <h4>PHƯƠNG THỨC THANH TOÁN</h4>
               <ul className="payment-icons">
-                <li><img src="src/assets/Icons/visa.png" alt="Visa" /></li>
-                <li><img src="src/assets/Icons/mastercard.png" alt="Mastercard" /></li>
-                <li><img src="src/assets/Icons/momo1.png" alt="COD" /></li>
-                <li><img src="src/assets/Icons/tienmat(bank).png" alt="Bank Transfer" /></li>
+                <li><img src="/imgs/Icons/visa.png" alt="Visa" /></li>
+                <li><img src="/imgs/Icons/mastercard.png" alt="Mastercard" /></li>
+                <li><img src="/imgs/Icons/momo1.png" alt="COD" /></li>
+                <li><img src="/imgs/Icons/tienmat(bank).png" alt="Bank Transfer" /></li>
               </ul>
             </div>
           </div>
@@ -280,8 +280,8 @@ const Layout = () => {
             Tòa nhà Lidaco, 19 Đại Từ, Phường Đại Kim, Quận Hoàng Mai, TP. Hà Nội.
           </p>
           <div className="certification-icons">
-            <img src="src/assets/Icons/verified.png.png" alt="Bảo Hành" />
-            <img src="src/assets/Icons/verified-dmca.png.png" alt="DMCA" />
+            <img src="/imgs/Icons/verified.png.png" alt="Bảo Hành" />
+            <img src="/imgs/Icons/verified-dmca.png.png" alt="DMCA" />
           </div>
         </div>
 

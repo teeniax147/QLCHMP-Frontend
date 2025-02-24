@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 const Home = () => {
 
   const banners = [
-    'src/assets/Icons/banner.png',
-    'src/assets/Icons/banner 2.png',
-    'src/assets/Icons/banner 3.jpg'
+    '/imgs/Icons/banner.png',
+    '/imgs/Icons/banner 2.png',
+    '/imgs/Icons/banner 3.jpg'
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -37,10 +37,10 @@ const Home = () => {
   const nextIndex = currentIndex === banners.length - 1 ? 0 : currentIndex + 1;
 
   const brands = [
-    { name: 'Yehwadam', image: 'src/assets/brand/brand1.png', url: '/yehwadam' },
-    { name: 'Freshian', image: 'src/assets/brand/brand2.png', url: '/freshian' },
-    { name: 'FMGT', image: 'src/assets/brand/brand3.png', url: '/fmgt' },
-    { name: 'Belif', image: 'src/assets/brand/brand4.png', url: '/belif' },
+    { name: 'Yehwadam', image: '/imgs/brand1.png', url: '/yehwadam' },
+    { name: 'Freshian', image: '/imgs/brand2.png', url: '/freshian' },
+    { name: 'FMGT', image: '/imgs/brand3.png', url: '/fmgt' },
+    { name: 'Belif', image: '/imgs/brand4.png', url: '/belif' },
   ];
 
   // Danh sách sản phẩm mẫu cho "Sản Phẩm Nổi Bật"
@@ -327,7 +327,7 @@ const Home = () => {
       </div>
 
       <div className="banner-container">
-        <img src="src/assets/Icons/hinh2.png" alt="Glamour Cosmic with Wonwoo" className="banner-image" />
+        <img src="/imgs/Icons/hinh2.png" alt="Glamour Cosmic with Wonwoo" className="banner-image" />
       </div>
 
       <div className="store-system-section">

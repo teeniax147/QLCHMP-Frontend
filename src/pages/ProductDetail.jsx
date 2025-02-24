@@ -30,12 +30,12 @@ const ProductDetail = () => {
   const handleAddToFavorites = async (productId) => {
     const token = localStorage.getItem("token"); // Lấy token từ localStorage
     console.log("Token từ localStorage:", token);
-  
+
     if (!token) {
       alert("Bạn cần đăng nhập để thêm sản phẩm vào danh sách yêu thích.");
       return;
     }
-  
+
     try {
       const response = await axios.post(
         "http://dangtringhia1407-001-site1.otempurl.com/api/Favorites/add",
@@ -46,7 +46,7 @@ const ProductDetail = () => {
           },
         }
       );
-  
+
       alert(response.data); // Hiển thị thông báo thành công từ server
     } catch (error) {
       console.error("Lỗi khi thêm sản phẩm yêu thích:", error.response?.data || error.message);
@@ -114,65 +114,65 @@ const ProductDetail = () => {
 
   return (
     <div className="product-detail-container">
-    <img
-      src={product?.ImageUrl || "https://via.placeholder.com/500"}
-      alt={product?.Name}
-      className="product-detail-image"
-    />
-    <div className="product-details">
-    <h1 className="custom-product-title">{product?.Name}</h1>
-
-      <p className="custom-product-price"> {product?.Price?.toLocaleString()} VND</p>
-      
-      <div className="product-actions">
-  <div className="quantity-container">
-    <button onClick={() => handleQuantityChange(-1)}>-</button>
-    <div className="quantity-display">{quantity}</div>
-    <button onClick={() => handleQuantityChange(1)}>+</button>
-  </div>
-
-  <div className="buttons-container">
-    <button className="custom-add-to-cart-button" onClick={() => handleAddToCart(false)}>
       <img
-        src="https://img.icons8.com/?size=100&id=ii6Lr4KivOiE&format=png&color=000000"
-        alt="Cart Icon"
-        style={{
-          width: "20px",
-          height: "20px",
-          marginRight: "8px",
-          verticalAlign: "middle",
-          filter: "invert(1)",
-        }}
+        src={product?.ImageUrl || "https://via.placeholder.com/500"}
+        alt={product?.Name}
+        className="product-detail-image"
       />
-      Thêm vào giỏ hàng
-    </button>
+      <div className="product-details">
+        <h1 className="custom-product-title">{product?.Name}</h1>
 
-    <button className="custom-buy-now-button" onClick={() => handleAddToCart(true)}>
-      <span>Mua Ngay</span>
-    </button>
+        <p className="custom-product-price"> {product?.Price?.toLocaleString()} VND</p>
 
-    {/* Nút yêu thích */}
-    <div
-      className="product-favorite-icon1"
-      onClick={(e) => {
-        e.stopPropagation(); // Ngăn sự kiện click vào thẻ cha
-        handleAddToFavorites(product.Id); // Gọi API thêm vào danh sách yêu thích
-      }}
-    >
-      ♡
+        <div className="product-actions">
+          <div className="quantity-container">
+            <button onClick={() => handleQuantityChange(-1)}>-</button>
+            <div className="quantity-display">{quantity}</div>
+            <button onClick={() => handleQuantityChange(1)}>+</button>
+          </div>
+
+          <div className="buttons-container">
+            <button className="custom-add-to-cart-button" onClick={() => handleAddToCart(false)}>
+              <img
+                src="https://img.icons8.com/?size=100&id=ii6Lr4KivOiE&format=png&color=000000"
+                alt="Cart Icon"
+                style={{
+                  width: "20px",
+                  height: "20px",
+                  marginRight: "8px",
+                  verticalAlign: "middle",
+                  filter: "invert(1)",
+                }}
+              />
+              Thêm vào giỏ hàng
+            </button>
+
+            <button className="custom-buy-now-button" onClick={() => handleAddToCart(true)}>
+              <span>Mua Ngay</span>
+            </button>
+
+            {/* Nút yêu thích */}
+            <div
+              className="product-favorite-icon1"
+              onClick={(e) => {
+                e.stopPropagation(); // Ngăn sự kiện click vào thẻ cha
+                handleAddToFavorites(product.Id); // Gọi API thêm vào danh sách yêu thích
+              }}
+            >
+              ♡
+            </div>
+          </div>
+
+
+
+        </div>
+        <p className="introduce">Giới thiệu:</p>
+
+        <p className="custom-product-description">{product?.Description}</p>
+
+      </div>
     </div>
-  </div>
 
-
-
-</div>
-<p className="introduce">Giới thiệu:</p>
-
-<p className="custom-product-description">{product?.Description}</p>
-
-    </div>
-  </div>
-  
   );
 };
 

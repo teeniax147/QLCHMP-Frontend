@@ -65,7 +65,7 @@ const BrandProducts = () => {
   return (
     <div className="brand-product-container">
       <div className="brand-product-header-banner">
-        <img src="http://localhost:5173/src/assets/Icons/hinh5.png" alt="Banner" />
+        <img src="http://localhost:5173//imgs/Icons/hinh5.png" alt="Banner" />
       </div>
       <div className="brand-product-header">
         {brandInfo.LogoUrl ? (

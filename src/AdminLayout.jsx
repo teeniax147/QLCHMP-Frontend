@@ -61,7 +61,7 @@ const AdminLayout = () => {
         isAdminLogin ? <div className="admin-layout-container">
           <aside className="admin-sidebar">
             <div className="logoheader3">
-              <img src="src/assets/Icons/logo6.png" alt="Glamour Cosmic Logo" />
+              <img src="/imgs/Icons/logo6.png" alt="Glamour Cosmic Logo" />
             </div>
             <nav>
               <ul>
