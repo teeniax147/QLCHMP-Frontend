@@ -17,7 +17,7 @@ import {
   Pagination,
   Typography,
 } from "@mui/material";
-
+import { API_BASE_URL } from '../config'
 const OrderManager = () => {
   const [orders, setOrders] = useState([]); // Danh sách đơn hàng
   const [loading, setLoading] = useState(false); // Trạng thái tải
@@ -49,7 +49,7 @@ const OrderManager = () => {
       }
 
       const response = await axios.get(
-        `http://dangtringhia1407-001-site1.otempurl.com/api/Orders/all-orders?pageNumber=${page}&pageSize=${pageSize}`,
+        `${API_BASE_URL}/Orders/all-orders?pageNumber=${page}&pageSize=${pageSize}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -100,7 +100,7 @@ const OrderManager = () => {
       }
 
       await axios.put(
-        `http://dangtringhia1407-001-site1.otempurl.com/api/Orders/${selectedOrder.Id}/update-status`,
+        `${API_BASE_URL}/Orders/${selectedOrder.Id}/update-status`,
         {
           Status: newStatus,
           PaymentStatus: newPaymentStatus,
@@ -146,7 +146,7 @@ const OrderManager = () => {
       }
 
       await axios.put(
-        `http://dangtringhia1407-001-site1.otempurl.com/api/Orders/${selectedOrder.Id}/cancel-by-staff`,
+        `${API_BASE_URL}/Orders/${selectedOrder.Id}/cancel-by-staff`,
         {},
         {
           headers: {

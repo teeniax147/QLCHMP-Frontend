@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./AllProductsList.css"; // CSS cho giao diện
+import { API_BASE_URL } from '../config'
 
 const AllProductsList = () => {
-  const [products, setProducts] = useState([]); // Dữ liệu sản phẩm
-  const [loading, setLoading] = useState(true); // Trạng thái loading
-  const [error, setError] = useState(null); // Trạng thái lỗi
+  const navigate = useNavigate();
+  const location = useLocation();
+  const searchProducts = location.state?.products || []; // Lấy dữ liệu từ tìm kiếm
+
+  const [products, setProducts] = useState(searchProducts);
+  const [loading, setLoading] = useState(!searchProducts.length);
+  const [error, setError] = useState(null);
   const [filters, setFilters] = useState({
 
     minPrice: '',
@@ -20,15 +25,26 @@ const AllProductsList = () => {
 
   const pageSize = 10; // Số sản phẩm mỗi trang
 
-  const navigate = useNavigate(); // Điều hướng
 
+
+  useEffect(() => {
+    console.log("Dữ liệu tìm kiếm:", searchProducts);
+
+    if (searchProducts.length > 0) {
+      setProducts([...searchProducts]); // Ép React cập nhật UI
+      setLoading(false);
+    }
+  }, [searchProducts]);
+
+
+  // ✅ Fetch danh sách sản phẩm mặc định
   useEffect(() => {
     const fetchAllProducts = async () => {
       setLoading(true);
       setError(null);
 
       try {
-        const response = await axios.get(`http://dangtringhia1407-001-site1.otempurl.com/api/Products/danh-sach`, {
+        const response = await axios.get(`${API_BASE_URL}/Products/danh-sach`, {
           params: {
             pageNumber: page,
             pageSize: pageSize,
@@ -40,7 +56,7 @@ const AllProductsList = () => {
           },
         });
 
-        console.log('Dữ liệu từ API:', response.data);
+        console.log("Dữ liệu từ API:", response.data);
 
         const data = response.data;
         const productsList = data.DanhSachSanPham?.$values || []; // Trích xuất từ $values
@@ -54,7 +70,8 @@ const AllProductsList = () => {
     };
 
     fetchAllProducts();
-  }, [page]); // Chỉ fetch dữ liệu khi đổi trang
+  }, [page]); // Chạy khi `page`, `filters`, `sortOrder` thay đổi
+
 
   const handleFilterChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -83,7 +100,7 @@ const AllProductsList = () => {
     };
 
     axios
-      .get(`http://dangtringhia1407-001-site1.otempurl.com/api/Products/loc`, { params: validParams })
+      .get(`${API_BASE_URL}/Products/loc`, { params: validParams })
       .then((response) => {
         const data = response.data.DanhSachSanPham?.$values || [];
 
@@ -113,7 +130,7 @@ const AllProductsList = () => {
 
     try {
       const response = await axios.post(
-        "http://dangtringhia1407-001-site1.otempurl.com/api/Favorites/add",
+        "${API_BASE_URL}/Favorites/add",
         { ProductId: productId },
         {
           headers: {
@@ -141,12 +158,14 @@ const AllProductsList = () => {
 
   return (
     <div className="product-container-all">
+
       <div className="product-header-banner-all">
         <img
-          src="/imgs/Icons/hinh5.png"
+          src="imgs/Icons/hinh5.png"
           alt="Banner"
         />
       </div>
+      <h1 className="product-title-all">Kết quả tìm kiếm</h1>
       <h1 className="product-title-all">Tất cả sản phẩm</h1>
       <div className="product-page-container">
         <div className="filters-all">

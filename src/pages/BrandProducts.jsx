@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom"; // Thêm useNavigate
 import "./BrandProducts.css";
-
+import { API_BASE_URL } from '../config'
 const BrandProducts = () => {
   const { brandId } = useParams(); // Lấy brandId từ URL
   const [brandInfo, setBrandInfo] = useState(null);
@@ -15,11 +15,11 @@ const BrandProducts = () => {
     const fetchBrandProducts = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`http://dangtringhia1407-001-site1.otempurl.com/api/thuong-hieu/${brandId}`);
+        const response = await axios.get(`${API_BASE_URL}/thuong-hieu/${brandId}`);
         const data = response.data;
         setBrandInfo({
           Name: data.Name,
-          LogoUrl: data.LogoUrl ? `http://dangtringhia1407-001-site1.otempurl.com${data.LogoUrl}` : null, // Thêm domain nếu cần
+          LogoUrl: data.LogoUrl ? `https://api.glamour.io.vn${data.LogoUrl}` : null, // Thêm domain nếu cần
           Description: data.Description,
         });
         setProducts(data.Products.$values || []);
@@ -43,7 +43,7 @@ const BrandProducts = () => {
 
     try {
       const response = await axios.post(
-        "http://dangtringhia1407-001-site1.otempurl.com/api/Favorites/add",
+        `${API_BASE_URL}/Favorites/add`,
         { ProductId: productId },
         {
           headers: {
@@ -65,7 +65,7 @@ const BrandProducts = () => {
   return (
     <div className="brand-product-container">
       <div className="brand-product-header-banner">
-        <img src="http://localhost:5173//imgs/Icons/hinh5.png" alt="Banner" />
+        <img src="http://localhost:5173/imgs/Icons/hinh5.png" alt="Banner" />
       </div>
       <div className="brand-product-header">
         {brandInfo.LogoUrl ? (

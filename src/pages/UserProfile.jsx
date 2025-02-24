@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import './UserProfile.css';
-
+import { API_BASE_URL } from '../config'
 const UserProfile = () => {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -24,7 +24,7 @@ const UserProfile = () => {
     }
 
     try {
-      const response = await axios.get('http://dangtringhia1407-001-site1.otempurl.com/api/Users/get-user-info', {
+      const response = await axios.get(`${API_BASE_URL}/Users/get-user-info`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -61,7 +61,7 @@ const UserProfile = () => {
 
     try {
       await axios.put(
-        'http://dangtringhia1407-001-site1.otempurl.com/api/Users/update',
+        `${API_BASE_URL}/Users/update`,
         {
           FirstName: formData.firstName,
           LastName: formData.lastName,

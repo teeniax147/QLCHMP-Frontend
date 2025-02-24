@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './CartPreviewPage.css';
 import { useNavigate } from 'react-router-dom';
-
+import { API_BASE_URL } from '../config'
 const CartPreviewPage = () => {
   const [previewData, setPreviewData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -34,10 +34,10 @@ const CartPreviewPage = () => {
 
     try {
       const [shippingResponse, paymentResponse] = await Promise.all([
-        axios.get('http://dangtringhia1407-001-site1.otempurl.com/api/ShippingCompany', {
+        axios.get(`${API_BASE_URL}/ShippingCompany`, {
           headers: { Authorization: `Bearer ${token}` }
         }),
-        axios.get('http://dangtringhia1407-001-site1.otempurl.com/api/PaymentMethod', {
+        axios.get(`${API_BASE_URL}/PaymentMethod`, {
           headers: { Authorization: `Bearer ${token}` }
         })
       ]);
@@ -61,7 +61,7 @@ const CartPreviewPage = () => {
     }
 
     try {
-      const response = await axios.get('http://dangtringhia1407-001-site1.otempurl.com/api/Users/get-user-info', {
+      const response = await axios.get(`${API_BASE_URL}/Users/get-user-info`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -86,7 +86,7 @@ const CartPreviewPage = () => {
   
     try {
       await axios.put(
-        'http://dangtringhia1407-001-site1.otempurl.com/api/Users/update',
+        `${API_BASE_URL}/Users/update`,
         {
           FirstName: firstName,
           LastName: lastName,
@@ -131,7 +131,7 @@ const CartPreviewPage = () => {
 
     try {
       const response = await axios.post(
-        'http://dangtringhia1407-001-site1.otempurl.com/api/Carts/preview',
+        `${API_BASE_URL}/Carts/preview`,
         {
           CouponCode: couponCode || null,
           ShippingCompanyId: parseInt(selectedShippingCompany) || null,
@@ -169,7 +169,7 @@ const CartPreviewPage = () => {
 
     try {
       await axios.post(
-        'http://dangtringhia1407-001-site1.otempurl.com/api/Orders/create',
+        `${API_BASE_URL}/Orders/create`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Register.css';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { API_BASE_URL } from '../config'
 const Register = () => {
   const [username, setUsername] = useState('');
   const [lastName, setLastName] = useState('');
@@ -106,7 +106,7 @@ const Register = () => {
     console.log("Sending request", data);
 
     try {
-      const response = await axios.post('http://dangtringhia1407-001-site1.otempurl.com/api/Users/register', data);
+      const response = await axios.post(`${API_BASE_URL}/Users/register`, data);
       console.log("Response:", response.data);
       alert(response.data);
       navigate('/otp', { state: { email, otpPurpose: 'register' } });

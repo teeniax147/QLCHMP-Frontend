@@ -14,6 +14,7 @@ import {
   Modal,
   Box,
 } from "@mui/material";
+import { API_BASE_URL } from '../config';
 
 const BlogManager = () => {
   const [blogs, setBlogs] = useState([]);
@@ -26,7 +27,7 @@ const BlogManager = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://dangtringhia1407-001-site1.otempurl.com/api/beauty-blog", {
+      const response = await axios.get(`${API_BASE_URL}/beauty-blog`, {  // Sửa từ '${API_BASE_URL}/beauty-blog' thành `${API_BASE_URL}/beauty-blog`
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -40,7 +41,7 @@ const BlogManager = () => {
         author: blog.Author || "Không có tác giả",
         category: blog.Category?.Name || "Không có danh mục",
         featuredImage: blog.FeaturedImage
-          ? `http://dangtringhia1407-001-site1.otempurl.com${blog.FeaturedImage}`
+          ? `https://api.glamour.io.vn${blog.FeaturedImage}`
           : null,
         createdAt: blog.CreatedAt || "",
         updatedAt: blog.UpdatedAt || "",
@@ -103,7 +104,7 @@ const BlogManager = () => {
       if (currentBlog.id) {
         // Cập nhật bài viết
         await axios.put(
-          `http://dangtringhia1407-001-site1.otempurl.com/api/beauty-blog/cap-nhat/${currentBlog.id}`,
+          `${API_BASE_URL}/beauty-blog/cap-nhat/${currentBlog.id}`,  // Sửa từ '${API_BASE_URL}/beauty-blog/cap-nhat/${currentBlog.id}' thành `${API_BASE_URL}/beauty-blog/cap-nhat/${currentBlog.id}`
           formData,
           {
             headers: {
@@ -115,7 +116,7 @@ const BlogManager = () => {
         alert("Cập nhật bài viết thành công!");
       } else {
         // Thêm mới bài viết
-        await axios.post("http://dangtringhia1407-001-site1.otempurl.com/api/beauty-blog/them-moi", formData, {
+        await axios.post(`${API_BASE_URL}/beauty-blog/them-moi`, formData, {  // Sửa từ '${API_BASE_URL}/beauty-blog/them-moi' thành `${API_BASE_URL}/beauty-blog/them-moi`
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "multipart/form-data",
@@ -144,7 +145,7 @@ const BlogManager = () => {
     if (window.confirm("Bạn có chắc muốn xóa bài viết này?")) {
       try {
         const token = localStorage.getItem("token");
-        await axios.delete(`http://dangtringhia1407-001-site1.otempurl.com/api/beauty-blog/xoa/${id}`, {
+        await axios.delete(`${API_BASE_URL}/beauty-blog/xoa/${id}`, {  // Sửa từ '${API_BASE_URL}/beauty-blog/xoa/${id}' thành `${API_BASE_URL}/beauty-blog/xoa/${id}`
           headers: {
             Authorization: `Bearer ${token}`,
           },

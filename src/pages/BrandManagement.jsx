@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import { API_BASE_URL } from '../config'
 import {
   Table,
   TableBody,
@@ -32,7 +32,7 @@ const BrandManagement = () => {
 
   const fetchBrands = async () => {
     try {
-      const response = await axios.get("http://dangtringhia1407-001-site1.otempurl.com/api/thuong-hieu", {
+      const response = await axios.get(`${API_BASE_URL}/thuong-hieu`, {
         headers: { Accept: "application/json" },
       });
 
@@ -90,7 +90,7 @@ const BrandManagement = () => {
       }
 
       const response = await axios.post(
-        "http://dangtringhia1407-001-site1.otempurl.com/api/thuong-hieu/them-moi",
+        `${API_BASE_URL}/thuong-hieu/them-moi`,
         formDataToSend,
         {
           headers: {
@@ -122,7 +122,7 @@ const BrandManagement = () => {
       if (formData.logoFile) formDataObj.append("LogoFile", formData.logoFile);
 
       const response = await axios.put(
-        `http://dangtringhia1407-001-site1.otempurl.com/api/thuong-hieu/cap-nhat/${id}`,
+        `${API_BASE_URL}/thuong-hieu/cap-nhat/${id}`,
         formDataObj,
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -146,7 +146,7 @@ const BrandManagement = () => {
       if (!token) throw new Error("Token không tồn tại. Vui lòng đăng nhập lại.");
 
       const response = await axios.delete(
-        `http://dangtringhia1407-001-site1.otempurl.com/api/thuong-hieu/xoa/${selectedBrand.Id}`,
+        `${API_BASE_URL}/thuong-hieu/xoa/${selectedBrand.Id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

@@ -26,7 +26,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-
+import { API_BASE_URL } from '../config'
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -61,7 +61,7 @@ const RevenueReport = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://dangtringhia1407-001-site1.otempurl.com/api/reports/revenue/from-to`,
+        `${API_BASE_URL}/reports/revenue/from-to`,
         {
           params: {
             startDate: startDate.toISOString(),
@@ -85,7 +85,7 @@ const RevenueReport = () => {
   const exportReport = async (format) => {
     try {
       const response = await axios.get(
-        `http://dangtringhia1407-001-site1.otempurl.com/api/reports/revenue/from-to`,
+        `${API_BASE_URL}/reports/revenue/from-to`,
         {
           params: {
             startDate: startDate.toISOString(),

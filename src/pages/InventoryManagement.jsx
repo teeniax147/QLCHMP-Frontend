@@ -16,7 +16,7 @@ import {
   Alert,
 } from "@mui/material";
 import axios from "axios";
-
+import { API_BASE_URL } from '../config'
 const InventoryManagement = () => {
   const [inventories, setInventories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -34,7 +34,7 @@ const InventoryManagement = () => {
   const fetchInventories = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("https://localhost:5001/api/Inventories", {
+      const response = await axios.get(`${API_BASE_URL}/Inventories`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       setInventories(response.data.$values || []);
@@ -81,7 +81,7 @@ const InventoryManagement = () => {
   const handleAddInventory = async () => {
     try {
       const response = await axios.post(
-        "https://localhost:5001/api/Inventories",
+        `${API_BASE_URL}/Inventories`,
         formData,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -105,7 +105,7 @@ const InventoryManagement = () => {
       };
 
       await axios.put(
-        `https://localhost:5001/api/Inventories/${selectedInventory.InventoryId}`,
+        `${API_BASE_URL}/Inventories/${selectedInventory.InventoryId}`,
         updatedInventory,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -126,7 +126,7 @@ const InventoryManagement = () => {
     }
     try {
       await axios.delete(
-        `https://localhost:5001/api/Inventories/${selectedInventory.InventoryId}`,
+        `${API_BASE_URL}/Inventories/${selectedInventory.InventoryId}`,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }

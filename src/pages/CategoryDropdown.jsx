@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import './CategoryDropdown.css';
-
+import { API_BASE_URL } from '../config'
 const CategoryDropdown = ({ title, parentId }) => {
     const [categories, setCategories] = useState([]);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -11,7 +11,7 @@ const CategoryDropdown = ({ title, parentId }) => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await axios.get('http://dangtringhia1407-001-site1.otempurl.com/api/Categories');
+                const response = await axios.get(`${API_BASE_URL}/Categories`);
                 const data = response.data.$values || [];
                 console.log("Danh mục từ API:", data); // Kiểm tra dữ liệu trong console
 

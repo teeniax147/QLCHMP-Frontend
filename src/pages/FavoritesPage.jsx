@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./FavoritesPage.css";
-
+import { API_BASE_URL } from '../config'
 const FavoritesPage = () => {
   const [favorites, setFavorites] = useState([]); // Danh sách yêu thích
   const [error, setError] = useState(null); // Trạng thái lỗi
@@ -16,7 +16,7 @@ const FavoritesPage = () => {
 
     try {
       const response = await axios.get(
-        "http://dangtringhia1407-001-site1.otempurl.com/api/Favorites/user-favorites",
+        `${API_BASE_URL}/Favorites/user-favorites`,
         {
           headers: {
             Authorization: `Bearer ${token}`, // Gửi token thực từ localStorage
@@ -46,7 +46,7 @@ const FavoritesPage = () => {
     try {
       // Gửi yêu cầu xóa sản phẩm yêu thích
       const response = await axios.delete(
-        "http://dangtringhia1407-001-site1.otempurl.com/api/Favorites/remove",
+        `${API_BASE_URL}/Favorites/remove`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

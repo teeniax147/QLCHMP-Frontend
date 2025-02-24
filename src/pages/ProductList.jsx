@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom"; // Thêm useNavigate
 import "./ProductList.css";
-
+import { API_BASE_URL } from '../config'
 const ProductList = () => {
   const { categoryId } = useParams(); // Lấy ID danh mục từ URL
   const [products, setProducts] = useState([]); // Dữ liệu sản phẩm
@@ -17,7 +17,7 @@ const ProductList = () => {
 
       try {
         const response = await axios.get(
-          `http://dangtringhia1407-001-site1.otempurl.com/api/Products/theo-danh-muc/${categoryId}?pageNumber=1&pageSize=10`,
+          `${API_BASE_URL}/Products/theo-danh-muc/${categoryId}?pageNumber=1&pageSize=10`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -51,7 +51,7 @@ const ProductList = () => {
 
     try {
       const response = await axios.post(
-        "http://dangtringhia1407-001-site1.otempurl.com/api/Favorites/add",
+        `${API_BASE_URL}/Favorites/add`,
         { ProductId: productId },
         {
           headers: {
@@ -78,7 +78,7 @@ const ProductList = () => {
     <div className="product-container-custom">
       <div className="product-header-banner-custom">
         <img
-          src="http://localhost:5173//imgs/Icons/hinh5.png"
+          src="http://localhost:5173/imgs/Icons/hinh5.png"
           alt="Banner"
         />
       </div>

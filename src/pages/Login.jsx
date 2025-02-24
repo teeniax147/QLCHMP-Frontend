@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom'; // Đảm bảo Link được import
 import axios from 'axios';
 import './Login.css';
-
+import { API_BASE_URL } from '../config';
 const Login = () => {
   const [emailOrUsername, setEmailOrUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -12,7 +12,7 @@ const Login = () => {
 
   const loginAPI = async (user, pass) => {
     try {
-      const res = await axios.post('http://dangtringhia1407-001-site1.otempurl.com/api/Users/login', {
+      const res = await axios.post(`${API_BASE_URL}/Users/login`, {
         EmailOrUsername: user,
         Password: pass,
       });

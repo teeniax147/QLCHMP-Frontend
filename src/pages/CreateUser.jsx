@@ -11,7 +11,7 @@ import {
   Typography,
   Alert,
 } from "@mui/material";
-
+import { API_BASE_URL } from '../config'
 const CreateUser = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -37,7 +37,7 @@ const CreateUser = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://dangtringhia1407-001-site1.otempurl.com/api/Users/create-user",
+        `${API_BASE_URL}/Users/create-user`,
         formData,
         {
           headers: {

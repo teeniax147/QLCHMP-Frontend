@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import './CartPage.css';
-
+import { API_BASE_URL } from '../config'
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
@@ -23,7 +23,7 @@ const CartPage = () => {
     }
 
     try {
-      const response = await axios.get('http://dangtringhia1407-001-site1.otempurl.com/api/Carts/details', {
+      const response = await axios.get(`${API_BASE_URL}/Carts/details`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -48,7 +48,7 @@ const CartPage = () => {
   const removeItem = async (productId) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete('http://dangtringhia1407-001-site1.otempurl.com/api/Carts/remove-item', {
+      await axios.delete(`${API_BASE_URL}/Carts/remove-item`, {
         headers: {
           Authorization: `Bearer ${token}`
         },
@@ -65,7 +65,7 @@ const CartPage = () => {
   const clearCart = async () => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete('http://dangtringhia1407-001-site1.otempurl.com/api/Carts/clear', {
+      await axios.delete(`${API_BASE_URL}/Carts/clear`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

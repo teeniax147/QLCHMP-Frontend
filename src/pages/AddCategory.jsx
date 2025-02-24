@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./AddCategory.css";
+import { API_BASE_URL } from "../config";  // Đảm bảo import chính xác
 
 const AddCategory = () => {
   const [category, setCategory] = useState({ Name: "", Description: "", ParentId: null });
@@ -38,7 +39,7 @@ const AddCategory = () => {
         if (!token) {
           throw new Error("Token không tồn tại.");
         }
-        const response = await axios.get("http://dangtringhia1407-001-site1.otempurl.com/api/Categories", {
+        const response = await axios.get(`${API_BASE_URL}/Categories`, {  // Đổi dấu " thành ` cho template string
           headers: { Authorization: `Bearer ${token}` },
         });
         const flatCategories = flattenNestedCategories(response.data.$values || []);
@@ -65,7 +66,7 @@ const AddCategory = () => {
       if (!token) {
         throw new Error("Token không tồn tại.");
       }
-      await axios.post("http://dangtringhia1407-001-site1.otempurl.com/api/Categories", category, {
+      await axios.post(`${API_BASE_URL}/Categories`, category, {  // Đổi dấu " thành ` cho template string
         headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
       });
       alert("Thêm danh mục thành công!");

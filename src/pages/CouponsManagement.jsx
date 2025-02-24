@@ -12,7 +12,7 @@ import {
   CircularProgress,
   Alert,
 } from "@mui/material";
-
+import { API_BASE_URL } from '../config'
 const CouponsManagement = () => {
   const [coupons, setCoupons] = useState([]); // Dữ liệu mã giảm giá
   const [loading, setLoading] = useState(true); // Trạng thái loading
@@ -22,7 +22,7 @@ const CouponsManagement = () => {
   const fetchCoupons = async () => {
     try {
       setLoading(true); // Bắt đầu tải
-      const response = await axios.get("http://dangtringhia1407-001-site1.otempurl.com/api/Coupons");
+      const response = await axios.get(`${API_BASE_URL}/Coupons`);
       console.log("Dữ liệu API trả về:", response.data); // Kiểm tra dữ liệu trả về
       const data = response.data.$values || []; // Lấy dữ liệu từ $values
       setCoupons(data); // Lưu dữ liệu vào state

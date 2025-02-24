@@ -12,7 +12,7 @@ export default defineConfig({
     },
     proxy: {
       '/api': {
-        target: 'https://localhost:5001', // Địa chỉ backend .NET Core
+        target: 'https://api.glamour.io.vn', // Địa chỉ backend .NET Core
         changeOrigin: true,
         secure: false // Dùng cho HTTPS nếu bạn không có chứng chỉ tin cậy
       }

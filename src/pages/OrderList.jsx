@@ -16,6 +16,7 @@ import {
   Tab,
   TextField,
 } from "@mui/material";
+import { API_BASE_URL } from '../config'
 import { Star, StarBorder } from "@mui/icons-material";
 import "./OrderList.css";
 const OrderList = () => {
@@ -69,7 +70,7 @@ const OrderList = () => {
     setError("");
     try {
       const response = await axios.get(
-        `http://dangtringhia1407-001-site1.otempurl.com/api/Orders/customer/${customerId}/orders`,
+        `${API_BASE_URL}/Orders/customer/${customerId}/orders`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -94,7 +95,7 @@ const OrderList = () => {
 
     try {
       const response = await axios.put(
-        `http://dangtringhia1407-001-site1.otempurl.com/api/Orders/${orderId}/cancel`,
+        `${API_BASE_URL}/Orders/${orderId}/cancel`,
         {},
         {
           headers: {
@@ -114,7 +115,7 @@ const OrderList = () => {
   const fetchOrderDetails = async (orderId) => {
     try {
       const response = await axios.get(
-        `http://dangtringhia1407-001-site1.otempurl.com/api/Orders/orders/${orderId}/details`,
+        `${API_BASE_URL}/Orders/orders/${orderId}/details`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -146,7 +147,7 @@ const OrderList = () => {
 
     try {
       const response = await axios.post(
-        `http://dangtringhia1407-001-site1.otempurl.com/api/ProductFeedbacks/add`,
+        `${API_BASE_URL}/ProductFeedbacks/add`,
         {
           ProductId: selectedProduct.ProductId,
           Rating: rating,

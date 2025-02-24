@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { styled } from "@mui/material/styles";
+import { API_BASE_URL } from '../config'
 import {
   Table,
   TableHead,
@@ -107,7 +108,7 @@ const CategoryManagement = () => {
         throw new Error("Token không tồn tại. Vui lòng đăng nhập lại.");
       }
 
-      const response = await axios.get("http://dangtringhia1407-001-site1.otempurl.com/api/Categories", {
+      const response = await axios.get(`${API_BASE_URL}/Categories`, {
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
@@ -143,7 +144,7 @@ const CategoryManagement = () => {
       if (!token) throw new Error("Token không tồn tại.");
 
       await axios.put(
-        `http://dangtringhia1407-001-site1.otempurl.com/api/Categories/${selectedCategory.Id}`,
+        `${API_BASE_URL}/Categories/${selectedCategory.Id}`,
         selectedCategory,
         {
           headers: {
@@ -167,7 +168,7 @@ const CategoryManagement = () => {
       if (!token) throw new Error("Token không tồn tại.");
 
       await axios.delete(
-        `http://dangtringhia1407-001-site1.otempurl.com/api/Categories/${selectedCategory.Id}`,
+        `${API_BASE_URL}/Categories/${selectedCategory.Id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

@@ -4,13 +4,16 @@ import './Layout.css';
 import CategoryDropdown from "./pages/CategoryDropdown";
 import BrandDropdown from "./pages/BrandDropdown";
 import axios from 'axios'; // Thêm axios để gọi API
+import { useNavigate } from "react-router-dom";  // Thêm useNavigate
 
+import { API_BASE_URL } from './config';
 const Layout = () => {
+  const navigate = useNavigate();
   const [userName, setUserName] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
   const [greeting, setGreeting] = useState('');
   const [cartItemCount, setCartItemCount] = useState(0); // State mới cho số lượng giỏ hàng
-  const [searchKeyword, setSearchKeyword] = useState(""); // Từ khóa tìm kiếm
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   useEffect(() => {
     const storedName = localStorage.getItem('userName');
@@ -30,7 +33,7 @@ const Layout = () => {
     // Hàm lấy số lượng sản phẩm trong giỏ hàng
     const fetchCartItemCount = async () => {
       try {
-        const response = await axios.get('http://dangtringhia1407-001-site1.otempurl.com/api/Carts/item-count', {
+        const response = await axios.get(`${API_BASE_URL}/Carts/item-count`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
@@ -44,7 +47,7 @@ const Layout = () => {
     fetchCartItemCount();
 
     // Thiết lập setInterval để tự động gọi API sau mỗi 5 giây
-    const intervalId = setInterval(fetchCartItemCount, 1000);
+    const intervalId = setInterval(fetchCartItemCount, 50000);
 
     // Xóa interval khi component unmount
     return () => clearInterval(intervalId);
@@ -73,26 +76,33 @@ const Layout = () => {
     }
 
     try {
-      console.log("Từ khóa tìm kiếm:", searchKeyword); // Log từ khóa
+      console.log(" Từ khóa tìm kiếm:", searchKeyword);
 
-      const response = await axios.get("http://dangtringhia1407-001-site1.otempurl.com/api/Products/tim-kiem", {
+      const response = await axios.get(`${API_BASE_URL}/Products/tim-kiem`, {
         params: { Keyword: searchKeyword },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}` || "",
+        },
       });
 
-      console.log("Phản hồi từ API:", response.data); // Log phản hồi API
+      console.log(" Phản hồi từ API:", response.data);
 
-      if (response.data.length === 0) {
+      if (!response.data || response.data.TotalProducts === 0) {
         alert("Không tìm thấy sản phẩm nào phù hợp.");
         return;
       }
 
-      // Điều hướng đến AllProductsList kèm dữ liệu
-      navigate("/all-products", { state: { products: response.data } });
+      console.log(" Dữ liệu gửi sang AllProductsList:", response.data.Products.$values);
+
+      // Điều hướng và truyền dữ liệu vào state
+      navigate("/all-products", { state: { products: response.data.Products.$values || [] } });
+
     } catch (error) {
-      console.error("Lỗi khi gọi API:", error.message || error.response?.data);
+      console.error("Lỗi khi gọi API tìm kiếm:", error.response?.data || error.message);
       alert("Không thể tìm kiếm sản phẩm. Vui lòng thử lại!");
     }
   };
+
 
   return (
     <>
@@ -145,7 +155,7 @@ const Layout = () => {
                 </div>
               ) : (
                 <Link to="/login" className='link-blog'>
-                    <img src="/imgs/Icons/dangnhap.png" alt="Login Icon" />
+                  <img src="/imgs/Icons/dangnhap.png" alt="Login Icon" />
                   <span>Đăng nhập</span>
                 </Link>
               )}

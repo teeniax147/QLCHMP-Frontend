@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ProductDetail.css";
-
+import { API_BASE_URL } from '../config'
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const ProductDetail = () => {
     const fetchProductDetail = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`http://dangtringhia1407-001-site1.otempurl.com/api/Products/chi-tiet/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/Products/chi-tiet/${id}`);
         setProduct(response.data);
       } catch (err) {
         console.error("Lỗi khi tải chi tiết sản phẩm:", err);
@@ -38,7 +38,7 @@ const ProductDetail = () => {
 
     try {
       const response = await axios.post(
-        "http://dangtringhia1407-001-site1.otempurl.com/api/Favorites/add",
+        `${API_BASE_URL}/Favorites/add`,
         { ProductId: productId },
         {
           headers: {
@@ -75,10 +75,11 @@ const ProductDetail = () => {
         ProductId: parseInt(id, 10),
         Quantity: quantity
       };
+
       console.log("Dữ liệu gửi đi:", requestData);
 
       const response = await axios.post(
-        'http://dangtringhia1407-001-site1.otempurl.com/api/Carts/add',
+        `${API_BASE_URL}/Carts/add`,
         requestData,
         config
       );
@@ -88,6 +89,7 @@ const ProductDetail = () => {
       // Điều hướng đến giỏ hàng nếu người dùng chọn "Mua Ngay"
       if (redirectToCart) {
         navigate('/CartPage');
+
       }
 
     } catch (err) {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './ForgotPassword.css';
-
+import { API_BASE_URL } from '../config'
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
@@ -33,7 +33,7 @@ const ForgotPassword = () => {
     setLoading(true);
     try {
       // Gửi yêu cầu quên mật khẩu tới API
-      const response = await axios.post('http://dangtringhia1407-001-site1.otempurl.com/api/Users/forgot-password', { email });
+      const response = await axios.post(`${API_BASE_URL}/Users/forgot-password`, { email });
       console.log("Response:", response.data);
       alert("Mã OTP đã được gửi đến email của bạn. Vui lòng kiểm tra email để xác nhận.");
       

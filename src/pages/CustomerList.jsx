@@ -15,7 +15,7 @@ import {
   Modal,
   TextField,
 } from "@mui/material";
-
+import { API_BASE_URL } from '../config'
 const CustomerList = () => {
   const [customers, setCustomers] = useState([]);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
@@ -31,7 +31,7 @@ const CustomerList = () => {
   useEffect(() => {
     const fetchCustomers = async () => {
       try {
-        const response = await axios.get("http://dangtringhia1407-001-site1.otempurl.com/api/Customers", {
+        const response = await axios.get(`${API_BASE_URL}/Customers`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -87,7 +87,7 @@ const CustomerList = () => {
   const handleUpdate = async () => {
     try {
       await axios.put(
-        `http://dangtringhia1407-001-site1.otempurl.com/api/Customers/${selectedCustomer.customerId}`,
+        `${API_BASE_URL}/Customers/${selectedCustomer.customerId}`,
         formData,
         {
           headers: {
@@ -115,7 +115,7 @@ const CustomerList = () => {
   const handleDeleteConfirm = async () => {
     try {
       await axios.delete(
-        `http://dangtringhia1407-001-site1.otempurl.com/api/Customers/${selectedCustomer.customerId}`,
+        `${API_BASE_URL}/Customers/${selectedCustomer.customerId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

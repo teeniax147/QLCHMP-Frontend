@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './BrandDropdown.css';
-
+import { API_BASE_URL } from '../config'
 const BrandDropdown = ({ title }) => {
   const [brands, setBrands] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -10,7 +10,7 @@ const BrandDropdown = ({ title }) => {
   useEffect(() => {
     const fetchBrands = async () => {
       try {
-        const response = await axios.get('http://dangtringhia1407-001-site1.otempurl.com/api/thuong-hieu');
+        const response = await axios.get(`${API_BASE_URL}/thuong-hieu`);
         if (response.status === 200) {
           const data = response.data?.$values || []; 
           setBrands(data);

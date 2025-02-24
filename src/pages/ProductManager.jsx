@@ -14,7 +14,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-
+import { API_BASE_URL } from '../config'
 // Styled Components
 const StyledTableCell = styled(TableCell)({
   textAlign: "center",
@@ -84,7 +84,7 @@ const ProductManager = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        "http://dangtringhia1407-001-site1.otempurl.com/api/Products/danh-sach",
+        `${API_BASE_URL}/Products/danh-sach`,
         { params: { pageNumber: page, pageSize: pageSize } }
       );
       setProducts(response.data?.DanhSachSanPham?.$values || []);
@@ -138,7 +138,7 @@ const ProductManager = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://dangtringhia1407-001-site1.otempurl.com/api/Products/them-moi",
+        `${API_BASE_URL}/Products/them-moi`,
         formData,
         {
           headers: {
@@ -169,7 +169,7 @@ const ProductManager = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `http://dangtringhia1407-001-site1.otempurl.com/api/Products/cap-nhat/${currentProduct.Id}`,
+        `${API_BASE_URL}/Products/cap-nhat/${currentProduct.Id}`,
         currentProduct,
         {
           headers: {
@@ -192,7 +192,7 @@ const ProductManager = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.delete(
-        `http://dangtringhia1407-001-site1.otempurl.com/api/Products/xoa/${currentProduct.Id}`,
+        `${API_BASE_URL}/Products/xoa/${currentProduct.Id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

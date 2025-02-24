@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './ResetPassword.css';
-
+import { API_BASE_URL } from '../config'
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -23,7 +23,7 @@ const ResetPassword = () => {
   useEffect(() => {
     const checkOtpVerified = async () => {
       try {
-        await axios.get(`http://dangtringhia1407-001-site1.otempurl.com/api/Users/check-otp-verified?email=${email}`);
+        await axios.get(`${API_BASE_URL}/Users/check-otp-verified?email=${email}`);
       } catch (error) {
         console.error("OTP chưa được xác nhận:", error.response ? error.response.data : error.message);
         setError("Bạn chưa xác nhận OTP hoặc OTP không hợp lệ.");
@@ -59,7 +59,7 @@ const ResetPassword = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post('http://dangtringhia1407-001-site1.otempurl.com/api/Users/reset-password', {
+      const response = await axios.post(`${API_BASE_URL}/Users/reset-password`, {
         email,
         newPassword,
         confirmPassword,

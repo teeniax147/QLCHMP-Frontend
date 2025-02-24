@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './OtpVerification.css';
-
+import { API_BASE_URL } from '../config'
 const OtpVerification = () => {
   const [otp, setOtp] = useState('');
   const [error, setError] = useState(false);
@@ -33,7 +33,7 @@ const OtpVerification = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post('http://dangtringhia1407-001-site1.otempurl.com/api/Users/verify-otp', {
+      const response = await axios.post(`${API_BASE_URL}/Users/verify-otp`, {
         email,
         otp,
         otpPurpose,
@@ -61,7 +61,7 @@ const OtpVerification = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post('http://dangtringhia1407-001-site1.otempurl.com/api/Users/forgot-password', {
+      const response = await axios.post(`${API_BASE_URL}/Users/forgot-password`, {
         email,
       });
       console.log("OTP resend response:", response.data);

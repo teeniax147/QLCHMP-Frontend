@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../config';
 import './BeautyBlog.css';
 
 const BeautyBlog = () => {
@@ -10,15 +11,15 @@ const BeautyBlog = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get('http://dangtringhia1407-001-site1.otempurl.com/api/beauty-blog');
+        const response = await axios.get(`${API_BASE_URL}/beauty-blog`);  // Sửa từ '${API_BASE_URL}/beauty-blog' thành `${API_BASE_URL}/beauty-blog`
         const fullBlogs = response.data.Blogs?.$values || [];
         const cleanedBlogs = fullBlogs.map((blog) => ({
           id: blog.Id,
           title: blog.Title || "Tiêu đề không có sẵn",
           content: blog.Content || "Nội dung không có sẵn",
           author: blog.Author || "Không rõ",
-          featuredImage: blog.FeaturedImage 
-            ? `http://dangtringhia1407-001-site1.otempurl.com/${blog.FeaturedImage}` 
+          featuredImage: blog.FeaturedImage
+            ? `https://api.glamour.io.vn/${blog.FeaturedImage}`
             : "default-image.jpg",
         }));
         setBlogs(cleanedBlogs);
@@ -30,7 +31,7 @@ const BeautyBlog = () => {
     };
     fetchBlogs();
   }, []);
-  
+
   if (loading) return <p>Đang tải...</p>;
   if (error) return <p>{error}</p>;
 
@@ -63,10 +64,10 @@ const BeautyBlog = () => {
       <div className="beauty-other-blogs">
         {otherBlogs.map((blog) => (
           <div key={blog.id} className="beauty-blog-item">
-            <img 
-              src={blog.featuredImage} 
-              alt={blog.title || "Hình ảnh không có sẵn"} 
-              className="beauty-blog-image" 
+            <img
+              src={blog.featuredImage}
+              alt={blog.title || "Hình ảnh không có sẵn"}
+              className="beauty-blog-image"
             />
             <div className="beauty-blog-content">
               <h3>{blog.title}</h3>
