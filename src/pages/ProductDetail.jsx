@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ProductDetail.css";
-import { API_BASE_URL } from '../config'
+import { API_BASE_URL } from "../config";
+import useGetCart from "../hooks/useGetCart";
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -10,12 +11,17 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const { fetchCartItemCount } = useGetCart();
 
   useEffect(() => {
+    console.log('loading get count cart');
+    
     const fetchProductDetail = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`${API_BASE_URL}/Products/chi-tiet/${id}`);
+        const response = await axios.get(
+          `${API_BASE_URL}/Products/chi-tiet/${id}`
+        );
         setProduct(response.data);
       } catch (err) {
         console.error("Lỗi khi tải chi tiết sản phẩm:", err);
@@ -49,31 +55,35 @@ const ProductDetail = () => {
 
       alert(response.data); // Hiển thị thông báo thành công từ server
     } catch (error) {
-      console.error("Lỗi khi thêm sản phẩm yêu thích:", error.response?.data || error.message);
+      console.error(
+        "Lỗi khi thêm sản phẩm yêu thích:",
+        error.response?.data || error.message
+      );
       alert(error.response?.data || "Không thể thêm sản phẩm vào yêu thích.");
     }
   };
+
   const handleAddToCart = async (redirectToCart = false) => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       console.log("Token hiện tại:", token); // Kiểm tra token
 
       if (!token) {
         alert("Vui lòng đăng nhập trước khi thêm vào giỏ hàng.");
-        navigate('/login');
+        navigate("/login");
         return;
       }
 
       const config = {
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       };
 
       const requestData = {
         ProductId: parseInt(id, 10),
-        Quantity: quantity
+        Quantity: quantity,
       };
 
       console.log("Dữ liệu gửi đi:", requestData);
@@ -83,20 +93,23 @@ const ProductDetail = () => {
         requestData,
         config
       );
+      
+      fetchCartItemCount();
 
       alert(response.data);
-
       // Điều hướng đến giỏ hàng nếu người dùng chọn "Mua Ngay"
       if (redirectToCart) {
-        navigate('/CartPage');
-
+        navigate("/CartPage");
       }
-
     } catch (err) {
       console.error("Chi tiết lỗi:", err);
       if (err.response) {
         console.error("Lỗi API:", err.response);
-        alert(`Lỗi từ server: ${err.response.data?.message || 'Không thể xử lý yêu cầu'}`);
+        alert(
+          `Lỗi từ server: ${
+            err.response.data?.message || "Không thể xử lý yêu cầu"
+          }`
+        );
       } else if (err.request) {
         console.error("Không có phản hồi từ server:", err.request);
         alert("Không có phản hồi từ server. Vui lòng kiểm tra kết nối.");
@@ -124,7 +137,10 @@ const ProductDetail = () => {
       <div className="product-details">
         <h1 className="custom-product-title">{product?.Name}</h1>
 
-        <p className="custom-product-price"> {product?.Price?.toLocaleString()} VND</p>
+        <p className="custom-product-price">
+          {" "}
+          {product?.Price?.toLocaleString()} VND
+        </p>
 
         <div className="product-actions">
           <div className="quantity-container">
@@ -134,7 +150,10 @@ const ProductDetail = () => {
           </div>
 
           <div className="buttons-container">
-            <button className="custom-add-to-cart-button" onClick={() => handleAddToCart(false)}>
+            <button
+              className="custom-add-to-cart-button"
+              onClick={() => handleAddToCart(false)}
+            >
               <img
                 src="https://img.icons8.com/?size=100&id=ii6Lr4KivOiE&format=png&color=000000"
                 alt="Cart Icon"
@@ -149,7 +168,10 @@ const ProductDetail = () => {
               Thêm vào giỏ hàng
             </button>
 
-            <button className="custom-buy-now-button" onClick={() => handleAddToCart(true)}>
+            <button
+              className="custom-buy-now-button"
+              onClick={() => handleAddToCart(true)}
+            >
               <span>Mua Ngay</span>
             </button>
 
@@ -164,17 +186,12 @@ const ProductDetail = () => {
               ♡
             </div>
           </div>
-
-
-
         </div>
         <p className="introduce">Giới thiệu:</p>
 
         <p className="custom-product-description">{product?.Description}</p>
-
       </div>
     </div>
-
   );
 };
 

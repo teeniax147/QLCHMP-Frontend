@@ -5,15 +5,17 @@ import CategoryDropdown from "./pages/CategoryDropdown";
 import BrandDropdown from "./pages/BrandDropdown";
 import axios from 'axios'; // Thêm axios để gọi API
 import { useNavigate } from "react-router-dom";  // Thêm useNavigate
-
 import { API_BASE_URL } from './config';
+import useGetCart from './hooks/useGetCart';
+
 const Layout = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
   const [greeting, setGreeting] = useState('');
-  const [cartItemCount, setCartItemCount] = useState(0); // State mới cho số lượng giỏ hàng
   const [searchKeyword, setSearchKeyword] = useState("");
+  const { cartItemCount, fetchCartItemCount } = useGetCart()
+  const [loadingCount, setLoadingCount] = useState(false)
 
   useEffect(() => {
     const storedName = localStorage.getItem('userName');
@@ -31,26 +33,15 @@ const Layout = () => {
     }
 
     // Hàm lấy số lượng sản phẩm trong giỏ hàng
-    const fetchCartItemCount = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/Carts/item-count`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        });
-        setCartItemCount(response.data.ItemCount);
-      } catch (hehe) { }
-
-    };
 
     // Gọi hàm lấy số lượng lần đầu
     fetchCartItemCount();
 
     // Thiết lập setInterval để tự động gọi API sau mỗi 5 giây
-    const intervalId = setInterval(fetchCartItemCount, 50000);
+    // const intervalId = setInterval(fetchCartItemCount, 50000);
 
     // Xóa interval khi component unmount
-    return () => clearInterval(intervalId);
+    // return () => clearInterval(intervalId);
   }, []);
 
   const handleDropdownToggle = () => {
@@ -102,6 +93,14 @@ const Layout = () => {
       alert("Không thể tìm kiếm sản phẩm. Vui lòng thử lại!");
     }
   };
+
+  useEffect(() => {
+
+    console.log(cartItemCount);   
+
+    setLoadingCount(true)
+  }, [cartItemCount])
+
 
 
   return (
@@ -190,7 +189,7 @@ const Layout = () => {
             <span className="iconcart">
               <Link to="/CartPage">
                 <img src="/imgs/cart1.png" alt="Cart Icon" />
-                {cartItemCount > 0 && <span className="cart-count">{cartItemCount}</span>}
+                <span className="cart-count">{loadingCount && cartItemCount}</span>
               </Link>
             </span>
 

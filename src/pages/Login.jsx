@@ -29,6 +29,9 @@ const Login = () => {
 
     const res = await loginAPI(emailOrUsername, password)
 
+    console.log("CHECK Res LOGIN", res);
+
+
     switch (res.status) {
       case 200:
         const { $values } = res.data.roles;
@@ -53,6 +56,7 @@ const Login = () => {
         }
 
         localStorage.setItem('token', token);
+        localStorage.setItem('id', res.data.$id);
         localStorage.setItem('userName', res.data.userName);
         localStorage.setItem('roles', JSON.stringify($values[0]));
         break;
