@@ -116,7 +116,7 @@ const CategoryManagement = () => {
       });
 
       if (response.status === 200 && response.data) {
-        console.log("Dữ liệu trả về từ API:", response.data);
+        // console.log("Dữ liệu trả về từ API:", response.data);
         const flatCategories = flattenCategories(response.data.$values || []);
         setCategories(flatCategories);
       } else {

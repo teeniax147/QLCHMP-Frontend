@@ -318,7 +318,7 @@ const Home = () => {
           ))}
         </div>
 
-        <Link to="/Duongda">
+        <Link to="/all-products">
           <button className="view-all-button">Xem tất cả</button>
         </Link>
 

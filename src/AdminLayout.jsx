@@ -90,7 +90,10 @@ const AdminLayout = () => {
                     <li><Link to="/admin/products"><span>📦</span> Sản phẩm</Link></li>
                     <li><Link to="/admin/coupons"><span>🏷️</span> Mã giảm giá</Link></li>
                     <li><Link to="/admin/inventory"><span>📦</span> Kho hàng</Link></li>
-                  
+                    <li><Link to="/admin/shipping"><span>🚚</span> Đơn vị vận chuyển</Link></li>
+                    <li><Link to="/admin/reviews"><span>⭐</span> Đánh giá</Link></li>
+                    <li><Link to="/admin/staff-accounts"><span>👨‍💻</span> Tài khoản nhân viên</Link></li>
+                    <li><Link to="/admin/payment-methods"><span>💳</span> Phương thức thanh toán</Link></li>
                     
                 
                     

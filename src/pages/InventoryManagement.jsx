@@ -159,7 +159,8 @@ const InventoryManagement = () => {
       >
         Thêm Kho Hàng
       </Button>
-      <TableContainer component={Paper} sx={{ maxHeight: "450px", overflowY: "auto" }}>
+      <TableContainer component={Paper}>
+
         <Table stickyHeader>
           <TableHead>
             <TableRow>

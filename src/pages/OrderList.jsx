@@ -68,6 +68,7 @@ const OrderList = () => {
   const fetchOrders = async () => {
     setLoading(true);
     setError("");
+
     try {
       const response = await axios.get(
         `${API_BASE_URL}/Orders/customer/${customerId}/orders`,
@@ -76,7 +77,7 @@ const OrderList = () => {
             Authorization: `Bearer ${token}`,
           },
         }
-      );  
+      );
       setOrders(response.data.$values || []);
     } catch (err) {
       console.error("Error fetching orders:", err.response?.data || err.message);
@@ -180,10 +181,11 @@ const OrderList = () => {
     fetchOrders();
   }, []);
 
+
   return (
     <div style={{ padding: "20px", marginTop: "70px" }}>
       <Typography variant="h4" align="center" fontSize={"30px"} fontWeight={"bold"} gutterBottom>
-      DANH SÁCH ĐƠN HÀNG
+        DANH SÁCH ĐƠN HÀNG
       </Typography>
 
       {/* Tabs trạng thái */}
@@ -193,7 +195,7 @@ const OrderList = () => {
         centered
         indicatorColor="primary"
         textColor="primary"
-        style={{ marginBottom: "20px"}}
+        style={{ marginBottom: "20px" }}
       >
         {tabLabels.map((label, index) => (
           <Tab key={index} label={label} />
@@ -210,14 +212,14 @@ const OrderList = () => {
           <Table>
             <TableHead>
               <TableRow>
-                    <TableCell align="center" sx={{ fontWeight: "bold", width: "0%", fontSize: "16px" }}>STT</TableCell>
-                    <TableCell align="center" sx={{ fontWeight: "bold", width: "5%", fontSize: "16px" }}>Ngày đặt</TableCell>
-                    <TableCell align="center" sx={{ fontWeight: "bold", width: "7%", fontSize: "16px" }}>Trạng thái</TableCell>
-                    <TableCell align="center" sx={{ fontWeight: "bold", width: "5%", fontSize: "16px" }}>Khách hàng</TableCell>
-                    <TableCell align="center" sx={{ fontWeight: "bold", width: "10%", fontSize: "16px" }}>Địa chỉ giao hàng</TableCell>
-              
-                    <TableCell align="center" sx={{ fontWeight: "bold", width: "5%", fontSize: "16px" }}>Tổng tiền</TableCell>
-                    <TableCell align="center" sx={{ fontWeight: "bold", width: "5%", fontSize: "16px" }}>Hành động</TableCell>
+                <TableCell align="center" sx={{ fontWeight: "bold", width: "0%", fontSize: "16px" }}>STT</TableCell>
+                <TableCell align="center" sx={{ fontWeight: "bold", width: "5%", fontSize: "16px" }}>Ngày đặt</TableCell>
+                <TableCell align="center" sx={{ fontWeight: "bold", width: "7%", fontSize: "16px" }}>Trạng thái</TableCell>
+                <TableCell align="center" sx={{ fontWeight: "bold", width: "5%", fontSize: "16px" }}>Khách hàng</TableCell>
+                <TableCell align="center" sx={{ fontWeight: "bold", width: "10%", fontSize: "16px" }}>Địa chỉ giao hàng</TableCell>
+
+                <TableCell align="center" sx={{ fontWeight: "bold", width: "5%", fontSize: "16px" }}>Tổng tiền</TableCell>
+                <TableCell align="center" sx={{ fontWeight: "bold", width: "5%", fontSize: "16px" }}>Hành động</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -228,7 +230,7 @@ const OrderList = () => {
                   <TableCell align="center">{order.Status}</TableCell>
                   <TableCell align="center">{order.CustomerName}</TableCell>
                   <TableCell align="center">{order.ShippingAddress}</TableCell>
-                
+
                   <TableCell align="center">{order.TotalAmount.toLocaleString()} VND</TableCell>
                   <TableCell align="center">
                     <div className="order-action-buttons">

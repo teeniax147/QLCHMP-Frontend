@@ -223,10 +223,7 @@ const ProductManager = () => {
       </AddButton>
       {error && <div style={{ color: "red" }}>{error}</div>}
       <TableContainer
-        style={{
-          maxHeight: "600px",
-          overflowY: "auto",
-        }}
+       
       >
         <Table stickyHeader>
           <TableHead>

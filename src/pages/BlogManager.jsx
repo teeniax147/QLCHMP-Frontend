@@ -240,7 +240,7 @@ const BlogManager = () => {
           sx={{
             width: 400,
             maxHeight: "70vh", // Giới hạn chiều cao modal
-            overflowY: "auto", // Thanh cuộn
+        
             bgcolor: "background.paper",
             p: 3,
             borderRadius: 2,

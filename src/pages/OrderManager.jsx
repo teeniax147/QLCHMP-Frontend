@@ -193,7 +193,7 @@ const OrderManager = () => {
         <>
           <TableContainer
             component={Paper}
-            style={{ maxHeight: "500px", overflow: "auto" }}
+           
           >
             <Table stickyHeader>
               <TableHead>

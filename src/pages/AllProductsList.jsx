@@ -23,7 +23,7 @@ const AllProductsList = () => {
   const [page, setPage] = useState(1); // Số trang hiện tại
   const [totalPages, setTotalPages] = useState(1); // Tổng số trang
 
-  const pageSize = 10; // Số sản phẩm mỗi trang
+  const pageSize = 12; // Số sản phẩm mỗi trang
 
 
 
@@ -130,7 +130,7 @@ const AllProductsList = () => {
 
     try {
       const response = await axios.post(
-        "${API_BASE_URL}/Favorites/add",
+        `${API_BASE_URL}/Favorites/add`,
         { ProductId: productId },
         {
           headers: {
@@ -145,7 +145,6 @@ const AllProductsList = () => {
       alert(error.response?.data || "Không thể thêm sản phẩm vào yêu thích.");
     }
   };
-
 
   if (loading) {
     return <p>Đang tải danh sách sản phẩm...</p>;
@@ -165,8 +164,12 @@ const AllProductsList = () => {
           alt="Banner"
         />
       </div>
-      <h1 className="product-title-all">Kết quả tìm kiếm</h1>
+    
+
       <h1 className="product-title-all">Tất cả sản phẩm</h1>
+      <div className="product-title-search">
+      {products.length} Kết quả
+      </div>
       <div className="product-page-container">
         <div className="filters-all">
           <div className="filter-section-all">
