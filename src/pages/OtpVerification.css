@@ -1,14 +1,17 @@
 /* Đảm bảo không có margin hoặc padding trên body và html chỉ trong trang OTP */
 .otp-wrapper {
     margin: 0;
-    padding: 0;
-    width: 100vw;
-    min-height: 100vh;
-    background-color: #d3f8d3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
+        padding: 0;
+        width: 100vw;
+        min-height: 100vh;
+        background-color: #d3f8d3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
 }
 
 .logo img {

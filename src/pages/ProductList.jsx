@@ -119,11 +119,15 @@ const ProductList = () => {
                 <p className="product-price-custom">
                   {product.Price ? `${product.Price.toLocaleString()}đ` : "Liên hệ"}
                 </p>
+                <div className="price-and-discount-container">
+                  {/* Hiển thị giá gốc và tag giảm giá cùng một dòng */}
                   {product.OriginalPrice && product.OriginalPrice > product.Price && (
-                    <span className="product-original-price3">
-                      {`  ${product.OriginalPrice.toLocaleString()}đ`}
-                    </span>
+                    <>
+                      <span className="product-original-price3">{product.OriginalPrice.toLocaleString()}đ</span>
+                      <div className="discount-tag">-{Math.round(((product.OriginalPrice - product.Price) / product.OriginalPrice) * 100)}%</div>
+                    </>
                   )}
+                </div>
                 
 
                 <div className="product-rating-stars">
@@ -139,10 +143,7 @@ const ProductList = () => {
                   <span>({product.ReviewCount || 0})</span>
                 </div>
 
-                {/* Số lượng tồn kho */}
-                <p className="product-stock-custom">
-                  {product.CurrentStock ? `${product.CurrentStock} sản phẩm có sẵn` : "Không xác định"}
-                </p>
+               
 
               </div>
             </div>

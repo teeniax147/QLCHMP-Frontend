@@ -1,10 +1,15 @@
 .preview-container {
-    max-width: 600px;
-    margin: 80px auto;
+    max-width: 800px;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
+    
   }
   
   .preview-title {

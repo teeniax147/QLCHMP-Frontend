@@ -67,12 +67,16 @@ const OrderList = () => {
   // **Gọi API để lấy danh sách đơn hàng**
   const fetchOrders = async () => {
     const userId = localStorage.getItem("id");
+
+    // console.log('----------chekc user ID:', userId);
+    
+
     setLoading(true);
     setError("");
 
     try {
       const response = await axios.get(
-        `${API_BASE_URL}/Orders/customer/${userId}/orders`,
+        `${API_BASE_URL}/Orders/customer/${customerId}/orders`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -93,7 +93,7 @@ const ProductDetail = () => {
         requestData,
         config
       );
-      
+
       fetchCartItemCount();
 
       alert(response.data);
@@ -136,12 +136,21 @@ const ProductDetail = () => {
       />
       <div className="product-details">
         <h1 className="custom-product-title">{product?.Name}</h1>
-
+        <div className="price-and-discount-container-custom">
         <p className="custom-product-price">
           {" "}
-          {product?.Price?.toLocaleString()} VND
+          {product?.Price?.toLocaleString()}đ
         </p>
-
+       
+          {/* Hiển thị giá gốc và tag giảm giá cùng một dòng */}
+          {product.OriginalPrice && product.OriginalPrice > product.Price && (
+            <>
+            
+              <span className="product-original-price2-custom">{product.OriginalPrice.toLocaleString()}đ</span>
+              <div className="discount-tag-custom">-{Math.round(((product.OriginalPrice - product.Price) / product.OriginalPrice) * 100)}%</div>
+            </>
+          )}
+        </div>
         <div className="product-actions">
           <div className="quantity-container">
             <button onClick={() => handleQuantityChange(-1)}>-</button>
@@ -165,7 +174,7 @@ const ProductDetail = () => {
                   filter: "invert(1)",
                 }}
               />
-              Thêm vào giỏ hàng
+              Thêm Vào Giỏ Hàng
             </button>
 
             <button

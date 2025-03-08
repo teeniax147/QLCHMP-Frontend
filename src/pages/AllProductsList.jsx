@@ -80,7 +80,6 @@ const AllProductsList = () => {
       [name]: type === "checkbox" ? checked : value,
     }));
   };
-
   const handlePageChange = (newPage) => {
     setPage(newPage);
   };
@@ -178,25 +177,24 @@ const AllProductsList = () => {
 
             <div className="price-filters2">
               <label>
-
                 <input
                   type="number"
                   name="minPrice"
                   value={filters.minPrice}
                   onChange={handleFilterChange}
+                  placeholder="10000"
                 />
               </label>
               <h4 className="product-text">-</h4>
               <label>
-
                 <input
                   type="number"
                   name="maxPrice"
                   value={filters.maxPrice}
                   onChange={handleFilterChange}
+                  placeholder="100000"
                 />
               </label>
-
 
             </div>
 
@@ -257,21 +255,25 @@ const AllProductsList = () => {
                 />
                 <div className="product-details-all">
 
-                  <p className="product-brand-custom">{product.BrandName || "Không có thương hiệu"}</p>
+                  <p className="product-brand-all">{product.BrandName || "Không có thương hiệu"}</p>
 
 
                   <h3 className="product-name-all">{product.Name}</h3>
 
 
-
-                  <p className="product-price-custom">
+                  
+                  <p className="product-price-all">
                     {product.Price ? `${product.Price.toLocaleString()}đ` : "Liên hệ"}
                   </p>
-                  {product.OriginalPrice && product.OriginalPrice > product.Price && (
-                    <span className="product-original-price2">{product.OriginalPrice.toLocaleString()}đ</span>
-                  )}
-
-
+                  <div className="price-and-discount-container">
+                    {/* Hiển thị giá gốc và tag giảm giá cùng một dòng */}
+                    {product.OriginalPrice && product.OriginalPrice > product.Price && (
+                      <>
+                        <span className="product-original-price2">{product.OriginalPrice.toLocaleString()}đ</span>
+                        <div className="discount-tag">-{Math.round(((product.OriginalPrice - product.Price) / product.OriginalPrice) * 100)}%</div>
+                      </>
+                    )}
+                  </div>
 
                   <div className="product-rating-stars">
                     {Array.from({ length: 5 }, (_, index) => (
@@ -286,10 +288,7 @@ const AllProductsList = () => {
                     <span>({product.ReviewCount || 0})</span>
                   </div>
 
-                  {/* Số lượng tồn kho */}
-                  <p className="product-stock-custom">
-                    {product.CurrentStock ? `${product.CurrentStock} sản phẩm có sẵn` : "Không xác định"}
-                  </p>
+                 
                 </div>
 
               </div>

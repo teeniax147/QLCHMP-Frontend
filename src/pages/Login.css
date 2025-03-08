@@ -1,16 +1,19 @@
 /* Đảm bảo không có margin hoặc padding trên body và html chỉ trong trang đăng nhập */
 .login-wrapper {
     margin: 0;
-    padding: 0;
-    width: 100vw;
-    min-height: 100%; /* Chiều cao tối thiểu bằng với chiều cao của cửa sổ */
-    background-color: #d3f8d3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    padding-top: 20px;
-    padding-bottom: 20px;
+        padding: 0;
+        width: 100vw;
+        min-height: 100vh;
+        background-color: #d3f8d3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+         
+          
 }
 
 .login-page {

@@ -112,12 +112,15 @@ const BrandProducts = () => {
                 <p className="brand-product-price">
                   {product.Price ? `${product.Price.toLocaleString()}đ` : "Liên hệ"}
                 </p>
-                {product.OriginalPrice && product.OriginalPrice > product.Price && (
-                  <span className="brand-product-original-price">
-                    {`${product.OriginalPrice.toLocaleString()}đ`}
-                  </span>
-                )}
-
+                <div className="price-and-discount-container-brand">
+                  {/* Hiển thị giá gốc và tag giảm giá cùng một dòng */}
+                  {product.OriginalPrice && product.OriginalPrice > product.Price && (
+                    <>
+                      <span className="brand-product-original-price ">{product.OriginalPrice.toLocaleString()}đ</span>
+                      <div className="discount-tag-brand">-{Math.round(((product.OriginalPrice - product.Price) / product.OriginalPrice) * 100)}%</div>
+                    </>
+                  )}
+                </div>
                 {/* Đánh giá sao */}
                 <div className="brand-product-rating-stars">
                   {Array.from({ length: 5 }, (_, index) => (

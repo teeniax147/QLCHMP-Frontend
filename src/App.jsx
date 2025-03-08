@@ -15,13 +15,12 @@ import AllProductsList from './pages/AllProductsList';
 import BrandProducts from './pages/BrandProducts';
 import CartPage from "./pages/CartPage";
 import UserProfile from './pages/UserProfile';
+import UserProfileAdmin from './pages/UserProfileAdmin';
 import FavoritesPage from "./pages/FavoritesPage";
 import CartPreviewPage from './pages/CartPreviewPage';
 import OrderSuccessPage from './pages/OrderSuccessPage';
 import AdminLayout from './AdminLayout';
 import HomeAdmin from './pages/HomeAdmin';
-import StaffLayout from './StaffLayout';
-import HomeStaff from './pages/HomeStaff';
 import ProductManager from './pages/ProductManager';
 import CategoryManagement from './pages/CategoryManagement';
 import OrderManager from './pages/OrderManager';
@@ -87,9 +86,9 @@ function App() {
                     path="/admin"
                     element={<AdminLayout />}
                 >
-                    <Route index element={<HomeAdmin />} />
+                    <Route index element={<UserProfileAdmin />} />
                     <Route path="users" element={<div>Quản lí người dùng</div>} />
-
+                    <Route path="user-profile-admin" element={<UserProfileAdmin />} />
                     <Route path="orders" element={<OrderManager />} />
                     <Route path="products" element={<ProductManager />} />
                     <Route path="categories" element={<CategoryManagement />} />

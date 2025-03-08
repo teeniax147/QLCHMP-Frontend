@@ -71,7 +71,7 @@ const AdminLayout = () => {
                 {isAccountOpen && (
                   <ul className="sub-menu">
           
-                    <li><Link to="/admin/create-user"><span>👥</span>Phân quyền</Link></li>
+                    <li><Link to="/admin/create-user"><span>👥 </span>Phân quyền</Link></li>
                   </ul>
                 )}
                 <li onClick={toggleManagement} style={{ cursor: 'pointer' }}>
@@ -128,6 +128,12 @@ const AdminLayout = () => {
                 <div className="user-dropdown-menu1">
                   <p>{greeting} {userName}!</p>
                   <ul>
+                    <li>
+                      <Link to="/admin/user-profile-admin">
+                                            <img src="https://img.icons8.com/?size=100&id=98957&format=png&color=000000" alt="Thông tin tài khoản Icon" style={{ width: '20px', marginRight: '8px', verticalAlign: 'middle' }} />
+                                            Thông tin tài khoản
+                                          </Link>
+                                        </li>
                     <li>
                       <button onClick={handleLogout} className="logout-button">Đăng xuất</button>
                     </li>

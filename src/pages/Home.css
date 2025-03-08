@@ -82,11 +82,14 @@
   background-color: rgba(255, 255, 255, 0.8); /* Giữ nguyên màu trắng khi bấm vào */
   color: black; /* Giữ màu mũi tên khi bấm vào */
   outline: none; /* Loại bỏ viền focus hoặc viền active */
+
 }
 
 .carousel-arrow:hover {
-  background-color: rgba(0, 0, 0, 0.5); /* Chỉ thay đổi màu khi hover */
-  color: white;
+  background-color: rgb(255, 255, 255); /* Chỉ thay đổi màu khi hover */
+  outline: none;
+    box-shadow: none;
+    border-color: #ffffff;
 }
 
 .left-arrow {
@@ -147,8 +150,9 @@
   overflow: hidden; /* Ngăn chặn bất kỳ nội dung nào tràn ra */
 }
 .banner-container {
-  width: 100%; /* Adjust the width as necessary */
+  width: auto; /* Adjust the width as necessary */
   text-align: center; /* Center the image if needed */
+
 }
 
 .banner-image {

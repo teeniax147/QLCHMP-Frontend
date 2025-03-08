@@ -1,12 +1,14 @@
 /* Container chính của trang sản phẩm */
 .product-container-custom {
-  font-family: Arial, sans-serif;
+  font-family: "Inter", sans-serif;
     color: #333;
   
-    max-width: 1200px;
-    padding: 10px;
-    margin-top: 170px;
-    margin-left: 20px;
+width: 100%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 170px;
+  max-width: 1200px;
 }
 
 .product-header-banner-custom img {
@@ -21,7 +23,7 @@
   text-align: left;
     font-size: 28px;
     color: #333;
-    margin-bottom: 20px;
+    margin-top: 5px;
     font-weight: bold;
     margin-left: 20px;
 }
@@ -40,7 +42,7 @@
   gap: 10px;
   justify-content: center;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 5px;
 }
 
 /* Thẻ sản phẩm */
@@ -48,10 +50,10 @@
   position: relative;
     /* Cần thiết để nút favorite-icon định vị đúng */
     background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 15px;
+  
+    border-radius: 10px;
     /* Tăng bo góc */
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  
     overflow: hidden;
     transition: transform 0.2s ease-in-out;
     text-align: center;
@@ -62,26 +64,26 @@
     justify-content: center;
     padding: 10px;
     /* Tăng khoảng cách bên trong */
-    width: 220px;
+    width: 200px;
     /* Tăng kích thước khung */
-    height: 400px;
+    height: 322px;
   }
 
 .product-card-custom:hover {
-  transform: scale(1.03); /* Tăng kích thước khi hover */
+  transform: scale(1.05);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
 .product-image-custom {
   width: auto;
-    height: 200px;
+    height: 180px;
     object-fit: contain;
     margin-bottom: 10px;
-    margin-top: 35px;
-}
+    margin-top: 5px;
+    text-align: center;
+  }
 
-.product-card-custom:hover .product-image-custom {
-  transform: scale(1.0); /* Tăng kích thước hình ảnh khi hover */
-}
+
 
 /* Thông tin sản phẩm */
 .product-details-custom {
@@ -89,37 +91,36 @@
 }
 
 .product-name-custom {
-  font-size: 16px;
-    font-weight: bold;
-    margin: 8px 0 5px;
-    color: #333;
+  font-size: 14px;
+    color: #000000;
     white-space: normal;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    margin-top: -25px;
+    margin-top: -29px;
 }
 
 /* Thương hiệu được đặt dưới hình ảnh */
 .product-brand-custom {
-  font-size: 16px;
-  color: #666;
-  margin-top: 8px;
+  font-weight: bold;
+    /* In đậm phần thương hiệu */
+    margin-top: -10px;
+    font-size: 17px;
+    color: #0b0702;
 }
 
 .product-price-custom {
-font-size: 17px;
-  color: #12853e;
-  font-weight: bold;
-  margin-top: 5px;
-  margin-bottom: 2px;
+  font-size: 15px;
+    color: #12853e;
+    font-weight: bold;
+    margin-top: -9px;
+    margin-bottom: 2px;
 }
 .product-original-price3 {
-  font-size: 18px;
-  color: #999;
-  text-decoration: line-through;
-  margin-bottom: -90px;
+  font-size: 15px;
+    color: #999;
+    text-decoration: line-through;
 }
 /* Sao đánh giá */
 .product-rating-stars {
@@ -159,27 +160,6 @@ font-size: 17px;
   font-weight: bold;
 }
 
-/* Các nút yêu thích */
-.favorite-button-custom,
-.favorited-custom {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-  color: #333;
-  margin-top: 10px;
-}
-
-.favorited-custom {
-  color: red;
-}
-
-.favorite-button-custom:hover,
-.favorited-custom:hover {
-  color: #ff6b6b;
-}
-
-
 
 .product-categories-custom {
   color: #007bff;
@@ -192,13 +172,11 @@ font-size: 17px;
 }
 .favorite-icon {
   position: absolute;
-  top: -2px;
-  right: 9px;
-  font-size: 28px;
-  cursor: pointer;
-  color: #aaa;
-  transition: color 0.3s ease;
-  z-index: 10; /* Đảm bảo hiển thị trên các thành phần khác */
+    top: 2px;
+    right: 12px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #aaa;
 }
 
 .favorite-icon:hover {

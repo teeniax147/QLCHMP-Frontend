@@ -140,10 +140,13 @@ const Layout = () => {
               </Link>
 
             </span>
-            <span className="icon">
-              <img src="/imgs/Icons/trungtamhotro.png" alt="Support Icon" />
-              Trung tâm hỗ trợ
-            </span>
+            <a href="https://info.glamour.io.vn/" target="_blank" rel="noopener noreferrer" className="link-blog">
+              <span className="icon">
+                <img src="/imgs/Icons/trungtamhotro.png" alt="Support Icon" />
+                Trung tâm hỗ trợ
+              </span>
+            </a>
+
             <span className="icon-more">•••</span>
             <span className="icon-divider"></span>
             <span className="icon">
@@ -153,10 +156,14 @@ const Layout = () => {
                   <span>Xin chào {userName} !</span>
                 </div>
               ) : (
-                <Link to="/login" className='link-blog'>
+                
+                    <Link to="/login" className='link-blog'>
                   <img src="/imgs/Icons/dangnhap.png" alt="Login Icon" />
-                  <span>Đăng nhập</span>
+                    
+                 Đăng nhập
+                    
                 </Link>
+                
               )}
               {userName && showDropdown && (
                 <div className="user-dropdown-menu">
@@ -220,8 +227,8 @@ const Layout = () => {
       <footer className="footer">
         <div className="newsletter-section">
           <div className="newsletter-content">
-            <h2>NHẬN BẢN TIN LÀM ĐẸP</h2>
-            <p>Đừng bỏ lỡ hàng ngàn sản phẩm và khuyến mãi siêu hấp dẫn</p>
+            <h2>Đăng ký nhận tin tức ưu đãi của chúng tôi</h2>
+            <p>Hàng ngàn ưu đãi hấp dẫn đang chờ bạn!</p>
           </div>
           <div className="newsletter-subscribe">
             <input type="email" placeholder="Điền email của bạn" />
@@ -273,7 +280,7 @@ const Layout = () => {
             <div className="footer-section">
               <h4>ĐỐI TÁC - LIÊN KẾT</h4>
               <ul>
-                <li><a href="#">Beauty Box</a></li>
+                <li><a href="#">Glamour cẩm nang</a></li>
               </ul>
             </div>
           </div>
@@ -281,16 +288,13 @@ const Layout = () => {
         <hr className="footer-divider" />  {/* Đường gạch ngang */}
         <div className="footer-bottom">
 
-          <p>® GlamourCosmic.com.vn thuộc quyền sở hữu của Công ty Cổ Phần Hoa Sen
-            Việt GPKD số 0303565753 cấp ngày 24/09/2004 tại Sở Kế hoạch & Đầu tư TP
-            HCM | VP Miền Nam Lầu 1, G Tower 3 - 196A, Nguyễn Văn Hưởng, Phường
-            Thảo Điền, Thành Phố Thủ Đức, TP.HCM--- Chi nhánh Công ty CP Hoa Sen
-            Việt tại Hà Nội GPKD chi nhánh số 0303565753-008 cấp ngày 12/10/2011 |
-            Tòa nhà Lidaco, 19 Đại Từ, Phường Đại Kim, Quận Hoàng Mai, TP. Hà Nội.
+          <p>® glamour.io.vn thuộc quyền sở hữu của Công ty TNHH Mỹ Phẩm Glamour Cosmic, được cấp Giấy phép kinh doanh số 0316789123 vào ngày 02/03/2025 bởi Sở Kế hoạch & Đầu tư TP. Hồ Chí Minh.
           </p>
           <div className="certification-icons">
-            <img src="/imgs/Icons/verified.png.png" alt="Bảo Hành" />
-            <img src="/imgs/Icons/verified-dmca.png.png" alt="DMCA" />
+          
+            <div class="payment">
+              
+            </div>
           </div>
         </div>
 

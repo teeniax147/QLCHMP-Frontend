@@ -3,7 +3,7 @@ body {
 }
 
 .product-detail-container {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 70px auto 30px;
   padding: 20px;
   border-radius: 8px;
@@ -34,12 +34,70 @@ body {
   text-align: justify;
 }
 
+/* Container chứa giá gốc và tag giảm giá */
+.price-and-discount-container-custom {
+  display: flex;
+  align-items: baseline;
+  /* Căn chỉnh theo đường cơ bản, giúp phần tử cùng chiều cao */
+  gap: 10px;
+  /* Khoảng cách giữa giá gốc và tag giảm giá */
+  flex-wrap: nowrap;
+  /* Đảm bảo không xuống dòng */
+}
+
+/* Giá sản phẩm */
 .custom-product-price {
   font-size: 24px;
   color: #12853e;
   font-weight: bold;
+  margin: 0;
+  /* Loại bỏ margin để các phần tử căn chỉnh đều */
 }
 
+/* Giá gốc */
+.product-original-price2-custom {
+  font-size: 20px;
+  color: #999;
+  text-decoration: line-through;
+  margin: 0;
+  /* Loại bỏ margin để các phần tử căn chỉnh đều */
+}
+
+/* Tag giảm giá */
+.discount-tag-custom {
+  background-color: #94c83d;
+  /* Màu nền xanh */
+  height: 20px;
+  width: 33px;
+  position: relative;
+  margin-left: 16px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Căn giữa nội dung trong tag */
+  font-weight: bold;
+  font-size: 12px;
+  color: white;
+ 
+  /* Thêm padding để tạo khoảng cách */
+  
+}
+
+/* Mũi nhọn cho tag giảm giá */
+.discount-tag-custom::before {
+  left: -19px;
+  border-style: solid;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  content: "";
+  height: 0px;
+  width: 0px;
+  position: absolute;
+  border-width: 10px;
+  border-right-color: #94c83d;
+}
 .introduce {
   font-size: 24px;
   font-weight: bold;
@@ -59,7 +117,9 @@ body {
 .product-actions {
   display: flex;
   align-items: center;
-  gap: 20px; /* Khoảng cách giữa các thành phần trong product-actions */
+  gap: 20px;
+  /* Khoảng cách giữa các thành phần trong product-actions */
+  margin-top: 20px;
 }
 
 .quantity-container {
@@ -72,8 +132,7 @@ body {
 .quantity-container .quantity-display {
   width: 35px;
   height: 35px;
-  border: 1px solid #ddd;
-  background-color: #f8f8f8;
+  background-color: #f1f1f1;
   font-size: 18px;
   display: flex;
   align-items: center;
@@ -81,12 +140,30 @@ body {
   cursor: pointer;
   padding: 0;
   box-sizing: border-box;
+  outline: none;
+  box-shadow: none;
+  border-radius: 0;
+
+}
+
+/* Đảm bảo không có viền xanh khi hover */
+.quantity-container button:hover,
+.quantity-container .quantity-display:hover {
+  outline: none;
+  box-shadow: none;
+  border-color: #f8f8f8;
+}
+
+/* Chỉ hiển thị viền khi phần tử được focus (nhấn vào) */
+.quantity-container button:focus,
+.quantity-container .quantity-display:focus {
+  box-shadow: none;
+  /* Không có bóng đổ */
 }
 
 .quantity-container .quantity-display {
   cursor: default;
 }
-
 .custom-add-to-cart-button,
 .custom-buy-now-button {
   padding: 8px 16px;

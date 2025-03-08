@@ -37,10 +37,10 @@ const Home = () => {
   const nextIndex = currentIndex === banners.length - 1 ? 0 : currentIndex + 1;
 
   const brands = [
-    { name: 'Yehwadam', image: '/imgs/brand1.png', url: '/yehwadam' },
-    { name: 'Freshian', image: '/imgs/brand2.png', url: '/freshian' },
-    { name: 'FMGT', image: '/imgs/brand3.png', url: '/fmgt' },
-    { name: 'Belif', image: '/imgs/brand4.png', url: '/belif' },
+    { name: 'Yehwadam', image: '/imgs/brand1.png', url: 'http://localhost:5173/brand/2' },
+    { name: 'Freshian', image: '/imgs/brand2.png', url: 'http://localhost:5173/brand/1' },
+    { name: 'FMGT', image: '/imgs/brand3.png', url: 'http://localhost:5173/brand/4' },
+    { name: 'Belif', image: '/imgs/brand4.png', url: 'http://localhost:5173/brand/5' },
   ];
 
   // Danh sách sản phẩm mẫu cho "Sản Phẩm Nổi Bật"
