@@ -3,15 +3,17 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ProductDetail.css";
 import { API_BASE_URL } from "../config";
-import useGetCart from "../hooks/useGetCart";
+import { useDispatch } from "react-redux";
+import { getItemCount } from "../services/cart.service";
+
 const ProductDetail = () => {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const { fetchCartItemCount } = useGetCart();
 
   useEffect(() => {
     console.log('loading get count cart');
@@ -94,13 +96,15 @@ const ProductDetail = () => {
         config
       );
 
-      fetchCartItemCount();
+   
 
       alert(response.data);
       // Điều hướng đến giỏ hàng nếu người dùng chọn "Mua Ngay"
       if (redirectToCart) {
         navigate("/CartPage");
       }
+
+      getItemCount(dispatch);
     } catch (err) {
       console.error("Chi tiết lỗi:", err);
       if (err.response) {

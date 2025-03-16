@@ -214,7 +214,7 @@ const CategoryManagement = () => {
 
     return validCategories.map((category, index) => (
       <tr key={index}>
-        <td>{category.Id}</td>
+        <td>{index + 1}</td>
         <td>{category.Name}</td>
         <td>{category.Description}</td>
         <td>{category.ParentName}</td>

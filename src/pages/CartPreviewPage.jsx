@@ -230,7 +230,7 @@ const CartPreviewPage = () => {
           <option value="">Chọn phương thức vận chuyển</option>
           {Array.isArray(shippingCompanies) && shippingCompanies.map((company) => (
             <option key={company.Id} value={company.Id}>
-              {company.Name} - {company.ShippingCost.toLocaleString()} VND
+              {company.Name} - {company.ShippingCost.toLocaleString()}đ
             </option>
           ))}
         </select>

@@ -33,6 +33,10 @@ import RevenueReport from './pages/RevenueReport';
 import BlogManager from './pages/BlogManager';
 import CreateUser from "./pages/CreateUser";
 import CustomerList from "./pages/CustomerList";
+import { Provider } from "react-redux"
+import { store } from "./redux/store";
+import OrderDetails from "./pages/OrderDetails";
+import MembershipLevelManager from './pages/MembershipLevelManager';
 function App() {
 
 
@@ -59,51 +63,54 @@ function App() {
     //     }
     // };
     return (
-        <Router>
-            <Routes>
-                {/* Điều hướng mặc định dựa trên quyền */}
-                {/* <Route path="/" element={defaultRoute()} /> */}
-                {/* Layout chính */}
-                <Route path="/" element={<Layout />}>
-                    <Route index element={<Home />} />
-                    <Route path="user-profile" element={<UserProfile />} />
-                    <Route path="coupons" element={<CouponList />} />
-                    <Route path="/product-detail/:id" element={<ProductDetail />} />
-                    <Route path="/beauty-blog" element={<BeautyBlog />} />
-                    <Route path="products/:categoryId" element={<ProductList />} />
-                    <Route path="all-products" element={<AllProductsList />} />
-                    <Route path="/brand/:brandId" element={<BrandProducts />} />
-                    <Route path="/CartPage" element={<CartPage />} />
-                    <Route path="/favorites" element={<FavoritesPage />} />
-                    <Route path="/cart-preview" element={<CartPreviewPage />} />
-                    <Route path="/order-success" element={<OrderSuccessPage />} />
-                    <Route path="/orders/customer/:customerId" element={<OrderList />} />
+        <Provider store={store}>
+            <Router>
+                <Routes>
+                    {/* Điều hướng mặc định dựa trên quyền */}
+                    {/* <Route path="/" element={defaultRoute()} /> */}
+                    {/* Layout chính */}
+                    <Route path="/" element={<Layout />}>
+                        <Route index element={<Home />} />
+                        <Route path="user-profile" element={<UserProfile />} />
+                        <Route path="coupons" element={<CouponList />} />
+                        <Route path="/product-detail/:id" element={<ProductDetail />} />
+                        <Route path="/beauty-blog" element={<BeautyBlog />} />
+                        <Route path="products/:categoryId" element={<ProductList />} />
+                        <Route path="all-products" element={<AllProductsList />} />
+                        <Route path="/brand/:brandId" element={<BrandProducts />} />
+                        <Route path="/CartPage" element={<CartPage />} />
+                        <Route path="/favorites" element={<FavoritesPage />} />
+                        <Route path="/cart-preview" element={<CartPreviewPage />} />
+                        <Route path="/order-success" element={<OrderSuccessPage />} />
+                        <Route path="/orders/customer/:customerId" element={<OrderList />} />
+                        <Route path="/order-details/:orderId" element={<OrderDetails />} />
 
-                </Route>
+                    </Route>
 
-                {/* Route cho admin */}
-                <Route
-                    path="/admin"
-                    element={<AdminLayout />}
-                >
-                    <Route index element={<UserProfileAdmin />} />
-                    <Route path="users" element={<div>Quản lí người dùng</div>} />
-                    <Route path="user-profile-admin" element={<UserProfileAdmin />} />
-                    <Route path="orders" element={<OrderManager />} />
-                    <Route path="products" element={<ProductManager />} />
-                    <Route path="categories" element={<CategoryManagement />} />
-                    <Route path="add-category" element={<AddCategory />} />
-                    <Route path="brands" element={<BrandManagement />} />
-                    <Route path="coupons" element={<CouponsManagement />} />
-                    <Route path="inventory" element={<InventoryManagement />} />
-                    <Route path="revenue-report" element={<RevenueReport />} />
-                    <Route path="blogs" element={<BlogManager />} />
-                    <Route path="create-user" element={<CreateUser />} />
-                    <Route path="customers" element={<CustomerList />} />
-                </Route>
+                    {/* Route cho admin */}
+                    <Route
+                        path="/admin"
+                        element={<AdminLayout />}
+                    >
+                        <Route index element={<UserProfileAdmin />} />
+                        <Route path="users" element={<div>Quản lí người dùng</div>} />
+                        <Route path="user-profile-admin" element={<UserProfileAdmin />} />
+                        <Route path="orders" element={<OrderManager />} />
+                        <Route path="products" element={<ProductManager />} />
+                        <Route path="categories" element={<CategoryManagement />} />
+                        <Route path="add-category" element={<AddCategory />} />
+                        <Route path="brands" element={<BrandManagement />} />
+                        <Route path="coupons" element={<CouponsManagement />} />
+                        <Route path="inventory" element={<InventoryManagement />} />
+                        <Route path="revenue-report" element={<RevenueReport />} />
+                        <Route path="blogs" element={<BlogManager />} />
+                        <Route path="create-user" element={<CreateUser />} />
+                        <Route path="customers" element={<CustomerList />} />
+                        <Route path="membershiplevel" element={<MembershipLevelManager />} />
+                    </Route>
 
-                {/* Route cho staff */}
-                {/* <Route
+                    {/* Route cho staff */}
+                    {/* <Route
                     path="/staff"
                     element={
                         isLoggedIn && isStaff ? (
@@ -119,17 +126,18 @@ function App() {
 
                 </Route> */}
 
-                {/* Điều hướng mặc định cho customer */}
+                    {/* Điều hướng mặc định cho customer */}
 
 
-                {/* Các route khác */}
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/otp" element={<OtpVerification />} />
-                <Route path="/forgot-password" element={<ForgotPassword />} />
-                <Route path="/reset-password" element={<ResetPassword />} />
-            </Routes>
-        </Router>
+                    {/* Các route khác */}
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/otp" element={<OtpVerification />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
+                    <Route path="/reset-password" element={<ResetPassword />} />
+                </Routes>
+            </Router>
+        </Provider>
     );
 }
 

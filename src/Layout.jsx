@@ -6,16 +6,18 @@ import BrandDropdown from "./pages/BrandDropdown";
 import axios from 'axios'; // Thêm axios để gọi API
 import { useNavigate } from "react-router-dom";  // Thêm useNavigate
 import { API_BASE_URL } from './config';
-import useGetCart from './hooks/useGetCart';
+import { useDispatch, useSelector } from 'react-redux';
+import { getItemCount } from './services/cart.service';
 
 const Layout = () => {
+  const dispatch = useDispatch();
+  const { countItem } = useSelector((state) => state.cartReducer);
+
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
   const [greeting, setGreeting] = useState('');
   const [searchKeyword, setSearchKeyword] = useState("");
-  const { cartItemCount, fetchCartItemCount } = useGetCart()
-  const [loadingCount, setLoadingCount] = useState(false)
 
   useEffect(() => {
     const storedName = localStorage.getItem('userName');
@@ -32,16 +34,7 @@ const Layout = () => {
       setGreeting('Good evening 🌙');
     }
 
-    // Hàm lấy số lượng sản phẩm trong giỏ hàng
-
-    // Gọi hàm lấy số lượng lần đầu
-    fetchCartItemCount();
-
-    // Thiết lập setInterval để tự động gọi API sau mỗi 5 giây
-    // const intervalId = setInterval(fetchCartItemCount, 50000);
-
-    // Xóa interval khi component unmount
-    // return () => clearInterval(intervalId);
+    getItemCount(dispatch);
   }, []);
 
   const handleDropdownToggle = () => {
@@ -94,12 +87,6 @@ const Layout = () => {
     }
   };
 
-  useEffect(() => {
-
-    console.log(cartItemCount);   
-
-    setLoadingCount(true)
-  }, [cartItemCount])
 
 
 
@@ -156,14 +143,14 @@ const Layout = () => {
                   <span>Xin chào {userName} !</span>
                 </div>
               ) : (
-                
-                    <Link to="/login" className='link-blog'>
+
+                <Link to="/login" className='link-blog'>
                   <img src="/imgs/Icons/dangnhap.png" alt="Login Icon" />
-                    
-                 Đăng nhập
-                    
+
+                  Đăng nhập
+
                 </Link>
-                
+
               )}
               {userName && showDropdown && (
                 <div className="user-dropdown-menu">
@@ -196,7 +183,7 @@ const Layout = () => {
             <span className="iconcart">
               <Link to="/CartPage">
                 <img src="/imgs/cart1.png" alt="Cart Icon" />
-                <span className="cart-count">{loadingCount && cartItemCount}</span>
+                <span className="cart-count">{countItem}</span>
               </Link>
             </span>
 
@@ -291,9 +278,9 @@ const Layout = () => {
           <p>® glamour.io.vn thuộc quyền sở hữu của Công ty TNHH Mỹ Phẩm Glamour Cosmic, được cấp Giấy phép kinh doanh số 0316789123 vào ngày 02/03/2025 bởi Sở Kế hoạch & Đầu tư TP. Hồ Chí Minh.
           </p>
           <div className="certification-icons">
-          
+
             <div class="payment">
-              
+
             </div>
           </div>
         </div>

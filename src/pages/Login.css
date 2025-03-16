@@ -24,7 +24,15 @@
     height: 100%;
     width: 100%;
 }
-
+.error-text {
+    color: red;
+    font-size: 8px;
+  
+    /* Thiết lập chiều cao cố định để tránh thay đổi giao diện */
+  margin-bottom: 8px;
+    /* Đảm bảo phần tử này có khoảng cách với các thành phần khác */
+    display: block;
+}
 .login-form {
     background-color: #fff;
     padding: 50px;
@@ -105,7 +113,7 @@ h2 {
 /* Căn phải cho liên kết Quên mật khẩu */
 .forgot-password {
     text-align: right;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .forgot-password a {

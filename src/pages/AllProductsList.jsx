@@ -8,7 +8,7 @@ const AllProductsList = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const searchProducts = location.state?.products || []; // Lấy dữ liệu từ tìm kiếm
-
+  const [avgPrice, setAvgPrice] = useState(null);
   const [products, setProducts] = useState(searchProducts);
   const [loading, setLoading] = useState(!searchProducts.length);
   const [error, setError] = useState(null);
@@ -19,12 +19,21 @@ const AllProductsList = () => {
     brandId: '',
     isOnSale: false,
   });
+  const [selectedPriceRange, setSelectedPriceRange] = useState(""); // Thêm dòng này để theo dõi phạm vi giá
+
   const [sortOrder, setSortOrder] = useState(""); // Thứ tự sắp xếp: 'asc' hoặc 'desc'
   const [page, setPage] = useState(1); // Số trang hiện tại
   const [totalPages, setTotalPages] = useState(1); // Tổng số trang
 
   const pageSize = 12; // Số sản phẩm mỗi trang
-
+  const priceRanges = [
+    { label: "Dưới 200.000đ", min: 0, max: 200000 },
+    { label: "200.000đ - 500.000đ", min: 200000, max: 500000 },
+    { label: "500.000đ - 1.000.000đ", min: 500000, max: 1000000 },
+    { label: "1.000.000đ - 1.500.000đ", min: 1000000, max: 1500000 },
+    { label: "1.500.000đ - 2.000.000đ", min: 1500000, max: 2000000 },
+   
+  ];
 
 
   useEffect(() => {
@@ -37,29 +46,26 @@ const AllProductsList = () => {
   }, [searchProducts]);
 
 
-  // ✅ Fetch danh sách sản phẩm mặc định
   useEffect(() => {
     const fetchAllProducts = async () => {
       setLoading(true);
       setError(null);
 
       try {
-        const response = await axios.get(`${API_BASE_URL}/Products/danh-sach`, {
+        const response = await axios.get(`${API_BASE_URL}/Products/loc`, {
           params: {
             pageNumber: page,
             pageSize: pageSize,
             minPrice: filters.minPrice || undefined,
             maxPrice: filters.maxPrice || undefined,
             brandId: filters.brandId || undefined,
-            isOnSale: filters.isOnSale, // Gửi chính xác isOnSale
-            sortByPrice: sortOrder || undefined, // Sắp xếp
+            isOnSale: filters.isOnSale,
+            sortByPrice: sortOrder || undefined,
           },
         });
 
-        console.log("Dữ liệu từ API:", response.data);
-
         const data = response.data;
-        const productsList = data.DanhSachSanPham?.$values || []; // Trích xuất từ $values
+        const productsList = data.DanhSachSanPham?.$values || [];
         setProducts(productsList);
         setTotalPages(Math.ceil(data.TongSoSanPham / pageSize));
       } catch (error) {
@@ -70,53 +76,89 @@ const AllProductsList = () => {
     };
 
     fetchAllProducts();
-  }, [page]); // Chạy khi `page`, `filters`, `sortOrder` thay đổi
+  }, [sortOrder, page ]); // Chạy lại khi filters, page hoặc sortOrder thay đổi
+
 
 
   const handleFilterChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [name]: type === "checkbox" ? checked : value,
-    }));
+
+    if (name === "priceRange") {
+      // Xử lý phạm vi giá
+      const selectedRange = priceRanges.find(range => range.label === value);
+
+      if (selectedRange) {
+        setSelectedPriceRange(value); // Lưu phạm vi giá đã chọn
+
+        if (checked) {
+          // Khi checkbox được tích, thiết lập giá trị minPrice và maxPrice
+          setFilters((prevFilters) => ({
+            ...prevFilters,
+            minPrice: selectedRange.min,
+            maxPrice: selectedRange.max,
+          }));
+        } else {
+          // Khi bỏ tích, reset minPrice và maxPrice
+          setFilters((prevFilters) => ({
+            ...prevFilters,
+            minPrice: '', // Xóa giá trị minPrice
+            maxPrice: '', // Xóa giá trị maxPrice
+          }));
+          setSelectedPriceRange(""); // Reset selectedPriceRange khi bỏ tích
+        }
+      }
+    } else if (type === "checkbox") {
+      // Xử lý các checkbox khác (ví dụ: isOnSale, productTypes)
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        [name]: checked ? value : '', // Thiết lập giá trị cho checkbox (trong đó value là giá trị của checkbox)
+      }));
+    } else {
+      // Xử lý các trường khác (input type text, select)
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        [name]: value, // Cập nhật giá trị cho các bộ lọc khác
+      }));
+    }
   };
+
   const handlePageChange = (newPage) => {
+    console.log("Đang thay đổi trang:", newPage); // Kiểm tra xem giá trị trang có thay đổi hay không
     setPage(newPage);
   };
 
-  const applyFilters = () => {
-    setLoading(true);
+const applyFilters = () => {
+  setLoading(true);
 
-    // Chỉ gửi các tham số hợp lệ, bỏ qua giá trị null hoặc undefined
-    const validParams = {
-      pageNumber: page,
-      pageSize: pageSize,
-      ...(filters.minPrice && { minPrice: filters.minPrice }),
-      ...(filters.maxPrice && { maxPrice: filters.maxPrice }),
-      ...(filters.brandId && { brandId: filters.brandId }),
-      ...(filters.isOnSale !== null && { isOnSale: filters.isOnSale }),
-      ...(sortOrder && { sortByPrice: sortOrder }),
-    };
-
-    axios
-      .get(`${API_BASE_URL}/Products/loc`, { params: validParams })
-      .then((response) => {
-        const data = response.data.DanhSachSanPham?.$values || [];
-
-        // Loại bỏ sản phẩm trùng lặp
-        const uniqueProducts = Array.from(new Map(data.map(item => [item.Id, item])).values());
-
-        setProducts(uniqueProducts); // Cập nhật danh sách sản phẩm
-        setTotalPages(Math.ceil(response.data.TongSoSanPham / pageSize)); // Cập nhật số trang
-      })
-      .catch((error) => {
-        console.error("Lỗi khi gọi API:", error);
-        setError("Lỗi từ server: " + error.message);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+  // Chỉ gửi các tham số hợp lệ, bỏ qua giá trị null hoặc undefined
+  const validParams = {
+    pageNumber: page,
+    pageSize: pageSize,
+    ...(filters.minPrice && { minPrice: filters.minPrice }),
+    ...(filters.maxPrice && { maxPrice: filters.maxPrice }),
+    ...(filters.brandId && { brandId: filters.brandId }),
+    ...(filters.isOnSale !== null && { isOnSale: filters.isOnSale }),
+    ...(sortOrder && { sortByPrice: sortOrder }),
   };
+
+  axios
+    .get(`${API_BASE_URL}/Products/loc`, { params: validParams })
+    .then((response) => {
+      const data = response.data.DanhSachSanPham?.$values || [];
+      // Loại bỏ sản phẩm trùng lặp
+      const uniqueProducts = Array.from(new Map(data.map(item => [item.Id, item])).values());
+
+      setProducts(uniqueProducts); // Cập nhật danh sách sản phẩm
+      setTotalPages(Math.ceil(response.data.TongSoSanPham / pageSize)); // Cập nhật số trang
+    })
+    .catch((error) => {
+      console.error("Lỗi khi gọi API:", error);
+      setError("Lỗi từ server: " + error.message);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+};
 
   const handleAddToFavorites = async (productId) => {
     const token = localStorage.getItem("token"); // Lấy token từ localStorage
@@ -173,7 +215,7 @@ const AllProductsList = () => {
         <div className="filters-all">
           <div className="filter-section-all">
 
-            <h4 className="product-text-all">Khoảng giá:</h4>
+            <h4 className="product-text-all">Giá sản phẩm:</h4>
 
             <div className="price-filters2">
               <label>
@@ -197,21 +239,33 @@ const AllProductsList = () => {
               </label>
 
             </div>
-
-            <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "10px" }}>
-              <label>
-                Đang khuyến mãi:
-              </label>
-              <input
-                style={{ width: "auto" }}
-                type="checkbox"
-                name="isOnSale"
-                checked={filters.isOnSale}
-                onChange={handleFilterChange}
-              />
-            </div>
+        
+     
+          <div className="price-range-checkbox-section">
+         
+            {priceRanges.map((range) => (
+              <div key={range.label} className="price-range-checkbox">
+                <label>
+                  <input
+                    type="checkbox"
+                    name="priceRange"
+                    value={range.label}
+                    onChange={handleFilterChange}
+                    checked={selectedPriceRange === range.label}
+                  />
+                  {range.label}
+                </label>
+              </div>
+            ))}
           </div>
+           
 
+          </div>
+          <div className="apply-button-container">
+            <button className="page-button-all1" onClick={applyFilters}>
+              Áp dụng
+            </button>
+          </div>
           <div className="sort-section-all">
             <label htmlFor="sortFilter" className="filter-label-all">
               Sắp xếp theo:
@@ -224,10 +278,15 @@ const AllProductsList = () => {
               <option value="">Tất cả</option>
               <option value="asc">Giá thấp nhất</option>
               <option value="desc">Giá cao nhất</option>
+              <option value="avgasc">Giá trung bình</option>
+          
             </select>
-            <button onClick={applyFilters}>Áp dụng</button>
+         
           </div>
+
+         
         </div>
+       
 
         <div className="product-grid-all">
           {products.length > 0 ? (
@@ -304,14 +363,14 @@ const AllProductsList = () => {
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index}
-            className={`page-button-all1 ${page === index + 1 ? "active-all" : ""
-              }`}
+            className={`page-button-all1 ${page === index + 1 ? "active-all" : ""}`}
             onClick={() => handlePageChange(index + 1)}
           >
             {index + 1}
           </button>
         ))}
       </div>
+
 
     </div>
 

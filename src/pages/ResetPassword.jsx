@@ -19,18 +19,7 @@ const ResetPassword = () => {
     return null;
   }
 
-  // Kiểm tra trạng thái OTP
-  useEffect(() => {
-    const checkOtpVerified = async () => {
-      try {
-        await axios.get(`${API_BASE_URL}/Users/check-otp-verified?email=${email}`);
-      } catch (error) {
-        console.error("OTP chưa được xác nhận:", error.response ? error.response.data : error.message);
-        setError("Bạn chưa xác nhận OTP hoặc OTP không hợp lệ.");
-      }
-    };
-    checkOtpVerified();
-  }, [email]);
+ 
 
   const validateForm = () => {
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,32}$/;

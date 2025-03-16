@@ -82,6 +82,7 @@
    justify-content: center;
    width: 100%;
    margin-top: 20px;
+    align-items: flex-start;
  }
 
  /* Thẻ sản phẩm theo thương hiệu */

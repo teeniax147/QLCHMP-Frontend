@@ -97,10 +97,11 @@ max-width: 1200px;
 
 .filter-section-all {
   padding: 10px;
-  margin-bottom: 10px;
+  margin-top: -10px;
   border-radius: 5px;
   background-color: #ffffff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 .filter-label-all {
@@ -149,6 +150,7 @@ max-width: 1200px;
   border-radius: 5px;
   background-color: #ffffff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
 }
 
 .sort-section-all select {
@@ -209,19 +211,20 @@ max-width: 1200px;
 
 .page-button-all1 {
   padding: 8px 12px;
-  margin: 0 5px;
+  margin: -10px 5px;
   border: none;
-  background-color: #ddd;
+  background-color: #35ae57;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+  color: #ffffff;
 }
 .page-button-all1.active-all {
   background-color: #54d179;
   color: white;
 }
 .page-button-all1:hover {
-  background-color: #aaa;
+  background-color: #40c165;
 }
 .page-button-all1:focus {
   outline: none;
@@ -354,4 +357,91 @@ max-width: 1200px;
   font-size: 15px;
   margin-top: -10px;
   margin-left: 375px;
+}
+
+
+
+/* Các checkbox trong price-range */
+.price-range-checkbox-section {
+  display: flex;
+  flex-direction: column;
+  /* Các checkbox sẽ xếp theo chiều dọc */
+  gap: 8px;
+  /* Khoảng cách giữa các checkbox */
+  margin-top: -5px;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  /* Đảm bảo chiều rộng cho checkbox */
+  height: 20px;
+  /* Đảm bảo chiều cao cho checkbox */
+  margin-right: 10px;
+  /* Khoảng cách giữa checkbox và chữ */
+  cursor: pointer;
+  /* Thêm con trỏ tay khi hover */
+  appearance: none;
+  /* Loại bỏ kiểu mặc định của checkbox */
+  border: 1px solid #ccc;
+  /* Đặt màu viền cho checkbox */
+  border-radius: 4px;
+  /* Làm tròn các góc viền */
+
+  /* Màu nền của checkbox */
+  transition: background-color 0.3s, border-color 0.3s;
+  position: relative;
+  /* Để dễ dàng thêm dấu tích */
+  vertical-align: middle;
+  /* Đảm bảo checkbox được căn giữa với chữ */
+}
+/* Khi checkbox được chọn */
+input[type="checkbox"]:checked {
+  background-color: #4caf50;
+  /* Màu nền khi được chọn */
+  border-color: #4caf50;
+  /* Màu viền khi được chọn */
+}
+
+/* Dấu tích trong checkbox khi được chọn */
+input[type="checkbox"]:checked::after {
+  content: '✔';
+  /* Thêm dấu tick khi checkbox được chọn */
+  color: white;
+  /* Màu của dấu tick */
+  font-size: 16px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Cải thiện hiệu ứng hover cho checkbox */
+input[type="checkbox"]:hover {
+  border-color: #4caf50;
+  /* Thay đổi màu viền khi hover */
+}
+
+/* Định dạng cho nhãn checkbox */
+label {
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+  display: inline-block;
+  line-height: 20px;
+  /* Đảm bảo chữ căn giữa với checkbox */
+  vertical-align: middle;
+  /* Căn chỉnh chữ và checkbox ngang nhau */
+}
+
+/* Thêm khoảng cách giữa các checkbox */
+.price-range-checkbox {
+margin-bottom: -5px;
+  display: flex;
+  align-items: center;
+  /* Căn giữa checkbox và nhãn */
+}
+
+/* Các phần tử con của các checkbox */
+.product-range-label {
+  margin-left: 8px;
+  /* Thêm khoảng cách giữa checkbox và nhãn */
 }

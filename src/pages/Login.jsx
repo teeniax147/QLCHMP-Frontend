@@ -6,65 +6,66 @@ import { API_BASE_URL } from '../config';
 const Login = () => {
   const [emailOrUsername, setEmailOrUsername] = useState('');
   const [password, setPassword] = useState('');
-  // const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  const [error, setError] = useState(null); 
   const loginAPI = async (user, pass) => {
     try {
       const res = await axios.post(`${API_BASE_URL}/Users/login`, {
         EmailOrUsername: user,
         Password: pass,
       });
-      return res
+      return res;
     } catch (error) {
       console.log(error);
-
+      // Nếu có lỗi xảy ra trong quá trình gọi API, hiển thị thông báo lỗi
+      setError('Tên đăng nhập hoặc mật khẩu không đúng.');
+      setLoading(false);  // Tắt loading khi gặp lỗi
+      return null;
     }
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
+    const res = await loginAPI(emailOrUsername, password);
 
-    const res = await loginAPI(emailOrUsername, password)
+    if (res.status === 200) {
+      const { $values } = res.data.roles;
+      const token = res.data.token?.Result; // Lấy chuỗi token từ response
 
-    console.log("CHECK Res LOGIN", res);
+      if (!token) {
+        setError('Không nhận được token hợp lệ từ server.');
+        setLoading(false);
+        return;
+      }
 
+      // Điều hướng người dùng dựa trên vai trò
+      switch ($values[0]) {
+        case "Admin":
+          navigate("/admin");
+          break;
+        case "Staff":
+          navigate("/staff");
+          break;
+        case "Customer":
+          navigate("/");
+          break;
+        default:
+          break;
+      }
 
-    switch (res.status) {
-      case 200:
-        const { $values } = res.data.roles;
-        const token = res.data.token?.Result; // Lấy chuỗi token từ thuộc tính Resul
-
-        if (!token) {
-          throw new Error('Không nhận được token hợp lệ từ server.');
-        }
-
-        switch ($values[0]) {
-          case "Admin":
-            navigate("/admin")
-            break;
-          case "Staff":
-            navigate("/staff")
-            break;
-          case "Customer":
-            navigate("/")
-            break;
-          default:
-            break;
-        }
-
-        localStorage.setItem('token', token);
-        localStorage.setItem('id', res.data.$id);
-        localStorage.setItem('userName', res.data.userName);
-        localStorage.setItem('roles', JSON.stringify($values[0]));
-        break;
-      default:
-        break;
+      // Lưu thông tin người dùng và token vào localStorage
+      localStorage.setItem('token', token);
+      localStorage.setItem('id', res.data.userId);
+      localStorage.setItem('userName', res.data.userName);
+      localStorage.setItem('roles', JSON.stringify($values[0]));
+    } else {
+      setError('Tên đăng nhập hoặc mật khẩu không đúng.');
+      setLoading(false);  // Đảm bảo không để trạng thái loading khi có lỗi
     }
   };
-
   useEffect(() => {
     localStorage.removeItem('roles')
     localStorage.removeItem('token')
@@ -104,7 +105,9 @@ const Login = () => {
               <div className="forgot-password">
                 <Link to="/forgot-password">Quên mật khẩu?</Link>
               </div>
-              {/* {error && <p className="error-text">{error}</p>} */}
+              {/* Hiển thị lỗi nếu có */}
+              {error && <p className="error-text">{error}</p>}
+
               <button type="submit" className="login-button" disabled={loading}>
                 {loading ? 'Đang đăng nhập...' : 'Đăng Nhập'}
               </button>
