@@ -217,7 +217,6 @@ const CategoryManagement = () => {
         <td>{index + 1}</td>
         <td>{category.Name}</td>
         <td>{category.Description}</td>
-        <td>{category.ParentName}</td>
         <td>{category.SubCategories}</td>
         <td>
           <button onClick={() => handleEdit(category)}>Sửa</button>
@@ -254,7 +253,6 @@ const CategoryManagement = () => {
             <StyledTableCell>STT</StyledTableCell>
             <StyledTableCell>Tên danh mục</StyledTableCell>
             <StyledTableCell>Mô tả</StyledTableCell>
-            <StyledTableCell>Danh mục cha</StyledTableCell>
             <StyledTableCell>Danh mục con</StyledTableCell>
             <StyledTableCell>Hành động</StyledTableCell>
           </TableRow>

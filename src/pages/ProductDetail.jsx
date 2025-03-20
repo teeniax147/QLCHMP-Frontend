@@ -17,7 +17,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     console.log('loading get count cart');
-    
+
     const fetchProductDetail = async () => {
       setLoading(true);
       try {
@@ -96,7 +96,7 @@ const ProductDetail = () => {
         config
       );
 
-   
+
 
       alert(response.data);
       // Điều hướng đến giỏ hàng nếu người dùng chọn "Mua Ngay"
@@ -110,8 +110,7 @@ const ProductDetail = () => {
       if (err.response) {
         console.error("Lỗi API:", err.response);
         alert(
-          `Lỗi từ server: ${
-            err.response.data?.message || "Không thể xử lý yêu cầu"
+          `Lỗi từ server: ${err.response.data?.message || "Không thể xử lý yêu cầu"
           }`
         );
       } else if (err.request) {
@@ -141,15 +140,15 @@ const ProductDetail = () => {
       <div className="product-details">
         <h1 className="custom-product-title">{product?.Name}</h1>
         <div className="price-and-discount-container-custom">
-        <p className="custom-product-price">
-          {" "}
-          {product?.Price?.toLocaleString()}đ
-        </p>
-       
+          <p className="custom-product-price">
+            {" "}
+            {product?.Price?.toLocaleString()}đ
+          </p>
+
           {/* Hiển thị giá gốc và tag giảm giá cùng một dòng */}
           {product.OriginalPrice && product.OriginalPrice > product.Price && (
             <>
-            
+
               <span className="product-original-price2-custom">{product.OriginalPrice.toLocaleString()}đ</span>
               <div className="discount-tag-custom">-{Math.round(((product.OriginalPrice - product.Price) / product.OriginalPrice) * 100)}%</div>
             </>

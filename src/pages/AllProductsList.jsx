@@ -13,7 +13,6 @@ const AllProductsList = () => {
   const [loading, setLoading] = useState(!searchProducts.length);
   const [error, setError] = useState(null);
   const [filters, setFilters] = useState({
-
     minPrice: '',
     maxPrice: '',
     brandId: '',
@@ -24,15 +23,15 @@ const AllProductsList = () => {
   const [sortOrder, setSortOrder] = useState(""); // Thứ tự sắp xếp: 'asc' hoặc 'desc'
   const [page, setPage] = useState(1); // Số trang hiện tại
   const [totalPages, setTotalPages] = useState(1); // Tổng số trang
+  const [noProductsFound, setNoProductsFound] = useState(false); // State để theo dõi trường hợp không có sản phẩm
 
   const pageSize = 12; // Số sản phẩm mỗi trang
   const priceRanges = [
     { label: "Dưới 200.000đ", min: 0, max: 200000 },
-    { label: "200.000đ - 500.000đ", min: 200000, max: 500000 },
+    { label: "200.000đ - 300.000đ", min: 200000, max: 300000 },
+    { label: "300.000đ - 500.000đ", min: 300000, max: 500000 },
     { label: "500.000đ - 1.000.000đ", min: 500000, max: 1000000 },
-    { label: "1.000.000đ - 1.500.000đ", min: 1000000, max: 1500000 },
-    { label: "1.500.000đ - 2.000.000đ", min: 1500000, max: 2000000 },
-   
+    { label: "Trên 1.000.000đ", min: 1000000, max: null },
   ];
 
 
@@ -41,6 +40,7 @@ const AllProductsList = () => {
 
     if (searchProducts.length > 0) {
       setProducts([...searchProducts]); // Ép React cập nhật UI
+      setNoProductsFound(false); // Đã có sản phẩm
       setLoading(false);
     }
   }, [searchProducts]);
@@ -66,7 +66,17 @@ const AllProductsList = () => {
 
         const data = response.data;
         const productsList = data.DanhSachSanPham?.$values || [];
-        setProducts(productsList);
+
+        // Clean and handle the product image URL similar to beauty blog images
+        const cleanedProducts = productsList.map((product) => ({
+          ...product,
+          ImageUrl: product.ImageUrl
+            ? `https://localhost:5001/${product.ImageUrl}`
+            : "default-image.jpg", // Provide default image if not available
+        }));
+
+        setProducts(cleanedProducts);
+        setNoProductsFound(cleanedProducts.length === 0); // Kiểm tra có sản phẩm hay không
         setTotalPages(Math.ceil(data.TongSoSanPham / pageSize));
       } catch (error) {
         setError("Lỗi từ server: " + error.message);
@@ -76,7 +86,7 @@ const AllProductsList = () => {
     };
 
     fetchAllProducts();
-  }, [sortOrder, page ]); // Chạy lại khi filters, page hoặc sortOrder thay đổi
+  }, [sortOrder, page]); // Chạy lại khi filters, page hoặc sortOrder thay đổi
 
 
 
@@ -127,38 +137,39 @@ const AllProductsList = () => {
     setPage(newPage);
   };
 
-const applyFilters = () => {
-  setLoading(true);
+  const applyFilters = () => {
+    setLoading(true);
 
-  // Chỉ gửi các tham số hợp lệ, bỏ qua giá trị null hoặc undefined
-  const validParams = {
-    pageNumber: page,
-    pageSize: pageSize,
-    ...(filters.minPrice && { minPrice: filters.minPrice }),
-    ...(filters.maxPrice && { maxPrice: filters.maxPrice }),
-    ...(filters.brandId && { brandId: filters.brandId }),
-    ...(filters.isOnSale !== null && { isOnSale: filters.isOnSale }),
-    ...(sortOrder && { sortByPrice: sortOrder }),
+    // Chỉ gửi các tham số hợp lệ, bỏ qua giá trị null hoặc undefined
+    const validParams = {
+      pageNumber: page,
+      pageSize: pageSize,
+      ...(filters.minPrice && { minPrice: filters.minPrice }),
+      ...(filters.maxPrice && { maxPrice: filters.maxPrice }),
+      ...(filters.brandId && { brandId: filters.brandId }),
+      ...(filters.isOnSale !== null && { isOnSale: filters.isOnSale }),
+      ...(sortOrder && { sortByPrice: sortOrder }),
+    };
+
+    axios
+      .get(`${API_BASE_URL}/Products/loc`, { params: validParams })
+      .then((response) => {
+        const data = response.data.DanhSachSanPham?.$values || [];
+        // Loại bỏ sản phẩm trùng lặp
+        const uniqueProducts = Array.from(new Map(data.map(item => [item.Id, item])).values());
+
+        setProducts(uniqueProducts); // Cập nhật danh sách sản phẩm
+        setNoProductsFound(uniqueProducts.length === 0); // Cập nhật trạng thái không có sản phẩm
+        setTotalPages(Math.ceil(response.data.TongSoSanPham / pageSize)); // Cập nhật số trang
+      })
+      .catch((error) => {
+        console.error("Lỗi khi gọi API:", error);
+        setError("Lỗi từ server: " + error.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
-
-  axios
-    .get(`${API_BASE_URL}/Products/loc`, { params: validParams })
-    .then((response) => {
-      const data = response.data.DanhSachSanPham?.$values || [];
-      // Loại bỏ sản phẩm trùng lặp
-      const uniqueProducts = Array.from(new Map(data.map(item => [item.Id, item])).values());
-
-      setProducts(uniqueProducts); // Cập nhật danh sách sản phẩm
-      setTotalPages(Math.ceil(response.data.TongSoSanPham / pageSize)); // Cập nhật số trang
-    })
-    .catch((error) => {
-      console.error("Lỗi khi gọi API:", error);
-      setError("Lỗi từ server: " + error.message);
-    })
-    .finally(() => {
-      setLoading(false);
-    });
-};
 
   const handleAddToFavorites = async (productId) => {
     const token = localStorage.getItem("token"); // Lấy token từ localStorage
@@ -195,7 +206,6 @@ const applyFilters = () => {
     return <p>{error}</p>;
   }
 
-
   return (
     <div className="product-container-all">
 
@@ -205,11 +215,10 @@ const applyFilters = () => {
           alt="Banner"
         />
       </div>
-    
 
       <h1 className="product-title-all">Tất cả sản phẩm</h1>
       <div className="product-title-search">
-      {products.length} Kết quả
+        {products.length} Kết quả
       </div>
       <div className="product-page-container">
         <div className="filters-all">
@@ -237,29 +246,24 @@ const applyFilters = () => {
                   placeholder="100000"
                 />
               </label>
-
             </div>
-        
-     
-          <div className="price-range-checkbox-section">
-         
-            {priceRanges.map((range) => (
-              <div key={range.label} className="price-range-checkbox">
-                <label>
-                  <input
-                    type="checkbox"
-                    name="priceRange"
-                    value={range.label}
-                    onChange={handleFilterChange}
-                    checked={selectedPriceRange === range.label}
-                  />
-                  {range.label}
-                </label>
-              </div>
-            ))}
-          </div>
-           
 
+            <div className="price-range-checkbox-section">
+              {priceRanges.map((range) => (
+                <div key={range.label} className="price-range-checkbox">
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="priceRange"
+                      value={range.label}
+                      onChange={handleFilterChange}
+                      checked={selectedPriceRange === range.label}
+                    />
+                    {range.label}
+                  </label>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="apply-button-container">
             <button className="page-button-all1" onClick={applyFilters}>
@@ -279,18 +283,18 @@ const applyFilters = () => {
               <option value="asc">Giá thấp nhất</option>
               <option value="desc">Giá cao nhất</option>
               <option value="avgasc">Giá trung bình</option>
-          
             </select>
-         
           </div>
-
-         
         </div>
-       
 
-        <div className="product-grid-all">
-          {products.length > 0 ? (
-            products.map((product, index) => (
+        {/* Kiểm tra nếu không có sản phẩm sau khi lọc */}
+        {noProductsFound ? (
+          <div className="no-products-message">
+            <p>Không có sản phẩm nào phù hợp với điều kiện lọc của bạn.</p>
+          </div>
+        ) : (
+          <div className="product-grid-all">
+            {products.map((product, index) => (
               <div
                 className="product-card-all"
                 key={`${product.Id}-${index}`}
@@ -308,19 +312,13 @@ const applyFilters = () => {
                 </div>
 
                 <img
-                  src={product.ImageUrl || "https://via.placeholder.com/150"}
-                  alt={product.Name}
+                  src={product.ImageUrl}
+                  alt={`${product.Name} `}
                   className="product-image-all"
                 />
                 <div className="product-details-all">
-
                   <p className="product-brand-all">{product.BrandName || "Không có thương hiệu"}</p>
-
-
                   <h3 className="product-name-all">{product.Name}</h3>
-
-
-                  
                   <p className="product-price-all">
                     {product.Price ? `${product.Price.toLocaleString()}đ` : "Liên hệ"}
                   </p>
@@ -346,17 +344,11 @@ const applyFilters = () => {
                     ))}
                     <span>({product.ReviewCount || 0})</span>
                   </div>
-
-                 
                 </div>
-
               </div>
-
-            ))
-          ) : (
-            <p>Không có sản phẩm nào trong danh mục này.</p>
-          )}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="pagination-all">

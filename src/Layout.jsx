@@ -210,7 +210,9 @@ const Layout = () => {
       <main>
         <Outlet />
       </main>
-
+      <a href="https://www.facebook.com/profile.php?id=61574651060902" className="fixed-icon messenger" target="_blank" rel="noopener noreferrer" aria-label="Messenger Chat">
+        <img src="https://res.cloudinary.com/dpqdfe1al/image/upload/v1706522050/messenger_zyke2c.png" alt="Messenger Icon" />
+      </a>
       <footer className="footer">
         <div className="newsletter-section">
           <div className="newsletter-content">

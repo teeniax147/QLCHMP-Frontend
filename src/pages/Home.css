@@ -556,17 +556,7 @@
   color: #28a745;
   font-weight: bold;
 }
-.fixed-icon {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  z-index: 1000;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease-in-out;
-}
+
 
 .fixed-icon.messenger {
   background-color: #0084FF;

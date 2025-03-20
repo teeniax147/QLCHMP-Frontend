@@ -2,7 +2,7 @@
 .home {
   width: 100%;
   font-family: Arial, sans-serif;
-  background-color: #fff;
+  background-color: #ffffff;
   position: relative;
   /* top: -150px; */
   left: 0;
@@ -235,6 +235,7 @@ font-family: 'Inter', sans-serif;
 /* padding-top: 150px;  */
 overflow-x: hidden;
 min-height: 0 !important;
+background-color: #ffffff;
 }
 .container {
   max-width: 100%;
@@ -508,4 +509,16 @@ margin: 0 10px;
 }
 .link-blog:hover{
   color: #333;
+}
+
+.fixed-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out;
 }

@@ -27,9 +27,17 @@ const ProductList = () => {
 
         const data = response.data;
         const productsList = data.DanhSachSanPham?.$values || []; // Lấy danh sách sản phẩm
-        setProducts(productsList);
 
-        console.log("Sản phẩm nhận được:", productsList); // Kiểm tra dữ liệu trong console
+        // Clean product image URLs
+        const cleanedProducts = productsList.map((product) => ({
+          ...product,
+          ImageUrl: product.ImageUrl
+            ? `https://api.glamour.io.vn/${product.ImageUrl}` // Append base URL to image path
+            : "default-image.jpg", // Fallback image if no image URL
+        }));
+
+        setProducts(cleanedProducts); // Cập nhật danh sách sản phẩm
+        console.log("Sản phẩm nhận được:", cleanedProducts); // Kiểm tra dữ liệu trong console
       } catch (error) {
         console.error("Lỗi khi lấy danh sách sản phẩm:", error);
         setError("Không thể tải sản phẩm. Vui lòng thử lại sau.");
@@ -128,7 +136,7 @@ const ProductList = () => {
                     </>
                   )}
                 </div>
-                
+
 
                 <div className="product-rating-stars">
                   {Array.from({ length: 5 }, (_, index) => (
@@ -143,7 +151,7 @@ const ProductList = () => {
                   <span>({product.ReviewCount || 0})</span>
                 </div>
 
-               
+
 
               </div>
             </div>

@@ -343,12 +343,7 @@ const Home = () => {
           ></iframe>
         </div>
       </div>
-      <a href="https://m.me/yourpage" className="fixed-icon messenger" target="_blank" aria-label="Messenger Chat">
-        <img src="https://res.cloudinary.com/dpqdfe1al/image/upload/v1706522050/messenger_zyke2c.png" alt="Messenger Icon" />
-      </a>
-      <a href="https://zalo.me/yourpage" className="fixed-icon zalo" target="_blank" aria-label="Zalo Chat">
-        <img src="https://page.widget.zalo.me/static/images/2.0/Logo.svg" alt="Zalo Icon" />
-      </a>
+     
     </div>
   );
 };
