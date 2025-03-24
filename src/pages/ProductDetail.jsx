@@ -28,7 +28,7 @@ const ProductDetail = () => {
         const cleanedProduct = {
           ...response.data,
           ImageUrl: response.data.ImageUrl
-            ? `https:/localhost:5001/${response.data.ImageUrl}` // Add base URL for image path
+            ? `https://api.glamour.io.vn/${response.data.ImageUrl}` // Add base URL for image path
             : "default-image.jpg", // Fallback image if no image URL
         };
 
@@ -44,7 +44,7 @@ const ProductDetail = () => {
     fetchProductDetail();
   }, [id]);
 
- 
+
 
   const handleAddToCart = async (redirectToCart = false) => {
     if (addingToCart) return; // Ngăn chặn gửi nhiều yêu cầu liên tiếp
@@ -166,6 +166,18 @@ const ProductDetail = () => {
       />
       <div className="product-details">
         <h1 className="custom-product-title">{product.Name}</h1>
+        <div className="product-rating-stars">
+          {Array.from({ length: 5 }, (_, index) => (
+            <span
+              key={index}
+              className={`product-star ${product.ReviewCount > 0 && index < Math.round(product.AverageRating || 0) ? "filled" : ""
+                }`}
+            >
+              ★
+            </span>
+          ))}
+          <span>({product.ReviewCount || 0})</span>
+        </div>
         <div className="price-and-discount-container-custom">
           <p className="custom-product-price">
             {product.Price?.toLocaleString()}đ

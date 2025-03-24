@@ -30,7 +30,7 @@ const FavoritesPage = () => {
       const cleanedFavorites = response.data.$values.map((favorite) => ({
         ...favorite,
         ImageUrl: favorite.ImageUrl
-          ? `https:/localhost:5001/${favorite.ImageUrl}` // Add base URL for product images
+          ? `https:/api.glamour.io.vn/${favorite.ImageUrl}` // Add base URL for product images
           : "default-image.jpg", // Fallback image if no image available
       }));
 

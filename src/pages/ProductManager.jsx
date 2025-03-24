@@ -350,7 +350,7 @@ const ProductManager = () => {
       const cleanedProducts = productsData.map((product) => ({
         ...product,
         ImageUrl: product.ImageUrl
-          ? `https:/localhost:5001/${product.ImageUrl}`
+          ? `https://api.glamour.io.vn/${product.ImageUrl}`
           : "default-image.jpg",
       }));
 

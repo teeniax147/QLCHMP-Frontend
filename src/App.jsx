@@ -25,7 +25,7 @@ import ProductManager from './pages/ProductManager';
 import CategoryManagement from './pages/CategoryManagement';
 import OrderManager from './pages/OrderManager';
 import OrderList from "./pages/OrderList";
-import AddCategory from './pages/AddCategory';
+
 import BrandManagement from './pages/BrandManagement';
 import CouponsManagement from "./pages/CouponsManagement";
 import InventoryManagement from "./pages/InventoryManagement";
@@ -38,6 +38,7 @@ import { store } from "./redux/store";
 import OrderDetails from "./pages/OrderDetails";
 import MembershipLevelManager from './pages/MembershipLevelManager';
 import VnpayCallback from './pages/VnpayCallback';
+
 function App() {
 
 
@@ -99,7 +100,7 @@ function App() {
                         <Route path="orders" element={<OrderManager />} />
                         <Route path="products" element={<ProductManager />} />
                         <Route path="categories" element={<CategoryManagement />} />
-                        <Route path="add-category" element={<AddCategory />} />
+                     
                         <Route path="brands" element={<BrandManagement />} />
                         <Route path="coupons" element={<CouponsManagement />} />
                         <Route path="inventory" element={<InventoryManagement />} />
@@ -108,6 +109,7 @@ function App() {
                         <Route path="create-user" element={<CreateUser />} />
                         <Route path="customers" element={<CustomerList />} />
                         <Route path="membershiplevel" element={<MembershipLevelManager />} />
+                     
                     </Route>
 
                     {/* Route cho staff */}

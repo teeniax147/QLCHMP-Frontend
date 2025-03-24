@@ -75,7 +75,7 @@ const BodyTableCell = styled(TableCell)(({ theme }) => ({
 const ActionButtonsCell = styled(TableCell)(({ theme }) => ({
   textAlign: "center",
   padding: theme.spacing(1),
-}));
+}));  
 
 const StyledButton = styled(Button)(({ theme, customvariant }) => ({
   borderRadius: 8,

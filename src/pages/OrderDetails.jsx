@@ -53,7 +53,7 @@ const OrderDetails = () => {
             const cleanedOrderDetails = response.data.$values.map(item => ({
                 ...item,
                 ProductImage: item.ProductImage
-                    ? `https:/localhost:5001/${item.ProductImage}` // Append base URL for product image
+                    ? `https://api.glamour.io.vn/${item.ProductImage}` // Append base URL for product image
                     : "default-image.jpg", // Fallback image if no image URL
             }));
 
