@@ -191,7 +191,32 @@
   font-size: 13px;
 
 }
+.user-icon {
+  margin-right: 5px;
+  /* Creates harmonious spacing between icon and text */
+  color: #ffffff;
+  /* A subtle botanical green tone for the icon */
+}
 
+.user-name {
+  font-family: 'Montserrat', sans-serif;
+  /* Modern, clean font with botanical elegance */
+  font-weight: 500;
+  font-size: 14px;
+  /* Medium weight for better readability */
+  letter-spacing: 0.3px;
+  /* Slight letter spacing for refined appearance */
+  color: #ffffff;
+  /* Rich forest green for text color */
+}
+
+/* Optional hover effect for an interactive touch */
+.user-menu-trigger1:hover .user-icon,
+.user-menu-trigger1:hover .user-name {
+  color: #ffffff;
+  /* Deeper green on hover for visual feedback */
+  transition: color 0.2s ease-in-out;
+}
 .user-dropdown-menu1 {
   position: absolute;
   top: 100%;

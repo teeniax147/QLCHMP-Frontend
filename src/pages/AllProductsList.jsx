@@ -71,7 +71,7 @@ const AllProductsList = () => {
         const cleanedProducts = productsList.map((product) => ({
           ...product,
           ImageUrl: product.ImageUrl
-            ? `https://localhost:5001/${product.ImageUrl}`
+            ? `https:/localhost:5001/${product.ImageUrl}`
             : "default-image.jpg", // Provide default image if not available
         }));
 

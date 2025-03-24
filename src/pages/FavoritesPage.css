@@ -11,7 +11,17 @@
         margin-top: 170px;
         max-width: 1200px;
   }
-  
+.empty-favorites-container {
+        font-family: "Inter", sans-serif;
+          color: #333;
+          max-width: 1200px;
+          width: 100%;
+          height: auto;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 170px;
+          max-width: 1200px;
+    }
   
   
   .favorites-title {

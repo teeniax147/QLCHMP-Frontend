@@ -37,6 +37,7 @@ import { Provider } from "react-redux"
 import { store } from "./redux/store";
 import OrderDetails from "./pages/OrderDetails";
 import MembershipLevelManager from './pages/MembershipLevelManager';
+import VnpayCallback from './pages/VnpayCallback';
 function App() {
 
 
@@ -84,7 +85,7 @@ function App() {
                         <Route path="/order-success" element={<OrderSuccessPage />} />
                         <Route path="/orders/customer/:customerId" element={<OrderList />} />
                         <Route path="/order-details/:orderId" element={<OrderDetails />} />
-
+                        <Route path="/vnpay-callback" element={<VnpayCallback />} />
                     </Route>
 
                     {/* Route cho admin */}

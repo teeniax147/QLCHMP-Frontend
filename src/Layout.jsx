@@ -281,7 +281,7 @@ const Layout = () => {
           </p>
           <div className="certification-icons">
 
-            <div class="payment">
+            <div className="payment">
 
             </div>
           </div>

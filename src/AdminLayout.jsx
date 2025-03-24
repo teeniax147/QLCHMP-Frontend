@@ -157,8 +157,8 @@ const AdminLayout = () => {
             <span className="icon2">
               {userName && (
                 <div onClick={handleDropdownToggle} className="user-menu-trigger1">
-                  <FontAwesomeIcon icon={faUser} />
-                  <span>{userName} </span>
+                  <FontAwesomeIcon icon={faUser} className="user-icon" />
+                  <span className="user-name">{userName}</span>
                 </div>
               )}
               {userName && showDropdown && (
