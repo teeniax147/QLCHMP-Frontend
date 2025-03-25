@@ -88,11 +88,11 @@ const RevenueReport = () => {
     setLoadingDetails(true);
     try {
       console.log(`Đang gọi API lấy chi tiết đơn hàng #${orderId}`);
-      
+
       // API_BASE_URL đã bao gồm "/api" nên không cần thêm vào nữa
       const apiUrl = `${API_BASE_URL}/Orders/orders/${orderId}/details`;
       console.log(`URL API: ${apiUrl}`);
-      
+
       const response = await axios.get(
         apiUrl,
         {
@@ -101,15 +101,28 @@ const RevenueReport = () => {
           },
         }
       );
-      
+
       console.log("Chi tiết đơn hàng nhận được:", response.data);
-      
+
       // Kiểm tra cấu trúc dữ liệu trả về
       if (Array.isArray(response.data)) {
-        setOrderDetails(response.data);
+        // Xử lý đường dẫn hình ảnh cho mảng dữ liệu
+        const cleanedOrderDetails = response.data.map(item => ({
+          ...item,
+          ProductImage: item.ProductImage
+            ? `https://api.glamour.io.vn/${item.ProductImage}` // Thêm base URL cho hình ảnh sản phẩm
+            : "default-image.jpg", // Hình ảnh mặc định nếu không có URL
+        }));
+        setOrderDetails(cleanedOrderDetails);
       } else if (response.data.$values && Array.isArray(response.data.$values)) {
         // Xử lý trường hợp kết quả nằm trong thuộc tính $values (định dạng ASP.NET)
-        setOrderDetails(response.data.$values);
+        const cleanedOrderDetails = response.data.$values.map(item => ({
+          ...item,
+          ProductImage: item.ProductImage
+            ? `https://api.glamour.io.vn/${item.ProductImage}` // Thêm base URL cho hình ảnh sản phẩm
+            : "default-image.jpg", // Hình ảnh mặc định nếu không có URL
+        }));
+        setOrderDetails(cleanedOrderDetails);
       } else {
         console.error("Định dạng dữ liệu không như mong đợi:", response.data);
         setOrderDetails([]);
@@ -119,14 +132,14 @@ const RevenueReport = () => {
       console.error("Lỗi khi lấy chi tiết đơn hàng:", err);
       console.error("OrderId được truyền vào:", orderId);
       setOrderDetails([]);
-      
+
       // Hiển thị thông báo lỗi chi tiết
       let errorMessage = `Có lỗi xảy ra khi lấy chi tiết đơn hàng #${orderId}.`;
-      
+
       if (err.response) {
         // Lỗi từ server
         console.error("Lỗi server:", err.response.status, err.response.data);
-        
+
         // Nếu lỗi 404, hiển thị thông báo gợi ý kiểm tra endpoint
         if (err.response.status === 404) {
           errorMessage = `Không tìm thấy API endpoint. Vui lòng kiểm tra lại đường dẫn API hoặc liên hệ với người phát triển backend.`;
@@ -142,13 +155,12 @@ const RevenueReport = () => {
         console.error("Lỗi:", err.message);
         errorMessage = err.message || errorMessage;
       }
-      
+
       alert(errorMessage);
     } finally {
       setLoadingDetails(false);
     }
   };
-
   // Mở modal chi tiết đơn hàng
   const handleOpenOrderDetails = (orderId) => {
     setSelectedOrderId(orderId);
@@ -588,20 +600,72 @@ const RevenueReport = () => {
       </Typography>
 
       <Box display="flex" justifyContent="space-between" marginBottom="15px">
-        <TextField
-          type="date"
-          label="Ngày bắt đầu"
-          value={startDate.toISOString().split("T")[0]}
-          onChange={(e) => setStartDate(new Date(e.target.value))}
-          InputLabelProps={{ shrink: true }}
-        />
-        <TextField
-          type="date"
-          label="Ngày kết thúc"
-          value={endDate.toISOString().split("T")[0]}
-          onChange={(e) => setEndDate(new Date(e.target.value))}
-          InputLabelProps={{ shrink: true }}
-        />
+        <div style={{ position: 'relative' }}>
+          <TextField
+            type="date"
+            label="Ngày bắt đầu"
+            value={startDate.toISOString().split("T")[0]}
+            onChange={(e) => setStartDate(new Date(e.target.value))}
+            InputLabelProps={{ shrink: true }}
+            sx={{
+              '& input::-webkit-calendar-picker-indicator': {
+                display: 'none'
+              }
+            }}
+            id="start-date-input"
+          />
+          <span
+            style={{
+              position: 'absolute',
+              right: '-30px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              pointerEvents: 'auto',
+              cursor: 'pointer',
+              zIndex: 1,
+              fontSize: '18px'
+            }}
+            onClick={() => {
+              document.getElementById('start-date-input').showPicker();
+            }}
+          >
+            📅
+          </span>
+        </div>
+
+        <div style={{ position: 'relative', marginRight: '30px' }}>
+          <TextField
+            type="date"
+            label="Ngày kết thúc"
+            value={endDate.toISOString().split("T")[0]}
+            onChange={(e) => setEndDate(new Date(e.target.value))}
+            InputLabelProps={{ shrink: true }}
+            sx={{
+              '& input::-webkit-calendar-picker-indicator': {
+                display: 'none'
+              }
+            }}
+            id="end-date-input"
+          />
+          <span
+            style={{
+              position: 'absolute',
+              right: '-30px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              pointerEvents: 'auto',
+              cursor: 'pointer',
+              zIndex: 1,
+              fontSize: '18px'
+            }}
+            onClick={() => {
+              document.getElementById('end-date-input').showPicker();
+            }}
+          >
+            📅
+          </span>
+        </div>
+
         <Button
           variant="contained"
           className="custom-button1 custom-button-contained1"
@@ -627,7 +691,6 @@ const RevenueReport = () => {
           Xuất PDF
         </Button>
       </Box>
-
       {error && <Typography color="error" style={{ marginBottom: "10px" }}>{error}</Typography>}
 
       {loading ? (

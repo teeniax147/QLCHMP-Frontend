@@ -75,8 +75,8 @@ const CartPage = () => {
           const cartItemsWithTotalPrice = items.map(item => ({
             ...item,
             // Clean and handle the product image URL
-          
-           ImageUrl: item.ImageUrl
+
+            ImageUrl: item.ImageUrl
               ? `https://api.glamour.io.vn/${item.ImageUrl}` // Append base URL for image path
               : "default-image.jpg", // Fallback image if no image URL
             TotalPrice: item.Quantity * item.UnitPrice // Tính toán giá sản phẩm ban đầu
@@ -220,9 +220,9 @@ const CartPage = () => {
   };
 
   const handleCheckout = () => {
-      
-      navigate('/cart-preview');
-    
+
+    navigate('/cart-preview');
+
   };
 
   if (loading) return <p style={{ marginTop: "100px", textAlign: "center" }}>Đang tải giỏ hàng...</p>;
@@ -238,7 +238,7 @@ const CartPage = () => {
           Tiếp tục mua sắm
         </button>
       </div>
-     
+
     </div>
 
   );
@@ -265,7 +265,7 @@ const CartPage = () => {
                   alt={item.ProductName}
                   className="cart-item-image"
                 />
-                 
+
               </td>
               <td className="product-name2">{item.ProductName}</td>
               <td className="quantity">

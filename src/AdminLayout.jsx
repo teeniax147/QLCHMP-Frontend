@@ -21,7 +21,7 @@ const AdminLayout = () => {
     const role = JSON.parse(localStorage.getItem('roles'));;
     console.log(role);
     if (role === "Admin") {
-      console.log("ADMINNN");
+      console.log("Da Dang Nhap Admin");
       setIsAdminLogin(true)
     } else {
       console.log("FALSE");
@@ -92,10 +92,13 @@ const AdminLayout = () => {
   return (
     <>
       {
+
         isAdminLogin ? <div className="admin-layout-container">
+          <title>ADMIN GLAMOUR COSMIC</title>
           <aside className="admin-sidebar">
             <div className="logoheader3">
               <img src="/imgs/Icons/logo6.png" alt="Glamour Cosmic Logo" />
+              <div className="admin-nofiti-test">Admin </div>
             </div>
             <nav>
               <ul>
@@ -104,7 +107,7 @@ const AdminLayout = () => {
                 </li>
                 {isAccountOpen && (
                   <ul className="sub-menu">
-          
+
                     <li><Link to="/admin/create-user"><span>👥 </span>Phân quyền</Link></li>
                   </ul>
                 )}
@@ -115,10 +118,10 @@ const AdminLayout = () => {
                   <ul className="sub-menu">
                     <li><Link to="/admin/blogs"><span>✏️</span> Bài viết blog</Link></li>
                     <li><Link to="/admin/brands"><span>🏷️</span> Thương hiệu</Link></li>
-                   
+
                     <li><Link to="/admin/revenue-report"><span>📑</span> Thống kê - Báo cáo</Link></li>
-                   
-                   <li><Link to="/admin/orders"><span>🛒</span> Đơn hàng</Link></li>
+
+                    <li><Link to="/admin/orders"><span>🛒</span> Đơn hàng</Link></li>
                     <li><Link to="/admin/customers"><span><FontAwesomeIcon icon={faUser} /></span> Tài khoản khách hàng</Link></li>
                     <li><Link to="/admin/categories"><span>📂</span> Danh mục</Link></li>
                     <li><Link to="/admin/products"><span>📦</span> Sản phẩm</Link></li>
@@ -126,13 +129,13 @@ const AdminLayout = () => {
                     <li><Link to="/admin/inventory"><span>📦</span> Kho hàng</Link></li>
                     <li><Link to="/admin/membershiplevel"><span>🌟</span> Thứ hạng thành viên</Link></li>
 
-                
-                    
-                   
-                   
-           
-                  
-                    
+
+
+
+
+
+
+
                   </ul>
                 )}
               </ul>
@@ -167,10 +170,10 @@ const AdminLayout = () => {
                   <ul>
                     <li>
                       <Link to="/admin/user-profile-admin">
-                                            <img src="https://img.icons8.com/?size=100&id=98957&format=png&color=000000" alt="Thông tin tài khoản Icon" style={{ width: '20px', marginRight: '8px', verticalAlign: 'middle' }} />
-                                            Thông tin tài khoản
-                                          </Link>
-                                        </li>
+                        <img src="https://img.icons8.com/?size=100&id=98957&format=png&color=000000" alt="Thông tin tài khoản Icon" style={{ width: '20px', marginRight: '8px', verticalAlign: 'middle' }} />
+                        Thông tin tài khoản
+                      </Link>
+                    </li>
                     <li>
                       <button onClick={handleLogout} className="logout-button">Đăng xuất</button>
                     </li>

@@ -260,7 +260,32 @@ const OrderDetails = () => {
         // Always open in add mode, we don't track previous review state
         openReviewModal(product, false);
     };
+    const handleAddToFavorites = async (productId) => {
+        const token = localStorage.getItem("token"); // Lấy token từ localStorage
+        console.log("Token từ localStorage:", token);
 
+        if (!token) {
+            alert("Bạn cần đăng nhập để thêm sản phẩm vào danh sách yêu thích.");
+            return;
+        }
+
+        try {
+            const response = await axios.post(
+                `${API_BASE_URL}/Favorites/add`,
+                { ProductId: productId },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+
+            alert(response.data); // Hiển thị thông báo thành công từ server
+        } catch (error) {
+            console.error("Lỗi khi thêm sản phẩm yêu thích:", error.response?.data || error.message);
+            alert(error.response?.data || "Không thể thêm sản phẩm vào yêu thích.");
+        }
+    };
     if (loading) return <div>Đang tải chi tiết đơn hàng...</div>;
     if (error) return <div style={{ color: 'red' }}>{error}</div>;
 
