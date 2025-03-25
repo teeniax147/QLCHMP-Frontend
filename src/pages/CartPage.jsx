@@ -103,7 +103,7 @@ const CartPage = () => {
   const removeItem = async (productId) => {
     try {
       if (!token) {
-        // Khách vãng lai
+        // Khách vãng loz (như c)
         await axios.delete(`${API_BASE_URL}/Carts/remove-guest-item`, {
           data: { ProductId: productId },
           withCredentials: true
