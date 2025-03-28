@@ -48,9 +48,9 @@ const ResultCard = styled(Paper)(({ theme }) => ({
 
 const CardHeader = styled(Box)(({ theme, success }) => ({
     padding: theme.spacing(4),
-    background: success 
-        ? 'linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%)' 
-        : 'linear-gradient(135deg, #F44336 0%, #C62828 100%)',
+    background: success
+        ? 'linear-gradient(135deg, #fe5400 0%, #ca4200 100%)'
+        : 'linear-gradient(135deg, #fe5400 0%, #ca4200 100%)',
     color: theme.palette.common.white,
     textAlign: 'center',
 }));
@@ -82,12 +82,12 @@ const InfoIcon = styled(Box)(({ theme }) => ({
     width: 40,
     height: 40,
     borderRadius: '50%',
-    background: alpha(theme.palette.primary.main, 0.1),
+    background: alpha('#fe5400', 0.1),
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: theme.spacing(2),
-    color: theme.palette.primary.main,
+    color: '#fe5400',
 }));
 
 const ActionButton = styled(Button)(({ theme, success }) => ({
@@ -97,18 +97,18 @@ const ActionButton = styled(Button)(({ theme, success }) => ({
     boxShadow: 'none',
     textTransform: 'none',
     '&.MuiButton-contained': {
-        backgroundColor: success ? theme.palette.success.main : theme.palette.primary.main,
+        backgroundColor: '#fe5400',
         '&:hover': {
-            backgroundColor: success ? theme.palette.success.dark : theme.palette.primary.dark,
-            boxShadow: `0 6px 12px ${alpha(success ? theme.palette.success.main : theme.palette.primary.main, 0.2)}`,
+            backgroundColor: '#ca4200',
+            boxShadow: `0 6px 12px ${alpha('#fe5400', 0.2)}`,
         }
     },
     '&.MuiButton-outlined': {
-        borderColor: theme.palette.primary.main,
-        color: theme.palette.primary.main,
+        borderColor: '#fe5400',
+        color: '#fe5400',
         '&:hover': {
-            backgroundColor: alpha(theme.palette.primary.main, 0.05),
-            borderColor: theme.palette.primary.dark,
+            backgroundColor: alpha('#fe5400', 0.05),
+            borderColor: '#ca4200',
         }
     }
 }));
@@ -119,10 +119,14 @@ const ProgressBar = styled(LinearProgress)(({ theme }) => ({
     width: '100%',
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
+    backgroundColor: 'rgba(254, 84, 0, 0.2)',
+    '& .MuiLinearProgress-bar': {
+        backgroundColor: '#fe5400'
+    }
 }));
 
 const LoadingSpinner = styled(CircularProgress)(({ theme }) => ({
-    color: theme.palette.primary.main,
+    color: '#fe5400',
 }));
 
 const VnpayCallback = () => {
@@ -259,20 +263,25 @@ const VnpayCallback = () => {
                 <ResultCard elevation={0}>
                     <CardHeader success={false}>
                         <StatusIcon>
-                            <ErrorOutline sx={{ fontSize: 40, color: 'error.main' }} />
+                            <ErrorOutline sx={{ fontSize: 40, color: '#fe5400' }} />
                         </StatusIcon>
                         <Typography variant="h4" fontWeight={600}>
                             Thanh toán không thành công
                         </Typography>
                     </CardHeader>
-                    
+
                     <CardContent>
-                        <Alert 
-                            severity="error" 
-                            sx={{ 
-                                mb: 3, 
+                        <Alert
+                            severity="error"
+                            sx={{
+                                mb: 3,
                                 borderRadius: 2,
-                                '& .MuiAlert-message': { fontWeight: 500 }
+                                '& .MuiAlert-message': { fontWeight: 500 },
+                                backgroundColor: 'rgba(254, 84, 0, 0.1)',
+                                color: '#fe5400',
+                                '& .MuiAlert-icon': {
+                                    color: '#fe5400'
+                                }
                             }}
                         >
                             {error}
@@ -316,20 +325,25 @@ const VnpayCallback = () => {
                         <>
                             <CardHeader success={true}>
                                 <StatusIcon>
-                                    <CheckCircleOutline sx={{ fontSize: 40, color: 'success.main' }} />
+                                    <CheckCircleOutline sx={{ fontSize: 40, color: '#fe5400' }} />
                                 </StatusIcon>
                                 <Typography variant="h4" fontWeight={600}>
                                     Thanh toán thành công!
                                 </Typography>
                             </CardHeader>
-                            
+
                             <CardContent>
-                                <Alert 
-                                    severity="success" 
-                                    sx={{ 
-                                        mb: 4, 
+                                <Alert
+                                    severity="success"
+                                    sx={{
+                                        mb: 4,
                                         borderRadius: 2,
-                                        '& .MuiAlert-message': { fontWeight: 500 }
+                                        '& .MuiAlert-message': { fontWeight: 500 },
+                                        backgroundColor: 'rgba(254, 84, 0, 0.1)',
+                                        color: '#fe5400',
+                                        '& .MuiAlert-icon': {
+                                            color: '#fe5400'
+                                        }
                                     }}
                                 >
                                     Cảm ơn bạn đã đặt hàng. Đơn hàng của bạn đã được thanh toán thành công và đang được xử lý.
@@ -339,7 +353,7 @@ const VnpayCallback = () => {
                                     <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
                                         Thông tin thanh toán
                                     </Typography>
-                                    
+
                                     <Grid container spacing={3}>
                                         <Grid item xs={12} md={6}>
                                             <InfoItem>
@@ -356,7 +370,7 @@ const VnpayCallback = () => {
                                                 </Box>
                                             </InfoItem>
                                         </Grid>
-                                        
+
                                         <Grid item xs={12} md={6}>
                                             <InfoItem>
                                                 <InfoIcon>
@@ -372,7 +386,7 @@ const VnpayCallback = () => {
                                                 </Box>
                                             </InfoItem>
                                         </Grid>
-                                        
+
                                         <Grid item xs={12} md={6}>
                                             <InfoItem>
                                                 <InfoIcon>
@@ -389,9 +403,9 @@ const VnpayCallback = () => {
                                                             const amountFromStorage = localStorage.getItem('orderAmount');
                                                             const urlParams = new URLSearchParams(location.search);
                                                             const amountFromUrl = urlParams.get('vnp_Amount') ? (parseInt(urlParams.get('vnp_Amount')) / 100) : null;
-                                                            
+
                                                             const finalAmount = amountFromResult || amountFromStorage || amountFromUrl;
-                                                            
+
                                                             if (finalAmount) {
                                                                 return `${Number(finalAmount).toLocaleString()}đ`;
                                                             } else {
@@ -402,7 +416,7 @@ const VnpayCallback = () => {
                                                 </Box>
                                             </InfoItem>
                                         </Grid>
-                                        
+
                                         <Grid item xs={12} md={6}>
                                             <InfoItem>
                                                 <InfoIcon>
@@ -424,13 +438,12 @@ const VnpayCallback = () => {
                                 <Divider sx={{ mb: 3 }} />
 
                                 <Box sx={{ mb: 4, textAlign: 'center' }}>
-                                    <Typography variant="body1" color="primary.main" fontWeight={500}>
+                                    <Typography variant="body1" sx={{ color: '#fe5400', fontWeight: 500 }}>
                                         Bạn sẽ được chuyển hướng đến trang xác nhận đơn hàng sau {redirectCountdown} giây
                                     </Typography>
-                                    <ProgressBar 
-                                        variant="determinate" 
-                                        value={(redirectCountdown / 10) * 100} 
-                                        color="success"
+                                    <ProgressBar
+                                        variant="determinate"
+                                        value={(redirectCountdown / 10) * 100}
                                     />
                                 </Box>
 
@@ -458,20 +471,25 @@ const VnpayCallback = () => {
                         <>
                             <CardHeader success={false}>
                                 <StatusIcon>
-                                    <ErrorOutline sx={{ fontSize: 40, color: 'error.main' }} />
+                                    <ErrorOutline sx={{ fontSize: 40, color: '#fe5400' }} />
                                 </StatusIcon>
                                 <Typography variant="h4" fontWeight={600}>
                                     Thanh toán không thành công
                                 </Typography>
                             </CardHeader>
-                            
+
                             <CardContent>
-                                <Alert 
-                                    severity="warning" 
-                                    sx={{ 
-                                        mb: 3, 
+                                <Alert
+                                    severity="warning"
+                                    sx={{
+                                        mb: 3,
                                         borderRadius: 2,
-                                        '& .MuiAlert-message': { fontWeight: 500 }
+                                        '& .MuiAlert-message': { fontWeight: 500 },
+                                        backgroundColor: 'rgba(254, 84, 0, 0.1)',
+                                        color: '#fe5400',
+                                        '& .MuiAlert-icon': {
+                                            color: '#fe5400'
+                                        }
                                     }}
                                 >
                                     {paymentResult.message}
@@ -529,7 +547,7 @@ const VnpayCallback = () => {
             <ResultCard elevation={0}>
                 <CardContent sx={{ py: 5 }}>
                     <Box textAlign="center">
-                        <ErrorOutline color="action" sx={{ fontSize: 70, mb: 3, opacity: 0.7 }} />
+                        <ErrorOutline sx={{ fontSize: 70, mb: 3, opacity: 0.7, color: '#fe5400' }} />
                         <Typography variant="h5" mb={3} fontWeight={600}>
                             Không tìm thấy thông tin thanh toán
                         </Typography>

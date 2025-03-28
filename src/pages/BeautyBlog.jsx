@@ -19,7 +19,7 @@ const BeautyBlog = () => {
           content: blog.Content || "Nội dung không có sẵn",
           author: blog.Author || "Không rõ",
           featuredImage: blog.FeaturedImage
-            ? `https://api.glamour.io.vn/${blog.FeaturedImage}`
+            ? `https://localhost:5001/${blog.FeaturedImage}`
             : "default-image.jpg",
         }));
         setBlogs(cleanedBlogs);
@@ -41,7 +41,7 @@ const BeautyBlog = () => {
   return (
     <div className="beauty-blog-contained">
       <div className="beauty-header">
-        <h1>Chuyên Mục Làm Đẹp</h1>
+        <h1>Blog</h1>
       </div>
 
       {featuredBlog && (

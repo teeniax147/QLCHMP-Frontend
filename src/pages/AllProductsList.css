@@ -11,13 +11,13 @@
  height: auto;
  margin-left: auto;
  margin-right: auto;
-margin-top: 170px;
+margin-top: 135px;
 max-width: 1200px;
 }
 
 .product-header-banner-all img {
   width: 100%;
-  height: 325px;
+  height: auto;
   margin-bottom: 20px;
   border-radius: 15px;
   margin-top: -90px;
@@ -55,7 +55,7 @@ max-width: 1200px;
 
 /* Tag giảm giá */
 .discount-tag {
-  background-color: #94c83d;
+  background-color: #06a0fa;
   /* Màu nền xanh */
   /* color: white;
   font-weight: bold;
@@ -92,7 +92,7 @@ max-width: 1200px;
   width: 0px;
   position: absolute;
   border-width: 10px;
-  border-right-color: #94c83d;
+  border-right-color: #06a0fa;
 }
 
 .filter-section-all {
@@ -162,7 +162,7 @@ max-width: 1200px;
 }
 
 .sort-section-all button {
-  background-color: #28a745;
+  background-color: #15a3f4;
   color: white;
   padding: 10px 15px;
   border: none;
@@ -173,7 +173,7 @@ max-width: 1200px;
 }
 
 .sort-section-all button:hover {
-  background-color: #218838;
+  background-color: #29a8f2;
 }
 
 /* Container chính */
@@ -213,18 +213,18 @@ max-width: 1200px;
   padding: 8px 12px;
   margin: -10px 5px;
   border: none;
-  background-color: #35ae57;
+  background-color: #06a0fa;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
   color: #ffffff;
 }
 .page-button-all1.active-all {
-  background-color: #54d179;
+  background-color: #29a6ef;
   color: white;
 }
 .page-button-all1:hover {
-  background-color: #40c165;
+  background-color: #25a6f1;
 }
 .page-button-all1:focus {
   outline: none;
@@ -283,7 +283,7 @@ max-width: 1200px;
 
 .product-price-all {
   font-size: 15px;
-  color: #12853e;
+  color: #068cda;
   font-weight: bold;
   margin-top: -9px;
   margin-bottom: 2px;
@@ -396,9 +396,9 @@ input[type="checkbox"] {
 }
 /* Khi checkbox được chọn */
 input[type="checkbox"]:checked {
-  background-color: #4caf50;
+  background-color: #06a0fa;
   /* Màu nền khi được chọn */
-  border-color: #4caf50;
+  border-color: #0896e7;
   /* Màu viền khi được chọn */
 }
 

@@ -78,7 +78,7 @@ const Login = () => {
         <div className="login-container">
           <div className="login-form">
             <div className="logo">
-              <img src="/imgs/Icons/logo1.png" alt="Glamour Cosmic Logo" />
+              <img src="/imgs/logo4.png" alt="Glamour Cosmic Logo" />
             </div>
             <h2>ĐĂNG NHẬP</h2>
             <form onSubmit={handleSubmit}>

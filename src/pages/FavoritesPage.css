@@ -8,7 +8,7 @@
         height: auto;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 170px;
+        margin-top: 135px;
         max-width: 1200px;
   }
 .empty-favorites-container {
@@ -19,7 +19,7 @@
           height: auto;
           margin-left: auto;
           margin-right: auto;
-          margin-top: 170px;
+          margin-top: 135px;
           max-width: 1200px;
     }
   
@@ -31,7 +31,7 @@
     margin-top: -80px;
     margin-left: 25px;
     text-align: center;
-    color: #0a6727;
+    color: #208fcf;
     font-weight: bold;
   }
   
@@ -116,7 +116,7 @@
 
  .favorites-price {
     font-size: 15px;
-      color: #12853e;
+      color: #1698e3;
       font-weight: bold;
       margin-top: -9px;
       margin-bottom: 2px;

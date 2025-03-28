@@ -78,8 +78,9 @@ margin-left: 30px; /* Lùi logo ra xa một chút về bên trái */
 }
 
 .logoheader img {
-height: 60px; /* Giữ nguyên chiều cao logo */
+height: 180px; /* Giữ nguyên chiều cao logo */
 display: block;
+margin-left: 20PX;
 }
 
 
@@ -127,6 +128,7 @@ width: 16px;
 display: flex;
 align-items: center;
 gap: 15px; /* Khoảng cách hợp lý giữa các icon */
+
 }
 
 .icon img {
@@ -148,7 +150,7 @@ margin-right: 5px; /* Giữ khoảng cách giữa icon và chữ */
     position: absolute;
     top: -5px;
     right: -3px;
-    background-color: rgb(20, 103, 11);
+    background-color: #06a0fa;
     color: white;
     border-radius: 50%;
     font-size: 12px;
@@ -179,11 +181,12 @@ margin-right: 10px;
 }
 
 .nav {
-  background-color: #e6f7e6;
-  padding: 5px 0; /* Điều chỉnh padding để làm cho thanh điều hướng thấp hơn */
-  max-width: 80%;
-  margin: 0 auto;
-  border-radius: 30px;
+  background-color: #def3ff;
+  padding: -2px 0; /* Điều chỉnh padding để làm cho thanh điều hướng thấp hơn */
+  max-width: 70%;
+
+  margin: 2px auto;
+  border-radius: 20px;
   text-align: center;
 }
 
@@ -199,7 +202,7 @@ margin-right: 10px;
 .nav li {
   font-size: 15px;
   cursor: pointer;
-  color: #5a9a5a;
+  color: #06a0fa;
   padding: 0 0px; /* Giảm padding để chiều cao mỗi mục giảm xuống */
   font-weight: bold;
   font-family: 'Inter', sans-serif;
@@ -213,18 +216,18 @@ margin-right: 10px;
 }
 
 .nav li:hover a {
-  color: #3e7e3e;
+  color: #15a3f4;
   font-weight: bold; /* In đậm khi hover */
 }
 
 
 /* Khoảng cách giữa footer và nội dung */
 .footer {
-background-color: #e6f7e6;
+background-color: #def3ff;
 color: #333;
 padding: 40px 20px;
 margin-top: 50px; /* Tạo khoảng cách giữa footer và nội dung chính */
-height: 460px;
+height: 320px;
 
 }
 
@@ -248,7 +251,7 @@ background-color: #ffffff;
 display: flex;
 justify-content: space-between;
 align-items: center;
-background: linear-gradient(to right, #66bb6a, #43a047); /* Màu gradient  */
+background: linear-gradient(to right, #15a3f4, #06a0fa); /* Màu gradient  */
 border-radius: 0; /* Loại bỏ bo góc của phần màu xanh đậm */
 padding: 8px 40px 8px 0px; /* Giữ padding để căn phần nội dung */
 width: 100%; /* Chiều ngang bằng trang web */
@@ -298,7 +301,7 @@ width: 250px;
 padding: 6px 20px;
 border-radius: 0 20px 20px 0; /* Bo góc cho phần nút */
 border: none;
-background-color: #2e7d32;
+background-color: #def3ff;
 color: white;
 cursor: pointer;
 font-weight: bold;
@@ -328,8 +331,9 @@ margin-left:-330px;
 }
 
 .footer-logo img {
-  height: 130px;
-  margin-left: 60px;
+  height: 150px;
+  margin-left: 50px;
+  margin-top: -40px;
 }
 .footer-links {
 display: flex;
@@ -339,7 +343,7 @@ width: 100%;
 
 .footer-section h4 {
 font-size: 13px;
-color: #5a9a5a;
+color: #15a3f4;
 padding: 0 3px 0 90px;
 }
 
@@ -355,7 +359,7 @@ font-size: 11px;
 }
 
 .footer-section ul li a:hover {
-color: #5a9a5a;
+color: #06a0fa;
 }
 
 .footer-social {
@@ -377,7 +381,7 @@ margin: 0 10px;
 
 .footer-bottom {
   display: flex;
-  justify-content: space-between; /* Căn đều hai bên giữa văn bản và biểu tượng */
+  justify-content: center; /* Căn đều hai bên giữa văn bản và biểu tượng */
   align-items: center; /* Căn giữa theo chiều dọc */
   padding: 20px; /* Điều chỉnh khoảng cách trong */
   width: 125%; /* Chiếm toàn bộ chiều rộng của footer */
@@ -421,7 +425,7 @@ margin: 0 10px;
 
 .user-dropdown-menu {
   position: absolute;
-  top: 100%;
+  top: 60px;
   right: 0;
   background-color: #ffffff;
   border-radius: 12px;
@@ -478,7 +482,7 @@ margin: 0 10px;
 
 .user-dropdown-menu a:hover,
 .user-dropdown-menu button:hover {
-  color: #5de7a2;
+  color: #06a0fa;
 }
 
 .user-dropdown-menu .icon {

@@ -4,7 +4,7 @@
   margin: -60px auto;
   position: relative;
   overflow: hidden;
-  margin-top: 80px;
+  margin-top: 40px;
 }
 
 .carousel-slide {
@@ -117,7 +117,7 @@
 
 .brand-image {
   width: 100%;
-  height: auto;
+  height: 190px;
   border-radius: 10px; /* Bo góc nhẹ cho hình ảnh */
   border: 2px solid white; /* Bo viền trắng cho hình ảnh */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Đổ bóng nhẹ */
@@ -137,9 +137,9 @@
   margin-top: 8px; /* Giảm khoảng cách trên cùng của tiêu đề */
   font-size: 16px;
   font-weight: bold;
-  color: #805b36;
+  color: #21abfa;
   padding: 10px 60px;
-  border: 2px solid #805b36;
+  border: 2px solid #1598e3;
   display: inline-block;
 }
 
@@ -157,8 +157,8 @@
 
 .banner-image {
   max-width: 90%; /* Ensures the image is responsive and fits the container */
-  height: 600px; /* Maintains the aspect ratio */
-  margin-top: 35px;
+  height: auto; /* Maintains the aspect ratio */
+  margin-top: -20px;
   object-fit: cover;
 }
 .brand-section-title {

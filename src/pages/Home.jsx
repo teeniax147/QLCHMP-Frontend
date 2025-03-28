@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 const Home = () => {
 
   const banners = [
-    '/imgs/Icons/banner.png',
-    '/imgs/Icons/banner 2.png',
-    '/imgs/Icons/banner 3.jpg'
+    '/imgs/1.png',
+    '/imgs/2.png',
+   
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -37,10 +37,10 @@ const Home = () => {
   const nextIndex = currentIndex === banners.length - 1 ? 0 : currentIndex + 1;
 
   const brands = [
-    { name: 'Yehwadam', image: '/imgs/brand1.png', url: 'https://glamour.io.vn/brand/2' },
-    { name: 'Freshian', image: '/imgs/brand2.png', url: 'https://glamour.io.vn/brand/1' },
-    { name: 'FMGT', image: '/imgs/brand3.png', url: 'https://glamour.io.vn/brand/4' },
-    { name: 'Belif', image: '/imgs/brand4.png', url: 'https://glamour.io.vn/brand/5' },
+    { name: 'Yehwadam', image: '/imgs/Picture8.jpg' },
+    { name: 'Freshian', image: '/imgs/Picture10.jpg' },
+    { name: 'FMGT', image: '/imgs/Picture9.jpg' },
+    { name: 'Belif', image: '/imgs/Picture11.jpg' },
   ];
 
   // Danh sách sản phẩm mẫu cho "Sản Phẩm Nổi Bật"
@@ -172,90 +172,6 @@ const Home = () => {
   });
 
 
-  const productsBySkinCondition = [
-    {
-      id: 4,
-      brand: 'GLAMOUR COSMIC',
-      name: 'Tẩy Tế Bào...Body Peeling 300ML',
-      price: '649,000₫',
-      originalPrice: '989,000₫',
-      discount: '-34%',
-      rating: 5,
-      reviews: 7,
-      image: 'https://image.hsv-tech.io/0x1987/tfs/common/5e355e2e-de19-46fa-b1ff-d416544826ee.webp',
-    },
-    {
-      id: 6,
-      brand: 'GLAMOUR COSMIC',
-      name: 'Sữa Dưỡng Thể GLAMOUR SHOP Cung Cấp Ẩm Avocado Body...',
-      price: '349,000₫',
-      rating: 5,
-      reviews: 8,
-      image: 'https://image.hsv-tech.io/0x1987/tfs/common/df7ebc1c-4a43-4522-a0ab-a1eefa2d93d2.webp',
-    },
-    {
-      id: 7,
-      brand: 'GLAMOUR COSMIC',
-      name: 'Xịt Dưỡng Thể Hương Nước Hoa GLAMOUR SHOP Nature Garden...',
-      price: '439,000₫',
-      originalPrice: '788,000₫',
-      discount: '-44%',
-      rating: 4,
-      reviews: 0,
-      image: 'https://image.hsv-tech.io/400x0/tfs/common/b8dfd59f-4fd0-49bc-895a-25a4daf4dd27.webp',
-    },
-    {
-      id: 8,
-      brand: 'GLAMOUR COSMIC',
-      name: 'Sữa Dưỡng Thể Dưỡng Ẩm Cho Da Nhạy Cảm Dr. Belmeur Mild...',
-      price: '979,000₫',
-      rating: 5,
-      reviews: 3,
-      image: 'https://image.hsv-tech.io/400x0/tfs/products/65d2fecf-d589-4f46-bc4a-5d4177a11d60.webp',
-    },
-    {
-      id: 9,
-      brand: 'GLAMOUR COSMIC',
-      name: 'Combo 2 Kem chống nắng đa năng GLAMOUR Natural...',
-      price: '550,000₫',
-      rating: 5,
-      reviews: 3,
-      image: 'https://image.hsv-tech.io/0x1987/tfs/common/8eb45545-3cf7-41e2-aa1a-ac575c6c7ea5.webp',
-    },
-    {
-      id: 10,
-      brand: 'GLAMOUR COSMIC',
-      name: 'Sữa Dưỡng GLAMOUR SHOP Trắng Da White Seed ...',
-      price: '425,000₫',
-      originalPrice: '788,000₫',
-      discount: '-44%',
-      rating: 4,
-      reviews: 0,
-      image: 'https://image.hsv-tech.io/0x1987/tfs/common/1fa6c774-3203-4430-893f-396fef0373c4.webp',
-    },
-    {
-      id: 11,
-      brand: 'GLAMOUR COSMIC',
-      name: 'Sữa Tắm GLAMOUR SHOP Dạng Gel Hương Nước Hoa Perfume',
-      price: '559,000₫',
-      originalPrice: '908,000₫',
-      discount: '-38%',
-      label: '1+1',
-      rating: 5,
-      reviews: 17,
-      image: 'https://image.hsv-tech.io/0x1200/tfs/common/44a504e0-330d-4505-91c8-de9438367676.webp',
-    },
-    {
-      id: 12,
-      brand: 'GLAMOUR COSMIC',
-      name: 'Gel Tắm GLAMOUR SHOP Cung Cấp Ẩm Avocado Body Wash',
-      price: '349,000₫',
-      rating: 5,
-      reviews: 15,
-      image: 'https://image.hsv-tech.io/0x1987/tfs/common/52e55050-072f-4662-a7a5-0c2d64e98695.webp',
-    }
-  ];
-
 
   return (
     <div>
@@ -291,43 +207,10 @@ const Home = () => {
         ))}
       </div>
 
-      {/* Featured Products Section */}
-      <div className="featured-products-section">
-        <h2 className="featured-products-title">SẢN PHẨM NỔI BẬT</h2>
-        <div className="category-options">
-          <span className="category-active">Chăm sóc da</span>
-          <span className="category-inactive">Trang điểm</span>
-        </div>
-
-        <div className="featured-product-list">
-          {featuredProducts.map((product) => (
-            <div className="featured-product-card" key={product.id}>
-              {product.discount && <div className="badge">{product.discount}</div>}
-              <img src={product.image} alt={product.name} className="product-image" />
-              <div className="product-brand">{product.brand}</div> {/* Đặt thương hiệu dưới hình ảnh */}
-              <h3 className="product-title">{product.name}</h3>
-              <div className="price-section">
-                {product.originalPrice && <span className="original-price">{product.originalPrice}</span>}
-                <span className="discounted-price">{product.price}</span>
-              </div>
-              <div className="rating">
-                {'★'.repeat(product.rating)}
-                <span className="reviews">({product.reviews})</span>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <Link to="/all-products">
-          <button className="view-all-button">Xem tất cả</button>
-        </Link>
-
-
-
-      </div>
+    
 
       <div className="banner-container">
-        <img src="/imgs/Icons/hinh2.png" alt="Glamour Cosmic with Wonwoo" className="banner-image" />
+        <img src="/imgs/6.png" alt="Glamour Cosmic with Wonwoo" className="banner-image" />
       </div>
 
       <div className="store-system-section">

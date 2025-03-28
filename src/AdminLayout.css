@@ -9,7 +9,7 @@
 /* Sidebar bên trái */
 .admin-sidebar {
   width: 250px;
-  background-color: #52accc;
+  background-color: #0c6fa8;
   /* Màu xanh đậm */
   color: white;
   padding-top: 20px;
@@ -54,7 +54,7 @@
 
 /* Hiệu ứng hover */
 .admin-sidebar nav ul li a:hover {
-  background-color: #4493b0;
+  background-color: #1790d5;
   /* Màu nền khi hover */
   color: white;
   /* Màu chữ khi hover */
@@ -75,14 +75,14 @@
   /* Điều chỉnh để thanh dọc sát bên trái hoàn toàn */
   width: 5px;
   height: 100%;
-  background-color: #2c5b6c;
+  background-color: #0f557e;
   /* Màu thanh dọc */
   
 }
 
 /* Nút khi được chọn (active) */
 .admin-sidebar nav ul li a.active {
-  background-color: #52accc;
+  background-color: #0f557e;
   /* Màu nền khi chọn */
   font-weight: bold;
   color: white;
@@ -90,7 +90,7 @@
 }
 /* Phần header ngang */
 .admin-header {
-  background-color: #52accc;
+  background-color: #0c6fa8;
   color: white;
   padding: 20px 20px;
   position: fixed;
@@ -110,9 +110,9 @@
 }
 
 .logoheader3 img {
-  height: 120px;
-  margin-left: 50px;
-  margin-top: -10px;
+  height: 160px;
+  margin-left: 38px;
+  margin-top: -40px;
 }
 
 .icon2 {
@@ -179,7 +179,7 @@
 }
 
 .sub-menu li a:hover {
-  background-color: #3e6b47;
+  background-color: #068cda;
   color: white;
 }
 
@@ -281,7 +281,7 @@
 
 .user-dropdown-menu1 a:hover,
 .user-dropdown-menu1 button:hover {
-  color: #5de7a2;
+  color: #06a0fa;
 }
 
 .user-dropdown-menu1 .icon {

@@ -110,7 +110,7 @@ const RevenueReport = () => {
         const cleanedOrderDetails = response.data.map(item => ({
           ...item,
           ProductImage: item.ProductImage
-            ? `https://api.glamour.io.vn/${item.ProductImage}` // Thêm base URL cho hình ảnh sản phẩm
+            ? `https://localhost:5001/${item.ProductImage}` // Thêm base URL cho hình ảnh sản phẩm
             : "default-image.jpg", // Hình ảnh mặc định nếu không có URL
         }));
         setOrderDetails(cleanedOrderDetails);
@@ -119,7 +119,7 @@ const RevenueReport = () => {
         const cleanedOrderDetails = response.data.$values.map(item => ({
           ...item,
           ProductImage: item.ProductImage
-            ? `https://api.glamour.io.vn/${item.ProductImage}` // Thêm base URL cho hình ảnh sản phẩm
+            ? `https://localhost:5001/${item.ProductImage}` // Thêm base URL cho hình ảnh sản phẩm
             : "default-image.jpg", // Hình ảnh mặc định nếu không có URL
         }));
         setOrderDetails(cleanedOrderDetails);

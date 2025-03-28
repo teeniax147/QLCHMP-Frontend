@@ -48,7 +48,7 @@
   .preview-button {
     margin-top: 20px;
     padding: 10px;
-    background-color: #4CAF50;
+    background-color: #06a0fa;
     color: #fff;
     font-weight: bold;
     border: none;
@@ -58,7 +58,7 @@
   }
   
   .preview-button:hover {
-    background-color: #45a049;
+    background-color: #068cda;
   }
   
   .preview-details {

@@ -93,14 +93,11 @@ const Layout = () => {
   return (
     <>
       <header className="home">
-        <div className="header-top">
-          <span className="freeship-info">FREESHIP 15K ĐƠN TỪ 199K</span>
-          <span className="store-info">Mua online nhận nhanh tại cửa hàng</span>
-        </div>
+       
 
         <div className="header-main">
           <Link to="/" className="logoheader">
-            <img src="/imgs/Logo.png" alt="Glamour Cosmic Logo" />
+            <img src="/imgs/logo4.png" alt="Bubble Logo" />
           </Link>
 
           {/* Thanh tìm kiếm */}
@@ -121,10 +118,7 @@ const Layout = () => {
           <div className="header-icons">
             <span className="icon">
 
-              <Link to="/beauty-blog" className='link-blog'>
-                <img src="/imgs/Icons/blog.png" alt="Blog Icon" />
-                Blog làm đẹp
-              </Link>
+            
 
             </span>
             <a href="https://info.glamour.io.vn/" target="_blank" rel="noopener noreferrer" className="link-blog">
@@ -140,7 +134,7 @@ const Layout = () => {
               {userName ? (
                 <div onClick={handleDropdownToggle} className="user-menu-trigger">
                   <img src="/imgs/Icons/dangnhap.png" alt="User Icon" />
-                  <span>Xin chào {userName} !</span>
+                  <span> {userName}</span>
                 </div>
               ) : (
 
@@ -194,11 +188,9 @@ const Layout = () => {
           <ul>
             <li><Link to="/">TRANG CHỦ</Link></li>
             <li><Link to="/all-products">SẢN PHẨM</Link></li>
-            <li>
-              <CategoryDropdown title="DƯỠNG DA" parentId={2} />
-            </li>
-            <li><CategoryDropdown title="TRANG ĐIỂM" parentId={1} /></li> {/* Truyền parentId tương ứng */}
-            <li><BrandDropdown title="THƯƠNG HIỆU" /></li>
+           
+            <li><CategoryDropdown title="BỘ SƯU TẬP" parentId={1} /></li> {/* Truyền parentId tương ứng */}
+            <li> <Link to="/beauty-blog">BLOG</Link></li>
 
             <li><Link to="/coupons">MÃ ƯU ĐÃI</Link></li>
           </ul>
@@ -216,20 +208,16 @@ const Layout = () => {
       <footer className="footer">
         <div className="newsletter-section">
           <div className="newsletter-content">
-            <h2>Đăng ký nhận tin tức ưu đãi của chúng tôi</h2>
-            <p>Hàng ngàn ưu đãi hấp dẫn đang chờ bạn!</p>
+           
           </div>
-          <div className="newsletter-subscribe">
-            <input type="email" placeholder="Điền email của bạn" />
-            <button>ĐĂNG KÝ</button>
-          </div>
+          
         </div>
 
         <div className="footer-middle">
           {/* Phần nội dung footer */}
           <div className="footer-logo-social">
             <div className="footer-logo">
-              <img src="/imgs/Icons/logo1.png" alt="Glamour Cosmic Logo" />
+              <img src="/imgs/logo4.png" alt="Glamour Cosmic Logo" />
             </div>
             <div className="footer-social">
               <h4>THEO DÕI CHÚNG TÔI TRÊN</h4>
@@ -262,14 +250,13 @@ const Layout = () => {
                 <li><a href="#">Hướng dẫn mua hàng online</a></li>
                 <li><a href="#">Quyền lợi thành viên</a></li>
                 <li><a href="#">Giao hàng và thanh toán</a></li>
-                <li><a href="#">Chính sách đổi hàng</a></li>
-                <li><a href="#">Điều khoản mua bán hàng hóa</a></li>
+              
               </ul>
             </div>
             <div className="footer-section">
               <h4>ĐỐI TÁC - LIÊN KẾT</h4>
               <ul>
-                <li><a href="#">Glamour cẩm nang</a></li>
+                <li><a href="#">Ốp lung Bubble</a></li>
               </ul>
             </div>
           </div>
@@ -277,7 +264,7 @@ const Layout = () => {
         <hr className="footer-divider" />  {/* Đường gạch ngang */}
         <div className="footer-bottom">
 
-          <p>® glamour.io.vn thuộc quyền sở hữu của Công ty TNHH Mỹ Phẩm Glamour Cosmic, được cấp Giấy phép kinh doanh số 0316789123 vào ngày 02/03/2025 bởi Sở Kế hoạch & Đầu tư TP. Hồ Chí Minh.
+          <p>® bubble since 2025
           </p>
           <div className="certification-icons">
 

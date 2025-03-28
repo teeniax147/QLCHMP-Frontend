@@ -46,7 +46,7 @@ const CartPage = () => {
           const processedItems = items.map(item => ({
             ...item,
             ImageUrl: item.ImageUrl
-              ? `https://api.glamour.io.vn/${item.ImageUrl}` // Append base URL for image path
+              ? `https://localhost:5001/${item.ImageUrl}` // Append base URL for image path
               : "default-image.jpg", // Fallback image if no image URL
           }));
 
@@ -77,7 +77,7 @@ const CartPage = () => {
             // Clean and handle the product image URL
 
             ImageUrl: item.ImageUrl
-              ? `https://api.glamour.io.vn/${item.ImageUrl}` // Append base URL for image path
+              ? `https://localhost:5001/${item.ImageUrl}` // Append base URL for image path
               : "default-image.jpg", // Fallback image if no image URL
             TotalPrice: item.Quantity * item.UnitPrice // Tính toán giá sản phẩm ban đầu
           }));

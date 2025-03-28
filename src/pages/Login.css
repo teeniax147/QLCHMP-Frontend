@@ -4,7 +4,7 @@
         padding: 0;
         width: 100vw;
         min-height: 100vh;
-        background-color: #d3f8d3;
+        background-color: #d7eefb;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -51,7 +51,7 @@
 }
 
 .logo img {
-    width: 110px;
+    width: 200px;
     height: auto;
     display: block;
     margin: 0 auto;
@@ -98,7 +98,7 @@ h2 {
 .login-button {
     width: 100%;
     padding: 12px;
-    background-color: #3e7e3e;
+    background-color: #109def;
     border: none;
     color: white;
     font-weight: bold;
@@ -107,7 +107,7 @@ h2 {
 }
 
 .login-button:hover {
-    background-color: #2e5e2e;
+    background-color: #26a6f0;
 }
 
 /* Căn phải cho liên kết Quên mật khẩu */
@@ -117,7 +117,7 @@ h2 {
 }
 
 .forgot-password a {
-    color: #3e7e3e;
+    color: #109def;
     text-decoration: none;
 }
 
@@ -132,7 +132,7 @@ p {
 }
 
 p a {
-    color: #3e7e3e;
+    color: #109def;
     text-decoration: none;
 }
 

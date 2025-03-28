@@ -97,8 +97,8 @@ const AdminLayout = () => {
           <title>ADMIN GLAMOUR COSMIC</title>
           <aside className="admin-sidebar">
             <div className="logoheader3">
-              <img src="/imgs/Icons/logo6.png" alt="Glamour Cosmic Logo" />
-              <div className="admin-nofiti-test">Admin </div>
+              <img src="/imgs/logo4.png" alt="Glamour Cosmic Logo" />
+           
             </div>
             <nav>
               <ul>
@@ -117,8 +117,7 @@ const AdminLayout = () => {
                 {isManagementOpen && (
                   <ul className="sub-menu">
                     <li><Link to="/admin/blogs"><span>✏️</span> Bài viết blog</Link></li>
-                    <li><Link to="/admin/brands"><span>🏷️</span> Thương hiệu</Link></li>
-
+                  
                     <li><Link to="/admin/revenue-report"><span>📑</span> Thống kê - Báo cáo</Link></li>
 
                     <li><Link to="/admin/orders"><span>🛒</span> Đơn hàng</Link></li>

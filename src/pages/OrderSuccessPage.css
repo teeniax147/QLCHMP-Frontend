@@ -21,7 +21,7 @@
 }
   .order-success-message {
     font-size: 26px;
-    color: #28a745;
+    color: #06a0fa;
     margin-bottom: 20px;
   }
   .order-message {
@@ -32,7 +32,7 @@
   }
   .back-to-home-button {
     padding: 10px 20px;
-    background-color: #179831;
+    background-color: #0d88cf;
     color: #fff;
     border: none;
     border-radius: 5px;

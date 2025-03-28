@@ -28,7 +28,7 @@ const ProductDetail = () => {
         const cleanedProduct = {
           ...response.data,
           ImageUrl: response.data.ImageUrl
-            ? `https://api.glamour.io.vn/${response.data.ImageUrl}` // Add base URL for image path
+            ? `https://localhost:5001/${response.data.ImageUrl}` // Add base URL for image path
             : "default-image.jpg", // Fallback image if no image URL
         };
 
@@ -148,7 +148,32 @@ const ProductDetail = () => {
       setAddingToCart(false);
     }
   };
+  const handleAddToFavorites = async (productId) => {
+    const token = localStorage.getItem("token"); // Lấy token từ localStorage
+    console.log("Token từ localStorage:", token);
 
+    if (!token) {
+      alert("Bạn cần đăng nhập để thêm sản phẩm vào danh sách yêu thích.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/Favorites/add`,
+        { ProductId: productId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      alert(response.data); // Hiển thị thông báo thành công từ server
+    } catch (error) {
+      console.error("Lỗi khi thêm sản phẩm yêu thích:", error.response?.data || error.message);
+      alert(error.response?.data || "Không thể thêm sản phẩm vào yêu thích.");
+    }
+  };
   const handleQuantityChange = (change) => {
     setQuantity((prev) => Math.max(1, prev + change));
   };

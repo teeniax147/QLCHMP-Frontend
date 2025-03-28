@@ -32,7 +32,7 @@ const ProductList = () => {
         const cleanedProducts = productsList.map((product) => ({
           ...product,
           ImageUrl: product.ImageUrl
-            ? `https://api.glamour.io.vn/${product.ImageUrl}` // Append base URL to image path
+            ? `https://localhost:5001/${product.ImageUrl}` // Append base URL to image path
             : "default-image.jpg", // Fallback image if no image URL
         }));
 
@@ -86,7 +86,7 @@ const ProductList = () => {
     <div className="product-container-custom">
       <div className="product-header-banner-custom">
         <img
-          src="https://glamour.io.vn/imgs/Icons/hinh5.png"
+          src="http://localhost:5173/imgs/7.png"
           alt="Banner"
         />
       </div>

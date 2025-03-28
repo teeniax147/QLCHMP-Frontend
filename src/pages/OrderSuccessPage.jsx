@@ -20,7 +20,7 @@ const OrderSuccessPage = () => {
         // Hiển thị thông báo cho khách vãng lai
         <>
           <h3 className="order-message">
-            Khách Vãng Lai vui lòng liên hệ số Zalo: 0937560278 hoặc email Buigiang2004thcsnd@gmail.com để xác nhận và cập nhật đơn hàng.
+            Số điện thoại shop: 0942781516 và Gmail: nguyenutphuongthuy1111@gmail.com. Khách hàng liên hệ qua thông tin trên để xác nhận và cập nhật đơn hàng nhé
           </h3>
           <p className="guest-notice">
             Đơn hàng của bạn đã được ghi nhận. Chúng tôi sẽ liên hệ sớm nhất có thể để xác nhận đơn hàng.
@@ -29,7 +29,7 @@ const OrderSuccessPage = () => {
       ) : (
         // Hiển thị thông báo cho người dùng đã đăng nhập
         <h3 className="order-message">
-          Cùng Glamour Cosmic bảo vệ quyền lợi của bạn - KHÔNG CHUYỂN TIỀN TRƯỚC cho Shipper khi đơn hàng chưa được giao tới với bất kỳ lý do gì
+            Bubble không yêu cầu chuyển khoản trước đối với giao dịch "Thanh Toán Khi Nhận Hàng". Vui lòng cẩn thận với những yêu cầu "Chuyển Khoản" cho Shipper.
         </h3>
       )}
 

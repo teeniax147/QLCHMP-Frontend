@@ -4,7 +4,7 @@
     padding: 0;
     width: 100vw;
     min-height: 100vh;
-    background-color: #d3f8d3;
+    background-color: #d7eefb;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,7 +15,7 @@
 }
 
 .logo img {
-    width: 140px;
+    width: 200px;
     height: auto;
     display: block;
     margin: 0 auto;
@@ -86,13 +86,13 @@ h2 {
 
 .input-group input:focus {
     outline: none;
-    border-color: #3e7e3e;
+    border-color: #109def;
 }
 
 .register-button {
     width: 100%;
     padding: 12px;
-    background-color: #3e7e3e;
+    background-color: #109def;
     border: none;
     color: white;
     font-weight: bold;
@@ -101,7 +101,7 @@ h2 {
 }
 
 .register-button:hover {
-    background-color: #2e5e2e;
+    background-color: #26a6f0;
 }
 
 p {
@@ -111,7 +111,7 @@ p {
 }
 
 p a {
-    color: #3e7e3e;
+    color: #109def;
     text-decoration: none;
 }
 

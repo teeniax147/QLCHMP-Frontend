@@ -71,7 +71,7 @@ const AllProductsList = () => {
         const cleanedProducts = productsList.map((product) => ({
           ...product,
           ImageUrl: product.ImageUrl
-            ? `https://api.glamour.io.vn/${product.ImageUrl}`
+            ? `https://localhost:5001/${product.ImageUrl}`
             : "default-image.jpg", // Provide default image if not available
         }));
 
@@ -160,7 +160,7 @@ const AllProductsList = () => {
         const cleanedProducts = data.map((product) => ({
           ...product,
           ImageUrl: product.ImageUrl
-            ? `https://api.glamour.io.vn/${product.ImageUrl}`
+            ? `https://localhost:5001/${product.ImageUrl}`
             : "default-image.jpg", // Hình ảnh mặc định nếu không có
         }));
 
@@ -222,7 +222,7 @@ const AllProductsList = () => {
 
       <div className="product-header-banner-all">
         <img
-          src="imgs/Icons/hinh5.png"
+          src="imgs/7.png"
           alt="Banner"
         />
       </div>

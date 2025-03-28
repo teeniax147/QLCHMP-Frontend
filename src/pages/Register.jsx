@@ -122,7 +122,7 @@ const Register = () => {
     <div className="register-wrapper">
       <div className="register-form">
         <div className="logo">
-          <img src="/imgs/Icons/logo1.png" alt="Glamour Cosmic Logo" />
+          <img src="/imgs/logo4.png" alt="Glamour Cosmic Logo" />
         </div>
         <h2>Đăng Ký Tài Khoản</h2>
         <form onSubmit={handleSubmit} style={{ width: "100%" }}>
