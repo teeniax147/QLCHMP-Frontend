@@ -8,7 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
   const loginAPI = async (user, pass) => {
     try {
       const res = await axios.post(`${API_BASE_URL}/Users/login`, {
@@ -33,7 +33,8 @@ const Login = () => {
 
     if (res.status === 200) {
       const { $values } = res.data.roles;
-      const token = res.data.token; // Lấy token trực tiếp
+      const { token, userId, userName } = res.data;
+
 
       if (!token) {
         setError('Không nhận được token hợp lệ từ server.');
@@ -58,8 +59,8 @@ const Login = () => {
 
       // Lưu thông tin người dùng và token vào localStorage
       localStorage.setItem('token', token);
-      localStorage.setItem('id', res.data.userId);
-      localStorage.setItem('userName', res.data.userName);
+      localStorage.setItem('id', userId);
+      localStorage.setItem('userName', userName);
       localStorage.setItem('roles', JSON.stringify($values[0]));
     } else {
       setError('Tên đăng nhập hoặc mật khẩu không đúng.');
